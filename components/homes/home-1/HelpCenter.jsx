@@ -2,7 +2,7 @@
 import SplitTextAnimation from "@/components/common/SplitTextAnimation";
 import { useState } from "react";
 
-const items = ["Buying", "Rating", "Selling"];
+const items = ["Buy Property", "Rent Property", "Sell Property"];
 export default function HelpCenter() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
@@ -12,11 +12,10 @@ export default function HelpCenter() {
           <div className="col-12">
             <div className="heading-section text-center">
               <h2 className="title split-text effect-right">
-                <SplitTextAnimation text="Discover how we can help" />
+                <SplitTextAnimation text="Discover how Growl Real Estate helps you" />
               </h2>
               <p className="text-1 split-text split-lines-transform">
-                Thousands of luxury home enthusiasts just like you visit our
-                website.
+                Thousands of property seekers trust Growl Real Estate to find, buy, and sell homes with confidence.
               </p>
             </div>
             <div className="widget-tabs style-2 style-border-primary">
@@ -62,14 +61,12 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Find out how much you <br />
-                            can afford
+                           Find Your Dream Home
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          We’ll help you estimate your budget range. Save to
-                          your buyer profile to help
-                          <br /> in your search
+                          Explore a wide range of verified properties that match your budget and lifestyle.
+                          <br />
                         </p>
                         <a
                           href="#"
@@ -103,14 +100,11 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Understand your <br />
-                            monthly costs
+                            Know Your Budget
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Ut sollicitudin ipsum eu massa sollicitudin
-                          facilisis.{" "}
+                          Get expert guidance on how much you can afford before buying your property.{" "}
                         </p>
                         <a
                           href="#"
@@ -140,14 +134,12 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Get help with your down <br />
-                            payment
+                             Easy Home<br />
+                            
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          In fermentum dignissim mauris et blandit. Fusce
-                          efficitur libero sit amet ullamcorper, nec volutpat
-                          justo fringilla
+                          We connect you with trusted banks for quick and hassle-free loan approvals.
                         </p>
                         <a
                           href="#"
@@ -187,14 +179,11 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Find out how much you <br />
-                            can afford
+                           Find Rental Homes
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          We’ll help you estimate your budget range. Save to
-                          your buyer profile to help
-                          <br /> in your search
+                          Browse affordable rental properties in your preferred location.
                         </p>
                         <a
                           href="#"
@@ -228,14 +217,11 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Understand your <br />
-                            monthly costs
+                            Flexible Lease Options
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Ut sollicitudin ipsum eu massa sollicitudin
-                          facilisis.{" "}
+                          Choose rental plans that suit your duration and budget requirements.{" "}
                         </p>
                         <a
                           href="#"
@@ -265,14 +251,11 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Get help with your down <br />
-                            payment
+                            Verified Listings
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          In fermentum dignissim mauris et blandit. Fusce
-                          efficitur libero sit amet ullamcorper, nec volutpat
-                          justo fringilla
+                          All rental properties are verified to ensure safety and transparency.
                         </p>
                         <a
                           href="#"
@@ -312,14 +295,11 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Find out how much you <br />
-                            can afford
+                          List Your Property
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          We’ll help you estimate your budget range. Save to
-                          your buyer profile to help
-                          <br /> in your search
+                          Showcase your property to thousands of potential buyers with Growl Real Estate.
                         </p>
                         <a
                           href="#"
@@ -353,14 +333,11 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Understand your <br />
-                            monthly costs
+                            Smart Pricing
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Ut sollicitudin ipsum eu massa sollicitudin
-                          facilisis.{" "}
+                          Get the best market price with our expert property valuation tools.{" "}
                         </p>
                         <a
                           href="#"
@@ -390,14 +367,11 @@ export default function HelpCenter() {
                         </div>
                         <h4 className="title text-center">
                           <a href="#">
-                            Get help with your down <br />
-                            payment
+                            Fast Selling Process
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          In fermentum dignissim mauris et blandit. Fusce
-                          efficitur libero sit amet ullamcorper, nec volutpat
-                          justo fringilla
+                          We help you sell your property quickly with powerful marketing strategies.
                         </p>
                         <a
                           href="#"
@@ -412,9 +386,9 @@ export default function HelpCenter() {
               </div>
             </div>
             <p className="text text-center text-1 " data-wow-duration="2s">
-              Looking to spotlight a unique property with expert marketing?
+              Looking to spotlight a unique property with Growl Real Estate?
               <a href="#" className="fw-7">
-                Let’s chat
+                Let’s connect
               </a>
             </p>
           </div>

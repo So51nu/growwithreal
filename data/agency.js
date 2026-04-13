@@ -1,7 +1,7 @@
 export const agenciesData = [
   {
     id: 1,
-    bgImageSrc: "/images/section/agencies-1.jpg",
+    bgImageSrc: "/images/section/g1.jpg",
     logoSrc: "/images/brands/brand-7.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",
@@ -12,7 +12,7 @@ export const agenciesData = [
   },
   {
     id: 2,
-    bgImageSrc: "/images/section/agencies-2.jpg",
+    bgImageSrc: "/images/section/g2.jpg",
     logoSrc: "/images/brands/brand-1.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",
@@ -23,7 +23,7 @@ export const agenciesData = [
   },
   {
     id: 3,
-    bgImageSrc: "/images/section/agencies-3.jpg",
+    bgImageSrc: "/images/section/g3.jpg",
     logoSrc: "/images/brands/brand-4.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",
@@ -34,7 +34,7 @@ export const agenciesData = [
   },
   {
     id: 4,
-    bgImageSrc: "/images/section/agencies-4.jpg",
+    bgImageSrc: "/images/section/g4.jpg",
     logoSrc: "/images/brands/brand-2.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",
@@ -45,7 +45,7 @@ export const agenciesData = [
   },
   {
     id: 5,
-    bgImageSrc: "/images/section/agencies-5.jpg",
+    bgImageSrc: "/images/section/g5.jpg",
     logoSrc: "/images/brands/brand-8.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",
@@ -56,7 +56,7 @@ export const agenciesData = [
   },
   {
     id: 6,
-    bgImageSrc: "/images/section/agencies-6.jpg",
+    bgImageSrc: "/images/section/g6.jpg",
     logoSrc: "/images/brands/brand-6.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",
@@ -67,7 +67,7 @@ export const agenciesData = [
   },
   {
     id: 7,
-    bgImageSrc: "/images/section/agencies-7.jpg",
+    bgImageSrc: "/images/section/g7.jpg",
     logoSrc: "/images/brands/brand-9.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",
@@ -78,7 +78,7 @@ export const agenciesData = [
   },
   {
     id: 8,
-    bgImageSrc: "/images/section/agencies-8.jpg",
+    bgImageSrc: "/images/section/g1.jpg",
     logoSrc: "/images/brands/brand-5.jpg",
     name: "Lorem House",
     location: "102 Ingraham St, Brooklyn, NY 11237",

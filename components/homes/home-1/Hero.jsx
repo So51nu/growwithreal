@@ -16,10 +16,9 @@ export default function Hero() {
           <div className="col-lg-8 ">
             <div className="content-inner">
               <div className="heading-title">
-                <h1 className="title">Search Luxury Homes</h1>
+                <h1 className="title">GROWL REAL ESTATE</h1>
                 <p className="h6 fw-4">
-                  Thousands of luxury home enthusiasts just like you visit our
-                  website.
+                  Discover exclusive luxury projects, trusted by thousands of homebuyers every month.
                 </p>
               </div>
               <div className="wg-filter">

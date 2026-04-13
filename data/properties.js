@@ -1,7 +1,7 @@
 export const properties = [
   {
     id: 1,
-    imageSrc: "/images/section/box-house-10.jpg",
+    imageSrc: "/images/section/g1.jpg",
     title: "Elegant studio flat",
     location: "Ingraham St, Brooklyn, NY 11237",
     beds: 3,
@@ -15,7 +15,7 @@ export const properties = [
   },
   {
     id: 2,
-    imageSrc: "/images/section/box-house-11.jpg",
+    imageSrc: "/images/section/g2.jpg",
     title: "Elegant studio flat",
     location: "Ingraham St, Brooklyn, NY 11237",
     beds: 3,
@@ -29,7 +29,7 @@ export const properties = [
   },
   {
     id: 3,
-    imageSrc: "/images/section/box-house-12.jpg",
+    imageSrc: "/images/section/g3.jpg",
     title: "Elegant studio flat",
     location: "Ingraham St, Brooklyn, NY 11237",
     beds: 3,
@@ -43,7 +43,7 @@ export const properties = [
   },
   {
     id: 4,
-    imageSrc: "/images/section/box-house-13.jpg",
+    imageSrc: "/images/section/g4.jpg",
     title: "Elegant studio flat",
     location: "Ingraham St, Brooklyn, NY 11237",
     beds: 3,
@@ -57,7 +57,7 @@ export const properties = [
   },
   {
     id: 5,
-    imageSrc: "/images/section/box-house.jpg",
+    imageSrc: "/images/section/g5.jpg",
     title: "Elegant studio flat",
     location: "Ingraham St, Brooklyn, NY 11237",
     beds: 3,
@@ -69,7 +69,7 @@ export const properties = [
   },
   {
     id: 6,
-    imageSrc: "/images/section/box-house-2.jpg",
+    imageSrc: "/images/section/g6.jpg",
     title: "Elegant studio flat",
     location: "Ingraham St, Brooklyn, NY 11237",
     beds: 3,
@@ -84,7 +84,7 @@ export const properties = [
 export const properties2 = [
   {
     id: 7,
-    imageSrc: "/images/section/box-house.jpg",
+    imageSrc: "/images/section/g7.jpg",
     alt: "Elegant studio flat",
     width: 600,
     height: 401,
@@ -97,7 +97,7 @@ export const properties2 = [
   },
   {
     id: 8,
-    imageSrc: "/images/section/box-house-3.jpg",
+    imageSrc: "/images/section/g1.jpg",
     alt: "Elegant studio flat",
     width: 600,
     height: 401,
@@ -110,7 +110,7 @@ export const properties2 = [
   },
   {
     id: 9,
-    imageSrc: "/images/section/box-house-14.jpg",
+    imageSrc: "/images/section/g2.jpg",
     alt: "Elegant studio flat",
     width: 600,
     height: 401,
@@ -123,7 +123,7 @@ export const properties2 = [
   },
   {
     id: 10,
-    imageSrc: "/images/section/box-house-13.jpg",
+    imageSrc: "/images/section/g3.jpg",
     alt: "Elegant studio flat",
     width: 600,
     height: 401,
@@ -136,7 +136,7 @@ export const properties2 = [
   },
   {
     id: 11,
-    imageSrc: "/images/section/box-house.jpg",
+    imageSrc: "/images/section/g4.jpg",
     alt: "Elegant studio flat",
     width: 600,
     height: 401,
@@ -149,7 +149,7 @@ export const properties2 = [
   },
   {
     id: 12,
-    imageSrc: "/images/section/box-house-2.jpg",
+    imageSrc: "/images/section/g5.jpg",
     alt: "Elegant studio flat",
     width: 600,
     height: 401,
@@ -165,7 +165,7 @@ export const properties2 = [
 export const properties3 = [
   {
     id: 13,
-    imageSrc: "/images/section/box-house-18.jpg",
+    imageSrc: "/images/section/g6.jpg",
     width: 465,
     height: 311,
     delay: "0s",
@@ -176,7 +176,7 @@ export const properties3 = [
   },
   {
     id: 14,
-    imageSrc: "/images/section/box-house-4.jpg",
+    imageSrc: "/images/section/g7.jpg",
     width: 600,
     height: 401,
     delay: ".1s",
@@ -187,7 +187,7 @@ export const properties3 = [
   },
   {
     id: 15,
-    imageSrc: "/images/section/box-house-22.jpg",
+    imageSrc: "/images/section/g1.jpg",
     width: 465,
     height: 311,
     delay: ".2s",
@@ -198,7 +198,7 @@ export const properties3 = [
   },
   {
     id: 16,
-    imageSrc: "/images/section/box-house-6.jpg",
+    imageSrc: "/images/section/g2.jpg",
     width: 600,
     height: 401,
     delay: ".3s",
@@ -212,7 +212,7 @@ export const properties3 = [
 export const properties4 = [
   {
     id: 17,
-    imageSrc: "/images/section/box-listing-1.jpg",
+    imageSrc: "/images/section/g3.jpg",
     title: "Casa Lomas de Machalí Machas",
     beds: 3,
     baths: 3,
@@ -221,7 +221,7 @@ export const properties4 = [
   },
   {
     id: 18,
-    imageSrc: "/images/section/box-listing-2.jpg",
+    imageSrc: "/images/section/g4.jpg",
     title: "Casa Lomas de Machalí Machas",
     beds: 3,
     baths: 3,
@@ -230,7 +230,7 @@ export const properties4 = [
   },
   {
     id: 19,
-    imageSrc: "/images/section/box-listing-3.jpg",
+    imageSrc: "/images/section/g5.jpg",
     title: "Casa Lomas de Machalí Machas",
     beds: 3,
     baths: 3,
@@ -239,7 +239,7 @@ export const properties4 = [
   },
   {
     id: 20,
-    imageSrc: "/images/section/box-listing-4.jpg",
+    imageSrc: "/images/section/g6.jpg",
     title: "Casa Lomas de Machalí Machas",
     beds: 3,
     baths: 3,
@@ -248,7 +248,7 @@ export const properties4 = [
   },
   {
     id: 21,
-    imageSrc: "/images/section/box-listing-5.jpg",
+    imageSrc: "/images/section/g7.jpg",
     title: "Casa Lomas de Machalí Machas",
     beds: 3,
     baths: 3,
@@ -260,7 +260,7 @@ export const properties4 = [
 export const properties5 = [
   {
     id: 22,
-    imageSrc: "/images/home/house-db-1.jpg",
+    imageSrc: "/images/home/g1.jpg",
     title: "Gorgeous Apartment Building",
     postingDate: "March 22, 2024",
     expiryDate: "April 10, 2024",
@@ -268,7 +268,7 @@ export const properties5 = [
   },
   {
     id: 23,
-    imageSrc: "/images/home/house-db-2.jpg",
+    imageSrc: "/images/home/g2.jpg",
     title: "Mountain Mist Retreat, Aspen",
     postingDate: "March 22, 2024",
     expiryDate: "April 10, 2024",
@@ -276,7 +276,7 @@ export const properties5 = [
   },
   {
     id: 24,
-    imageSrc: "/images/home/house-db-3.jpg",
+    imageSrc: "/images/home/g3.jpg",
     title: "Lakeview Haven, Lake Tahoe",
     postingDate: "March 22, 2024",
     expiryDate: "April 10, 2024",
@@ -284,7 +284,7 @@ export const properties5 = [
   },
   {
     id: 25,
-    imageSrc: "/images/home/house-db-4.jpg",
+    imageSrc: "/images/home/g4.jpg",
     title: "Coastal Serenity Cottage",
     postingDate: "March 22, 2024",
     expiryDate: "April 10, 2024",
@@ -292,7 +292,7 @@ export const properties5 = [
   },
   {
     id: 26,
-    imageSrc: "/images/home/house-db-5.jpg",
+    imageSrc: "/images/home/g5.jpg",
     title: "Sunset Heights Estate",
     postingDate: "March 22, 2024",
     expiryDate: "April 10, 2024",
@@ -303,7 +303,7 @@ export const properties5 = [
 export const properties6 = [
   {
     id: 27,
-    imageSrc: "/images/section/box-house-list-1.jpg",
+    imageSrc: "/images/section/g7.jpg",
     title: "Elegant studio flat",
     location: "Los Angeles, California 91604",
     beds: 4,
@@ -314,7 +314,7 @@ export const properties6 = [
   },
   {
     id: 28,
-    imageSrc: "/images/section/box-house-list-2.jpg",
+    imageSrc: "/images/section/g1.jpg",
     title: "Elegant studio flat",
     location: "Los Angeles, California 91604",
     beds: 4,
@@ -325,7 +325,7 @@ export const properties6 = [
   },
   {
     id: 29,
-    imageSrc: "/images/section/box-house-list-3.jpg",
+    imageSrc: "/images/section/g2.jpg",
     title: "Elegant studio flat",
     location: "Los Angeles, California 91604",
     beds: 4,
@@ -336,7 +336,7 @@ export const properties6 = [
   },
   {
     id: 30,
-    imageSrc: "/images/section/box-house-list-4.jpg",
+    imageSrc: "/images/section/g3.jpg",
     title: "Elegant studio flat",
     location: "Los Angeles, California 91604",
     beds: 4,
@@ -350,7 +350,7 @@ export const properties6 = [
 export const properties7 = [
   {
     id: 31,
-    imageSrc: "/images/section/box-house-4.jpg",
+    imageSrc: "/images/section/g4.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -361,12 +361,12 @@ export const properties7 = [
     category: "Studio",
     title: "Elegant studio flat",
     location: "102 Ingraham St, Brooklyn, NY 11237",
-    agentAvatar: "/images/avatar/avatar-5.jpg",
+    agentAvatar: "/images/avatar/g5.jpg",
     agentName: "Courtney Henry",
   },
   {
     id: 32,
-    imageSrc: "/images/section/box-house-18.jpg",
+    imageSrc: "/images/section/g6.jpg",
     imageWidth: 465,
     imageHeight: 311,
     featured: true,
@@ -377,12 +377,12 @@ export const properties7 = [
     category: "Studio",
     title: "Elegant studio flat",
     location: "102 Ingraham St, Brooklyn, NY 11237",
-    agentAvatar: "/images/avatar/avatar-4.jpg",
+    agentAvatar: "/images/avatar/g7.jpg",
     agentName: "Courtney Henry",
   },
   {
     id: 33,
-    imageSrc: "/images/section/box-house-19.jpg",
+    imageSrc: "/images/section/g1.jpg",
     imageWidth: 465,
     imageHeight: 311,
     featured: true,
@@ -393,12 +393,12 @@ export const properties7 = [
     category: "Studio",
     title: "Elegant studio flat",
     location: "102 Ingraham St, Brooklyn, NY 11237",
-    agentAvatar: "/images/avatar/avatar-5.jpg",
+    agentAvatar: "/images/avatar/g1.jpg",
     agentName: "Courtney Henry",
   },
   {
     id: 34,
-    imageSrc: "/images/section/box-house-14.jpg",
+    imageSrc: "/images/section/g2.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -409,12 +409,12 @@ export const properties7 = [
     category: "Studio",
     title: "Elegant studio flat",
     location: "102 Ingraham St, Brooklyn, NY 11237",
-    agentAvatar: "/images/avatar/avatar-5.jpg",
+    agentAvatar: "/images/avatar/g3.jpg",
     agentName: "Courtney Henry",
   },
   {
     id: 35,
-    imageSrc: "/images/section/box-house-22.jpg",
+    imageSrc: "/images/section/g4.jpg",
     imageWidth: 465,
     imageHeight: 311,
     featured: true,
@@ -425,12 +425,12 @@ export const properties7 = [
     category: "Studio",
     title: "Elegant studio flat",
     location: "102 Ingraham St, Brooklyn, NY 11237",
-    agentAvatar: "/images/avatar/avatar-6.jpg",
+    agentAvatar: "/images/avatar/g5.jpg",
     agentName: "Courtney Henry",
   },
   {
     id: 36,
-    imageSrc: "/images/section/box-house-8.jpg",
+    imageSrc: "/images/section/g6.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: false,
@@ -441,7 +441,7 @@ export const properties7 = [
     category: "Studio",
     title: "Elegant studio flat",
     location: "102 Ingraham St, Brooklyn, NY 11237",
-    agentAvatar: "/images/avatar/avt-png4.png",
+    agentAvatar: "/images/avatar/g7.png",
     agentName: "Courtney Henry",
   },
 ];
@@ -449,7 +449,7 @@ export const properties7 = [
 export const properties8 = [
   {
     id: 37,
-    imageSrc: "/images/section/box-house-list-8.jpg",
+    imageSrc: "/images/section/g2.jpg",
     imageWidth: 314,
     imageHeight: 282,
     featured: true,
@@ -460,13 +460,13 @@ export const properties8 = [
     beds: 3,
     baths: 3,
     sqft: 4043,
-    agentAvatar: "/images/avatar/avatar-4.jpg",
+    agentAvatar: "/images/avatar/g4.jpg",
     agentName: "Courtney Henry",
     price: 8600,
   },
   {
     id: 38,
-    imageSrc: "/images/section/box-house-list-6.jpg",
+    imageSrc: "/images/section/g6.jpg",
     imageWidth: 435,
     imageHeight: 408,
     featured: true,
@@ -477,13 +477,13 @@ export const properties8 = [
     beds: 3,
     baths: 3,
     sqft: 4043,
-    agentAvatar: "/images/avatar/avatar-5.jpg",
+    agentAvatar: "/images/avatar/g5.jpg",
     agentName: "Courtney Henry",
     price: 8600,
   },
   {
     id: 39,
-    imageSrc: "/images/section/box-house-list-9.jpg",
+    imageSrc: "/images/section/g5.jpg",
     imageWidth: 314,
     imageHeight: 282,
     featured: true,
@@ -494,13 +494,13 @@ export const properties8 = [
     beds: 3,
     baths: 3,
     sqft: 4043,
-    agentAvatar: "/images/avatar/testimonials-4.jpg",
+    agentAvatar: "/images/avatar/g4.jpg",
     agentName: "Courtney Henry",
     price: 8600,
   },
   {
     id: 40,
-    imageSrc: "/images/section/box-house-list-10.jpg",
+    imageSrc: "/images/section/g1.jpg",
     imageWidth: 314,
     imageHeight: 282,
     featured: true,
@@ -511,7 +511,7 @@ export const properties8 = [
     beds: 3,
     baths: 3,
     sqft: 4043,
-    agentAvatar: "/images/avatar/avt-png4.png",
+    agentAvatar: "/images/avatar/g4.png",
     agentName: "Courtney Henry",
     price: 8600,
   },
@@ -520,7 +520,7 @@ export const properties8 = [
 export const properties9 = [
   {
     id: 41,
-    imageSrc: "/images/section/box-house-25.jpg",
+    imageSrc: "/images/section/g5.jpg",
     imageWidth: 1280,
     imageHeight: 720,
     title: "Gorgeous Apartment Building",
@@ -533,7 +533,7 @@ export const properties9 = [
   },
   {
     id: 42,
-    imageSrc: "/images/section/box-house-23.jpg",
+    imageSrc: "/images/section/g3.jpg",
     imageWidth: 1280,
     imageHeight: 720,
     title: "Gorgeous Apartment Building",
@@ -546,7 +546,7 @@ export const properties9 = [
   },
   {
     id: 43,
-    imageSrc: "/images/section/box-house-24.jpg",
+    imageSrc: "/images/section/g4.jpg",
     imageWidth: 1280,
     imageHeight: 720,
     title: "Gorgeous Apartment Building",
@@ -562,7 +562,7 @@ export const properties9 = [
 export const properties10 = [
   {
     id: 44,
-    imageSrc: "/images/section/box-house-21.jpg",
+    imageSrc: "/images/section/g2.jpg",
     imageWidth: 465,
     imageHeight: 311,
     featured: true,
@@ -576,7 +576,7 @@ export const properties10 = [
   },
   {
     id: 45,
-    imageSrc: "/images/section/box-house-18.jpg",
+    imageSrc: "/images/section/g1.jpg",
     imageWidth: 465,
     imageHeight: 311,
     featured: true,
@@ -590,7 +590,7 @@ export const properties10 = [
   },
   {
     id: 46,
-    imageSrc: "/images/section/box-house-15.jpg",
+    imageSrc: "/images/section/g7.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -607,7 +607,7 @@ export const properties10 = [
 export const properties11 = [
   {
     id: 47,
-    imageSrc: "/images/section/box-house.jpg",
+    imageSrc: "/images/section/g1.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -621,7 +621,7 @@ export const properties11 = [
   },
   {
     id: 48,
-    imageSrc: "/images/section/box-house-2.jpg",
+    imageSrc: "/images/section/g2.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -635,7 +635,7 @@ export const properties11 = [
   },
   {
     id: 49,
-    imageSrc: "/images/section/box-house-3.jpg",
+    imageSrc: "/images/section/g3.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -649,7 +649,7 @@ export const properties11 = [
   },
   {
     id: 50,
-    imageSrc: "/images/section/box-house-4.jpg",
+    imageSrc: "/images/section/g4.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -663,7 +663,7 @@ export const properties11 = [
   },
   {
     id: 51,
-    imageSrc: "/images/section/box-house-5.jpg",
+    imageSrc: "/images/section/g5.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -677,7 +677,7 @@ export const properties11 = [
   },
   {
     id: 52,
-    imageSrc: "/images/section/box-house-6.jpg",
+    imageSrc: "/images/section/g6.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -691,7 +691,7 @@ export const properties11 = [
   },
   {
     id: 53,
-    imageSrc: "/images/section/box-house-7.jpg",
+    imageSrc: "/images/section/g7.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -705,7 +705,7 @@ export const properties11 = [
   },
   {
     id: 54,
-    imageSrc: "/images/section/box-house-8.jpg",
+    imageSrc: "/images/section/g1.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -719,7 +719,7 @@ export const properties11 = [
   },
   {
     id: 55,
-    imageSrc: "/images/section/box-house-9.jpg",
+    imageSrc: "/images/section/g3.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -733,7 +733,7 @@ export const properties11 = [
   },
   {
     id: 56,
-    imageSrc: "/images/section/box-house-15.jpg",
+    imageSrc: "/images/section/g5.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -747,7 +747,7 @@ export const properties11 = [
   },
   {
     id: 57,
-    imageSrc: "/images/section/box-house-16.jpg",
+    imageSrc: "/images/section/g6.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -761,7 +761,7 @@ export const properties11 = [
   },
   {
     id: 58,
-    imageSrc: "/images/section/box-house-14.jpg",
+    imageSrc: "/images/section/g4.jpg",
     imageWidth: 600,
     imageHeight: 401,
     featured: true,
@@ -779,13 +779,13 @@ export const propertySlidesData = [
   {
     id: 59,
     mainImage: {
-      src: "/images/page-title/thumbs-main-8.jpg",
+      src: "/images/page-title/g8.jpg",
       width: 924,
       height: 1020,
       alt: "",
     },
     propertyImage: {
-      src: "/images/page-title/property-1.jpg",
+      src: "/images/page-title/g1.jpg",
       width: 154,
       height: 117,
       alt: "",
@@ -796,13 +796,13 @@ export const propertySlidesData = [
   {
     id: 60,
     mainImage: {
-      src: "/images/page-title/thumbs-main-9.jpg",
+      src: "/images/page-title/g2.jpg",
       width: 924,
       height: 1020,
       alt: "",
     },
     propertyImage: {
-      src: "/images/page-title/property-2.jpg",
+      src: "/images/page-title/g2.jpg",
       width: 154,
       height: 117,
       alt: "",
@@ -813,13 +813,13 @@ export const propertySlidesData = [
   {
     id: 61,
     mainImage: {
-      src: "/images/page-title/thumbs-main-10.jpg",
+      src: "/images/page-title/g1.jpg",
       width: 924,
       height: 1020,
       alt: "",
     },
     propertyImage: {
-      src: "/images/page-title/property-3.jpg",
+      src: "/images/page-title/g3.jpg",
       width: 154,
       height: 117,
       alt: "",

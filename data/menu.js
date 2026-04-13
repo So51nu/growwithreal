@@ -1,16 +1,15 @@
 export const homes = [
-  { href: "/", label: "Home Page 01", isCurrent: true },
-  { href: "/home02", label: "Home Page 02" },
-  { href: "/home03", label: "Home Page 03" },
-  { href: "/home04", label: "Home Page 04" },
-  { href: "/home05", label: "Home Page 05" },
-  { href: "/home06", label: "Home Page 06" },
-  { href: "/home07", label: "Home Page 07" },
-  { href: "/home08", label: "Home Page 08" },
-  { href: "/home09", label: "Home Page 09" },
-  { href: "/home10", label: "Home Page 10" },
+  { href: "/", label: "Home Page 01", isCurrent: true }, // sirf ye true rahe
+  { href: "/home02", label: "Home Page 02", isCurrent: false },
+  { href: "/home03", label: "Home Page 03", isCurrent: false },
+  { href: "/home04", label: "Home Page 04", isCurrent: false },
+  { href: "/home05", label: "Home Page 05", isCurrent: false },
+  { href: "/home06", label: "Home Page 06", isCurrent: false },
+  { href: "/home07", label: "Home Page 07", isCurrent: false },
+  { href: "/home08", label: "Home Page 08", isCurrent: false },
+  { href: "/home09", label: "Home Page 09", isCurrent: false },
+  { href: "/home10", label: "Home Page 10", isCurrent: false },
 ];
-
 export const propertyLinks = [
   {
     title: "Layout",

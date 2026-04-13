@@ -489,7 +489,7 @@ export default function AddProperty() {
           </form>
         </div>
         <div className="widget-box-2 mb-20">
-          <h3 className="title">Floors</h3>
+          <h3 className="title">Floorsededed</h3>
           <div className="box-radio-check mb-16">
             <div className="text-1 mb-12">Enable Floor Plan:</div>
             <fieldset className="radio-item mb-8">

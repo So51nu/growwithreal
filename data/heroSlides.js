@@ -3,7 +3,7 @@ export const slidesData = [
     title:
       "Find the <span class='text_white'>home</span> that <span class='text_white'> best fits</span> your <span class='text_white'>finances</span>",
     image: {
-      src: "/images/page-title/gallery-1.jpg",
+      src: "/images/page-title/g1.jpg",
       alt: "gallery",
       width: 214,
       height: 209,
@@ -25,7 +25,7 @@ export const slidesData = [
     title:
       "Find the <span class='text_white'>home</span> that <span class='text_white'> best fits</span> your <span class='text_white'>finances</span>",
     image: {
-      src: "/images/page-title/gallery-1.jpg",
+      src: "/images/page-title/g1.jpg",
       alt: "gallery",
       width: 214,
       height: 209,
@@ -47,7 +47,7 @@ export const slidesData = [
     title:
       "Find the <span class='text_white'>home</span> that <span class='text_white'> best fits</span> your <span class='text_white'>finances</span>",
     image: {
-      src: "/images/page-title/gallery-1.jpg",
+      src: "/images/page-title/g1.jpg",
       alt: "gallery",
       width: 214,
       height: 209,

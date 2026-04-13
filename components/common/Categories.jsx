@@ -13,11 +13,10 @@ export default function Categories({
       <div className="tf-container">
         <div className="heading-section text-center mb-48">
           <h2 className="title split-text effect-right">
-            <SplitTextAnimation text="Try Searching For" />
+            <SplitTextAnimation text="Find Your Perfect Space" />
           </h2>
           <p className="text-1 split-text split-lines-transform">
-            Thousands of luxury home enthusiasts just like you have found their
-            dream home
+            Exclusive projects curated for your lifestyle.
           </p>
         </div>
         <div className="wrap-categories-sw">

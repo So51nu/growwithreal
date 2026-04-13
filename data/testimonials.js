@@ -1,34 +1,34 @@
 export const testimonials = [
   {
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     description:
       "Phasellus efficitur dictum urna, non elementum mauris mollis a. Duis lacinia arcu ac lorem ultricies porta. Maecenas eleifend malesuada egestas. In eu eros hendrerit, pharetra justo id, blandit orci.",
     name: "Ronald Richards",
     role: "CEO Themesflat",
   },
   {
-    avatarSrc: "/images/avatar/testimonials-2.jpg",
+    avatarSrc: "/images/avatar/g2.jpg",
     description:
       "Proin auctor, mauris at tristique ullamcorper, nunc nisi sagittis velit, eget blandit dolor arcu sed ante. Fusce euismod varius massa, id viverra nisl semper ut. Aliquam felis eros, eleifend non faucibus at.",
     name: "Courtney Henry",
     role: "CEO Themesflat",
   },
   {
-    avatarSrc: "/images/avatar/testimonials-4.jpg",
+    avatarSrc: "/images/avatar/g4.jpg",
     description:
       "Phasellus efficitur dictum urna, non elementum mauris mollis a. Duis lacinia arcu ac lorem ultricies porta. Maecenas eleifend malesuada egestas. In eu eros hendrerit, pharetra justo id, blandit orci.",
     name: "Ronald Richards",
     role: "CEO Themesflat",
   },
   {
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     description:
       "Sed eget nibh eros. Phasellus pharetra ac leo et auctor. Donec libero dui, blandit id nulla laoreet, pellentesque egestas ante. Etiam mollis tincidunt elit, sit amet sodales tellus finibus ut. Orci varius natoque.",
     name: "Annette Black",
     role: "CEO Themesflat",
   },
   {
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     description:
       "Phasellus efficitur dictum urna, non elementum mauris mollis a. Duis lacinia arcu ac lorem ultricies porta. Maecenas eleifend malesuada egestas. In eu eros hendrerit, pharetra justo id, blandit orci.",
     name: "Ronald Richards",
@@ -39,7 +39,7 @@ export const testimonials = [
 export const testimonials2 = [
   {
     id: 1,
-    avatar: "/images/avatar/testimonials-1.jpg",
+    avatar: "/images/avatar/g1.jpg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis, lorem in fringilla feugiat, nisi libero dapibus dui finibus luctus felis augue ac quam. Ut at egestas mauris. Nulla quis laoreet diam",
     name: "Brooklyn Simmons",
@@ -47,7 +47,7 @@ export const testimonials2 = [
   },
   {
     id: 2,
-    avatar: "/images/avatar/testimonials-2.jpg",
+    avatar: "/images/avatar/g2.jpg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis, lorem in fringilla feugiat, nisi libero dapibus dui finibus luctus felis augue ac quam. Ut at egestas mauris. Nulla quis laoreet diam",
     name: "Leslie Alexander",
@@ -55,7 +55,7 @@ export const testimonials2 = [
   },
   {
     id: 3,
-    avatar: "/images/avatar/testimonials-4.jpg",
+    avatar: "/images/avatar/g4.jpg",
     description:
       "Phasellus efficitur dictum urna, non elementum mauris mollis a. Duis lacinia arcu ac lorem ultricies porta. Maecenas eleifend malesuada egestas. In eu eros hendrerit, pharetra justo id, blandit orci.",
     name: "Ronald Richards",
@@ -63,7 +63,7 @@ export const testimonials2 = [
   },
   {
     id: 4,
-    avatar: "/images/avatar/testimonials-3.jpg",
+    avatar: "/images/avatar/g3.jpg",
     description:
       "Sed eget nibh eros. Phasellus pharetra ac leo et auctor. Donec libero dui, blandit id nulla laoreet, pellentesque egestas ante. Etiam mollis tincidunt elit, sit amet sodales tellus finibus ut. Orci varius natoque.",
     name: "Annette Black",
@@ -71,7 +71,7 @@ export const testimonials2 = [
   },
   {
     id: 5,
-    avatar: "/images/avatar/testimonials-3.jpg",
+    avatar: "/images/avatar/g3.jpg",
     description:
       "Phasellus efficitur dictum urna, non elementum mauris mollis a. Duis lacinia arcu ac lorem ultricies porta. Maecenas eleifend malesuada egestas. In eu eros hendrerit, pharetra justo id, blandit orci.",
     name: "Ronald Richards",
@@ -82,7 +82,7 @@ export const testimonials2 = [
 export const testimonials3 = [
   {
     id: 1,
-    avatarSrc: "/images/avatar/testimonials-2.jpg",
+    avatarSrc: "/images/avatar/g2.jpg",
     avatarWidth: 200,
     avatarHeight: 200,
     description:
@@ -102,7 +102,7 @@ export const testimonials3 = [
   },
   {
     id: 3,
-    avatarSrc: "/images/avatar/testimonials-4.jpg",
+    avatarSrc: "/images/avatar/g4.jpg",
     avatarWidth: 200,
     avatarHeight: 200,
     description:
@@ -112,7 +112,7 @@ export const testimonials3 = [
   },
   {
     id: 4,
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     avatarWidth: 200,
     avatarHeight: 200,
     description:
@@ -122,7 +122,7 @@ export const testimonials3 = [
   },
   {
     id: 5,
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     avatarWidth: 200,
     avatarHeight: 200,
     description:
@@ -162,7 +162,7 @@ export const slides = [
 export const testimonials4 = [
   {
     id: 1,
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     description:
       "Proin auctor, mauris at tristique ullamcorper, nunc nisi sagittis velit, eget blandit dolor arcu sed ante. Fusce euismod varius massa, id viverra nisl semper ut. Aliquam felis eros, eleifend non faucibus at.",
     name: "Ronald Richards",
@@ -170,7 +170,7 @@ export const testimonials4 = [
   },
   {
     id: 2,
-    avatarSrc: "/images/avatar/testimonials-2.jpg",
+    avatarSrc: "/images/avatar/g2.jpg",
     description:
       "Proin auctor, mauris at tristique ullamcorper, nunc nisi sagittis velit, eget blandit dolor arcu sed ante. Fusce euismod varius massa, id viverra nisl semper ut. Aliquam felis eros, eleifend non faucibus at.",
     name: "Courtney Henry",
@@ -178,7 +178,7 @@ export const testimonials4 = [
   },
   {
     id: 3,
-    avatarSrc: "/images/avatar/testimonials-4.jpg",
+    avatarSrc: "/images/avatar/g4.jpg",
     description:
       "Proin auctor, mauris at tristique ullamcorper, nunc nisi sagittis velit, eget blandit dolor arcu sed ante. Fusce euismod varius massa, id viverra nisl semper ut. Aliquam felis eros, eleifend non faucibus at.",
     name: "Ronald Richards",
@@ -186,7 +186,7 @@ export const testimonials4 = [
   },
   {
     id: 4,
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     description:
       "Proin auctor, mauris at tristique ullamcorper, nunc nisi sagittis velit, eget blandit dolor arcu sed ante. Fusce euismod varius massa, id viverra nisl semper ut. Aliquam felis eros, eleifend non faucibus at.",
     name: "Annette Black",
@@ -194,7 +194,7 @@ export const testimonials4 = [
   },
   {
     id: 5,
-    avatarSrc: "/images/avatar/testimonials-3.jpg",
+    avatarSrc: "/images/avatar/g3.jpg",
     description:
       "Proin auctor, mauris at tristique ullamcorper, nunc nisi sagittis velit, eget blandit dolor arcu sed ante. Fusce euismod varius massa, id viverra nisl semper ut. Aliquam felis eros, eleifend non faucibus at.",
     name: "Ronald Richards",
@@ -207,7 +207,7 @@ export const testimonials5 = [
     rating: 5, // Number of stars
     description:
       "My experience with property management services has exceeded expectations. They efficiently manage properties with a professional and attentive approach in every situation. I feel reassured that any issue will be resolved promptly and effectively.",
-    avatar: "/images/avatar/testimonials-4.jpg",
+    avatar: "/images/avatar/g4.jpg",
     name: "Annette Black",
     role: "CEO Themesflat",
     width: 200,
@@ -237,7 +237,7 @@ export const testimonials5 = [
     rating: 5, // Number of stars
     description:
       "My experience with property management services has exceeded expectations. They efficiently manage properties with a professional and attentive approach in every situation. I feel reassured that any issue will be resolved promptly and effectively.",
-    avatar: "/images/avatar/testimonials-4.jpg",
+    avatar: "/images/avatar/g4.jpg",
     name: "Annette Black",
     role: "CEO Themesflat",
     width: 200,
@@ -267,7 +267,7 @@ export const testimonials5 = [
     rating: 5, // Number of stars
     description:
       "My experience with property management services has exceeded expectations. They efficiently manage properties with a professional and attentive approach in every situation. I feel reassured that any issue will be resolved promptly and effectively.",
-    avatar: "/images/avatar/testimonials-4.jpg",
+    avatar: "/images/avatar/g4.jpg",
     name: "Annette Black",
     role: "CEO Themesflat",
     width: 200,
@@ -297,7 +297,7 @@ export const testimonials5 = [
     rating: 5, // Number of stars
     description:
       "My experience with property management services has exceeded expectations. They efficiently manage properties with a professional and attentive approach in every situation. I feel reassured that any issue will be resolved promptly and effectively.",
-    avatar: "/images/avatar/testimonials-4.jpg",
+    avatar: "/images/avatar/g4.jpg",
     name: "Annette Black",
     role: "CEO Themesflat",
     width: 200,

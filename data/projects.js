@@ -1,7 +1,7 @@
 export const projects = [
   {
     id: 1,
-    imageSrc: "/images/section/box-house-21.jpg",
+    imageSrc: "/images/section/g1.jpg",
     width: 465,
     height: 311,
     type: "Townhouse",
@@ -10,7 +10,7 @@ export const projects = [
   },
   {
     id: 2,
-    imageSrc: "/images/section/box-help-2.jpg",
+    imageSrc: "/images/section/g2.jpg",
     width: 592,
     height: 366,
     type: "Apartment",
@@ -19,7 +19,7 @@ export const projects = [
   },
   {
     id: 3,
-    imageSrc: "/images/section/box-house-23.jpg",
+    imageSrc: "/images/section/g3.jpg",
     width: 1280,
     height: 720,
     type: "Studio",
@@ -28,7 +28,7 @@ export const projects = [
   },
   {
     id: 4,
-    imageSrc: "/images/section/box-house-list-6.jpg",
+    imageSrc: "/images/section/g6.jpg",
     width: 435,
     height: 408,
     type: "Office",
@@ -37,7 +37,7 @@ export const projects = [
   },
   {
     id: 5,
-    imageSrc: "/images/section/box-house-24.jpg",
+    imageSrc: "/images/section/g4.jpg",
     width: 1280,
     height: 720,
     type: "Commercial",
@@ -46,7 +46,7 @@ export const projects = [
   },
   {
     id: 6,
-    imageSrc: "/images/section/banner-5.jpg",
+    imageSrc: "/images/section/g5.jpg",
     width: 1280,
     height: 703,
     type: "Residential",
@@ -55,7 +55,7 @@ export const projects = [
   },
   {
     id: 7,
-    imageSrc: "/images/section/box-house-28.jpg",
+    imageSrc: "/images/section/g7.jpg",
     width: 400,
     height: 264,
     type: "Apartment",
@@ -64,7 +64,7 @@ export const projects = [
   },
   {
     id: 8,
-    imageSrc: "/images/section/box-house-list-2.jpg",
+    imageSrc: "/images/section/g2.jpg",
     width: 435,
     height: 408,
     type: "Apartment",
@@ -73,7 +73,7 @@ export const projects = [
   },
   {
     id: 9,
-    imageSrc: "/images/section/box-house-26.jpg",
+    imageSrc: "/images/section/g6.jpg",
     width: 400,
     height: 267,
     type: "Villa",
@@ -82,7 +82,7 @@ export const projects = [
   },
   {
     id: 10,
-    imageSrc: "/images/section/box-house-29.jpg",
+    imageSrc: "/images/section/g7.jpg",
     width: 400,
     height: 264,
     type: "Villa",
@@ -94,7 +94,7 @@ export const projects = [
 export const projects2 = [
   {
     id: 11,
-    imageSrc: "/images/section/box-listing-1.jpg",
+    imageSrc: "/images/section/g1.jpg",
     width: 224,
     height: 160,
     title: "Casa Lomas de Machalí Machas",
@@ -105,7 +105,7 @@ export const projects2 = [
   },
   {
     id: 12,
-    imageSrc: "/images/section/box-listing-2.jpg",
+    imageSrc: "/images/section/g2.jpg",
     width: 224,
     height: 160,
     title: "Casa Lomas de Machalí Machas",
@@ -116,7 +116,7 @@ export const projects2 = [
   },
   {
     id: 13,
-    imageSrc: "/images/section/box-listing-3.jpg",
+    imageSrc: "/images/section/g3.jpg",
     width: 224,
     height: 160,
     title: "Casa Lomas de Machalí Machas",
@@ -127,7 +127,7 @@ export const projects2 = [
   },
   {
     id: 14,
-    imageSrc: "/images/section/box-listing-4.jpg",
+    imageSrc: "/images/section/g4.jpg",
     width: 224,
     height: 160,
     title: "Casa Lomas de Machalí Machas",
@@ -138,7 +138,7 @@ export const projects2 = [
   },
   {
     id: 15,
-    imageSrc: "/images/section/box-listing-5.jpg",
+    imageSrc: "/images/section/g5.jpg",
     width: 224,
     height: 160,
     title: "Casa Lomas de Machalí Machas",
