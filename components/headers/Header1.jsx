@@ -11,17 +11,20 @@ export default function Header1({ parentClass = "header" }) {
           <div className="row">
             <div className="col-12">
               <div className="header-inner-wrap">
-                <div className="header-logo">
-                  <Link href={`/`} className="site-logo">
-                    <img
-                      className="logo_header"
-                      alt=""
-                      data-light="/images/logo/logo@2x.png"
-                      data-dark="/images/logo/logo-2@2x.png"
-                      src="/images/logo/logo@2x.png"
-                    />
-                  </Link>
-                </div>
+                <div className="header-logo" style={{ overflow: "visible" }}>
+  <Link href={`/`} className="site-logo">
+    <img
+      src="/images/logo/growl_logo2.png"
+      alt="logo"
+      style={{
+        height: "80px",         // header ke andar fit
+        transform: "scale(1.95)", // 👈 ye actual size bada karega
+        transformOrigin: "left center",
+        display: "block",
+      }}
+    />
+  </Link>
+</div>
                 <nav className="main-menu">
                   <ul className="navigation ">
                     <Nav />

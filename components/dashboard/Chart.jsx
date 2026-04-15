@@ -1,3 +1,97 @@
+// "use client";
+// import React, { useEffect, useRef } from "react";
+// import {
+//   Chart,
+//   LineController,
+//   LineElement,
+//   PointElement,
+//   LinearScale,
+//   Title,
+//   CategoryScale,
+// } from "chart.js";
+
+// Chart.register(
+//   LineController,
+//   LineElement,
+//   PointElement,
+//   LinearScale,
+//   CategoryScale,
+//   Title
+// );
+
+// const LineChart = () => {
+//   const chartRef = useRef(null);
+//   const chartInstance = useRef(null);
+
+//   useEffect(() => {
+//     if (chartInstance.current) {
+//       chartInstance.current.destroy(); // Destroy previous instance to avoid duplicates
+//     }
+
+//     const ctx = chartRef.current.getContext("2d");
+
+//     // Create gradient
+//     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+//     gradient.addColorStop(0, "rgba(21, 99, 223,0.2)");
+//     gradient.addColorStop(1, "rgba(21, 99, 223,0)");
+
+//     // Chart data
+//     chartInstance.current = new Chart(ctx, {
+//       type: "line",
+//       data: {
+//         labels: [
+//           "Jan",
+//           "Feb",
+//           "Mar",
+//           "Apr",
+//           "May",
+//           "Jun",
+//           "Jul",
+//           "Aug",
+//           "Sep",
+//           "Oct",
+//           "Nov",
+//           "Dec",
+//         ],
+//         datasets: [
+//           {
+//             data: [
+//               42, 45, 70, 65, 140, 130, 145, 145, 160, 135, 140, 130, 135, 140,
+//               250,
+//             ],
+//             backgroundColor: gradient,
+//             borderColor: "#f1913d",
+//             borderWidth: 2,
+//             fill: true,
+//             tension: 0.4,
+//           },
+//         ],
+//       },
+//       options: {
+//         responsive: true,
+//         plugins: {
+//           legend: {
+//             display: false,
+//           },
+//         },
+//         scales: {
+//           y: {
+//             beginAtZero: true,
+//           },
+//         },
+//       },
+//     });
+
+//     return () => {
+//       chartInstance.current.destroy(); // Cleanup on unmount
+//     };
+//   }, []);
+
+//   return <canvas ref={chartRef} id="lineChart"></canvas>;
+// };
+
+// export default LineChart;
+
 "use client";
 import React, { useEffect, useRef } from "react";
 import {
@@ -8,6 +102,9 @@ import {
   LinearScale,
   Title,
   CategoryScale,
+  Filler,
+  Tooltip,
+  Legend,
 } from "chart.js";
 
 Chart.register(
@@ -16,49 +113,35 @@ Chart.register(
   PointElement,
   LinearScale,
   CategoryScale,
-  Title
+  Title,
+  Filler,
+  Tooltip,
+  Legend
 );
 
-const LineChart = () => {
+const LineChart = ({ labels = [], values = [] }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
   useEffect(() => {
+    if (!chartRef.current) return;
+
     if (chartInstance.current) {
-      chartInstance.current.destroy(); // Destroy previous instance to avoid duplicates
+      chartInstance.current.destroy();
     }
 
     const ctx = chartRef.current.getContext("2d");
-
-    // Create gradient
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(21, 99, 223,0.2)");
     gradient.addColorStop(1, "rgba(21, 99, 223,0)");
 
-    // Chart data
     chartInstance.current = new Chart(ctx, {
       type: "line",
       data: {
-        labels: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        labels,
         datasets: [
           {
-            data: [
-              42, 45, 70, 65, 140, 130, 145, 145, 160, 135, 140, 130, 135, 140,
-              250,
-            ],
+            data: values,
             backgroundColor: gradient,
             borderColor: "#f1913d",
             borderWidth: 2,
@@ -69,25 +152,28 @@ const LineChart = () => {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
-          legend: {
-            display: false,
-          },
+          legend: { display: false },
         },
         scales: {
-          y: {
-            beginAtZero: true,
-          },
+          y: { beginAtZero: true },
         },
       },
     });
 
     return () => {
-      chartInstance.current.destroy(); // Cleanup on unmount
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+      }
     };
-  }, []);
+  }, [labels, values]);
 
-  return <canvas ref={chartRef} id="lineChart"></canvas>;
+  return (
+    <div style={{ width: "100%", height: "350px" }}>
+      <canvas ref={chartRef} />
+    </div>
+  );
 };
 
 export default LineChart;
