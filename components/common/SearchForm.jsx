@@ -10,9 +10,9 @@ function toNumber(value) {
   return Number.isFinite(num) ? num : 0;
 }
 
-function uniqueSorted(values) {
-  return [...new Set(values.filter(Boolean))].sort((a, b) =>
-    String(a).localeCompare(String(b))
+function uniqueValues(values = []) {
+  return [...new Set(values.filter(Boolean).map((v) => String(v).trim()))].sort(
+    (a, b) => a.localeCompare(b)
   );
 }
 
@@ -20,19 +20,17 @@ function formatCurrency(value) {
   return `₹${Number(value || 0).toLocaleString("en-IN")}`;
 }
 
-function getPriceMax(projects = []) {
+function getMaxPrice(projects = []) {
   const max = Math.max(...projects.map((item) => toNumber(item.price)), 0);
-  if (max <= 0) return 100000000;
-  return Math.ceil(max / 1000000) * 1000000;
+  return max > 0 ? Math.ceil(max / 1000000) * 1000000 : 50000000;
 }
 
-function getAreaMax(projects = []) {
+function getMaxArea(projects = []) {
   const max = Math.max(
     ...projects.map((item) => toNumber(item.carpet_area || item.size_sqft)),
     0
   );
-  if (max <= 0) return 5000;
-  return Math.ceil(max / 100) * 100;
+  return max > 0 ? Math.ceil(max / 100) * 100 : 5000;
 }
 
 export default function SearchForm({
@@ -44,82 +42,63 @@ export default function SearchForm({
 }) {
   const searchFormRef = useRef(null);
 
-  const priceMax = useMemo(() => getPriceMax(projects), [projects]);
-  const areaMax = useMemo(() => getAreaMax(projects), [projects]);
+  const priceMax = useMemo(() => getMaxPrice(projects), [projects]);
+  const areaMax = useMemo(() => getMaxArea(projects), [projects]);
 
-  const cityOptions = useMemo(() => {
-    const values = uniqueSorted(projects.map((item) => item.city));
-    return ["All Cities", ...values];
-  }, [projects]);
+  const cityOptions = useMemo(
+    () => uniqueValues(projects.map((item) => item.city)),
+    [projects]
+  );
 
-  const locationOptions = useMemo(() => {
-    const values = uniqueSorted(
-      projects.map(
-        (item) => item.short_location || item.location || item.full_address
-      )
-    );
-    return ["All Locations", ...values];
-  }, [projects]);
+  const locationOptions = useMemo(
+    () =>
+      uniqueValues(
+        projects.map(
+          (item) => item.short_location || item.location || item.full_address
+        )
+      ),
+    [projects]
+  );
 
-  const typeOptions = useMemo(() => {
-    const values = uniqueSorted(projects.map((item) => item.property_type));
-    return ["All Types", ...values];
-  }, [projects]);
+  const typeOptions = useMemo(
+    () => uniqueValues(projects.map((item) => item.property_type)),
+    [projects]
+  );
 
-  const statusOptions = useMemo(() => {
-    const values = uniqueSorted(projects.map((item) => item.property_status));
-    return ["All Status", ...values];
-  }, [projects]);
+  const statusOptions = useMemo(
+    () => uniqueValues(projects.map((item) => item.property_status)),
+    [projects]
+  );
 
   const amenityOptions = useMemo(() => {
-    const flatAmenities = projects.flatMap((item) =>
+    const allAmenities = projects.flatMap((item) =>
       Array.isArray(item.amenities) ? item.amenities : []
     );
-    return uniqueSorted(flatAmenities);
+    return uniqueValues(allAmenities);
   }, [projects]);
 
-  const [filters, setFilters] = useState({
-    keyword: "",
-    city: lockedCity || "",
-    location: "",
-    propertyType: "",
-    propertyStatus: "",
-    bedrooms: "",
-    bathrooms: "",
-    amenities: [],
-    sortBy: "Newest",
-    priceRange: [0, priceMax],
-    areaRange: [0, areaMax],
-  });
-
-  useEffect(() => {
-    setFilters((prev) => ({
-      ...prev,
-      city: lockedCity || prev.city || "",
+  const defaultFilters = useMemo(
+    () => ({
+      keyword: "",
+      city: lockedCity || "",
+      location: "",
+      propertyType: "",
+      propertyStatus: "",
+      bedrooms: "",
+      bathrooms: "",
+      amenities: [],
+      sortBy: "Newest",
       priceRange: [0, priceMax],
       areaRange: [0, areaMax],
-    }));
-  }, [lockedCity, priceMax, areaMax]);
+    }),
+    [lockedCity, priceMax, areaMax]
+  );
+
+  const [filters, setFilters] = useState(defaultFilters);
 
   useEffect(() => {
-    const searchFormToggler = document.querySelector(".searchFormToggler");
-
-    const handleToggle = () => {
-      if (searchFormRef.current) {
-        searchFormRef.current.classList.toggle("show");
-      }
-    };
-
-    if (searchFormToggler) {
-      searchFormToggler.addEventListener("click", handleToggle);
-    }
-
-    return () => {
-      if (searchFormToggler) {
-        searchFormToggler.removeEventListener("click", handleToggle);
-      }
-    };
-  }, []);
+    setFilters(defaultFilters);
+  }, [defaultFilters]);
 
   useEffect(() => {
     onFilterChange(filters);
@@ -145,43 +124,42 @@ export default function SearchForm({
   };
 
   const resetFilters = () => {
-    setFilters({
-      keyword: "",
-      city: lockedCity || "",
-      location: "",
-      propertyType: "",
-      propertyStatus: "",
-      bedrooms: "",
-      bathrooms: "",
-      amenities: [],
-      sortBy: "Newest",
-      priceRange: [0, priceMax],
-      areaRange: [0, areaMax],
-    });
+    setFilters(defaultFilters);
   };
 
   return (
-    <div className={parentClass} ref={searchFormRef}>
+    <form
+      className={parentClass}
+      ref={searchFormRef}
+      onSubmit={(e) => e.preventDefault()}
+    >
       <div className="group-select" style={{ marginBottom: 20 }}>
         <div className="box-select" style={{ width: "100%" }}>
           <input
             type="text"
-            className="form-control"
+            value={filters.keyword}
             placeholder={
               lockedDeveloper
-                ? `Search ${lockedDeveloper} projects, location, address...`
+                ? `Search ${lockedDeveloper} projects, locations, address...`
                 : lockedCity
-                ? `Search ${lockedCity} projects, location, address...`
-                : "Search by project name, location, address..."
+                ? `Search ${lockedCity} projects, locations, address...`
+                : "Search project name, city, location, address..."
             }
-            value={filters.keyword}
             onChange={(e) => updateFilter("keyword", e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
+            className="form-control"
             style={{
               width: "100%",
               minHeight: "54px",
               borderRadius: "12px",
               padding: "12px 16px",
-              border: "1px solid #ddd",
+              border: "1px solid #d9d9d9",
+              background: "#fff",
+              color: "#111",
             }}
           />
         </div>
@@ -236,10 +214,8 @@ export default function SearchForm({
           <div className="box-select">
             <DropdownSelect
               options={cityOptions}
-              selectedValue={filters.city || "All Cities"}
-              onChange={(value) =>
-                updateFilter("city", value === "All Cities" ? "" : value)
-              }
+              selectedValue={filters.city}
+              onChange={(value) => updateFilter("city", value)}
               placeholder="All Cities"
             />
           </div>
@@ -248,10 +224,8 @@ export default function SearchForm({
         <div className="box-select">
           <DropdownSelect
             options={locationOptions}
-            selectedValue={filters.location || "All Locations"}
-            onChange={(value) =>
-              updateFilter("location", value === "All Locations" ? "" : value)
-            }
+            selectedValue={filters.location}
+            onChange={(value) => updateFilter("location", value)}
             placeholder="All Locations"
           />
         </div>
@@ -259,46 +233,35 @@ export default function SearchForm({
         <div className="box-select">
           <DropdownSelect
             options={typeOptions}
-            selectedValue={filters.propertyType || "All Types"}
-            onChange={(value) =>
-              updateFilter("propertyType", value === "All Types" ? "" : value)
-            }
-            placeholder="All Types"
+            selectedValue={filters.propertyType}
+            onChange={(value) => updateFilter("propertyType", value)}
+            placeholder="All Property Types"
           />
         </div>
 
         <div className="box-select">
           <DropdownSelect
             options={statusOptions}
-            selectedValue={filters.propertyStatus || "All Status"}
-            onChange={(value) =>
-              updateFilter(
-                "propertyStatus",
-                value === "All Status" ? "" : value
-              )
-            }
+            selectedValue={filters.propertyStatus}
+            onChange={(value) => updateFilter("propertyStatus", value)}
             placeholder="All Status"
           />
         </div>
 
         <div className="box-select">
           <DropdownSelect
-            options={["Any BHK", "1", "2", "3", "4", "5+"]}
-            selectedValue={filters.bedrooms || "Any BHK"}
-            onChange={(value) =>
-              updateFilter("bedrooms", value === "Any BHK" ? "" : value)
-            }
+            options={["1", "2", "3", "4", "5+"]}
+            selectedValue={filters.bedrooms}
+            onChange={(value) => updateFilter("bedrooms", value)}
             placeholder="Any BHK"
           />
         </div>
 
         <div className="box-select">
           <DropdownSelect
-            options={["Any Bath", "1", "2", "3", "4+"]}
-            selectedValue={filters.bathrooms || "Any Bath"}
-            onChange={(value) =>
-              updateFilter("bathrooms", value === "Any Bath" ? "" : value)
-            }
+            options={["1", "2", "3", "4+"]}
+            selectedValue={filters.bathrooms}
+            onChange={(value) => updateFilter("bathrooms", value)}
             placeholder="Any Bath"
           />
         </div>
@@ -345,18 +308,21 @@ export default function SearchForm({
       )}
 
       <div
-        className="flex"
         style={{
           display: "flex",
-          gap: "12px",
+          gap: 12,
           flexWrap: "wrap",
-          marginTop: "20px",
+          marginTop: 20,
         }}
       >
-        <button type="button" className="tf-btn btn-fill" onClick={resetFilters}>
+        <button
+          type="button"
+          className="tf-btn btn-fill"
+          onClick={resetFilters}
+        >
           Reset Filters
         </button>
       </div>
-    </div>
+    </form>
   );
 }

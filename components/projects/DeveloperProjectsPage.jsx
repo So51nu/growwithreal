@@ -1,113 +1,3 @@
-// "use client";
-
-// import React, { useEffect, useState } from "react";
-// import Link from "next/link";
-// import Image from "next/image";
-// import { apiGet } from "../lib/api";
-
-// function formatPrice(price) {
-//   const num = Number(price || 0);
-//   if (!num) return "Price on request";
-//   if (num >= 10000000) return `₹${(num / 10000000).toFixed(2).replace(/\.00$/, "")} Cr`;
-//   if (num >= 100000) return `₹${(num / 100000).toFixed(2).replace(/\.00$/, "")} L`;
-//   return `₹${num.toLocaleString()}`;
-// }
-
-// export default function DeveloperProjectsPage({ developerSlug }) {
-//   const [projects, setProjects] = useState([]);
-
-//   useEffect(() => {
-//     const loadProjects = async () => {
-//       try {
-//         const res = await apiGet(`/admindashboard/developers/${developerSlug}/properties/`);
-//         setProjects(Array.isArray(res) ? res : []);
-//       } catch (error) {
-//         console.error("Developer projects fetch error:", error);
-//       }
-//     };
-
-//     loadProjects();
-//   }, [developerSlug]);
-
-//   const developerName = projects[0]?.developer_name || developerSlug.replaceAll("-", " ");
-//   const cityName = projects[0]?.city || "";
-
-//   return (
-//     <section className="section-property-layout style-1">
-//       <div className="tf-container">
-//         <div style={{ marginBottom: 24 }}>
-//           <div className="text-1">
-//             {cityName ? <Link href={`/cities/${projects[0]?.city_slug}`}>{cityName}</Link> : null}
-//             {" > "}
-//             <span>{developerName}</span>
-//           </div>
-//           <h2 className="title" style={{ marginTop: 10 }}>
-//             Projects by {developerName}{cityName ? ` in ${cityName}` : ""}
-//           </h2>
-//           <p className="text-1">Showing {projects.length} project{projects.length === 1 ? "" : "s"}</p>
-//         </div>
-
-//         <div className="row">
-//           {projects.map((project) => (
-//             <div className="col-md-6 mb-24" key={project.id}>
-//               <div className="box-house hover-img">
-//                 <div className="image-wrap">
-//                   <Link href={`/property-detail-v1/${project.id}`}>
-//                     <Image
-//                       alt={project.title}
-//                       src={project.imageSrc || "/images/home/house-db-1.jpg"}
-//                       width={615}
-//                       height={405}
-//                     />
-//                   </Link>
-//                 </div>
-
-//                 <div className="content">
-//                   <h5 className="title">
-//                     <Link href={`/property-detail-v1/${project.id}`}>
-//                       {project.title}
-//                     </Link>
-//                   </h5>
-
-//                   <p className="location text-1 flex items-center gap-6">
-//                     <i className="icon-location" />
-//                     {project.short_location || project.location || project.full_address}
-//                   </p>
-
-//                   <div className="price text-3 fw-6" style={{ marginTop: 8 }}>
-//                     {formatPrice(project.price)}
-//                   </div>
-
-//                   <ul className="meta-list flex" style={{ marginTop: 8 }}>
-//                     <li className="text-1 flex"><span>{project.bedrooms || 0}</span>BHK</li>
-//                     <li className="text-1 flex"><span>{project.possession_date || "-"}</span>Possession</li>
-//                     <li className="text-1 flex"><span>{project.carpet_area || "-"}</span>Area</li>
-//                   </ul>
-
-//                   <div className="bot flex justify-between items-center" style={{ marginTop: 14 }}>
-//                     <Link
-//                       href={`/property-detail-v1/${project.id}`}
-//                       className="tf-btn style-border pd-4"
-//                     >
-//                       Details
-//                     </Link>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-
-//           {projects.length === 0 && (
-//             <div className="col-12">
-//               <p>No projects found for this developer.</p>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -121,30 +11,24 @@ function toNumber(value) {
   return Number.isFinite(num) ? num : 0;
 }
 
-function formatPrice(price) {
-  const num = Number(price || 0);
-  if (!num) return "Price on request";
-  if (num >= 10000000) {
-    return `₹${(num / 10000000).toFixed(2).replace(/\.00$/, "")} Cr`;
-  }
-  if (num >= 100000) {
-    return `₹${(num / 100000).toFixed(2).replace(/\.00$/, "")} L`;
-  }
-  return `₹${num.toLocaleString("en-IN")}`;
-}
-
 function normalizeText(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function formatPrice(price) {
+  const num = Number(price || 0);
+  if (!num) return "Price on request";
+  if (num >= 10000000) return `₹${(num / 10000000).toFixed(2).replace(/\.00$/, "")} Cr`;
+  if (num >= 100000) return `₹${(num / 100000).toFixed(2).replace(/\.00$/, "")} L`;
+  return `₹${num.toLocaleString("en-IN")}`;
+}
+
 function matchesCountFilter(actual, selected) {
   if (!selected) return true;
-  const num = toNumber(actual);
-
-  if (selected === "5+") return num >= 5;
-  if (selected === "4+") return num >= 4;
-
-  return num === Number(selected);
+  const value = toNumber(actual);
+  if (selected === "5+") return value >= 5;
+  if (selected === "4+") return value >= 4;
+  return value === Number(selected);
 }
 
 export default function DeveloperProjectsPage({ developerSlug }) {
@@ -159,7 +43,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
     bathrooms: "",
     amenities: [],
     sortBy: "Newest",
-    priceRange: [0, 100000000],
+    priceRange: [0, 50000000],
     areaRange: [0, 5000],
   });
 
@@ -172,6 +56,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
         setProjects(Array.isArray(res) ? res : []);
       } catch (error) {
         console.error("Developer projects fetch error:", error);
+        setProjects([]);
       }
     };
 
@@ -182,6 +67,9 @@ export default function DeveloperProjectsPage({ developerSlug }) {
     let data = [...projects];
 
     data = data.filter((project) => {
+      const locationValue =
+        project.short_location || project.location || project.full_address || "";
+
       const searchableText = normalizeText(
         [
           project.title,
@@ -201,9 +89,6 @@ export default function DeveloperProjectsPage({ developerSlug }) {
 
       const cityMatch = !filters.city || project.city === filters.city;
 
-      const locationValue =
-        project.short_location || project.location || project.full_address || "";
-
       const locationMatch =
         !filters.location || locationValue === filters.location;
 
@@ -215,10 +100,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
         project.property_status === filters.propertyStatus;
 
       const bedroomsMatch = matchesCountFilter(project.bedrooms, filters.bedrooms);
-      const bathroomsMatch = matchesCountFilter(
-        project.bathrooms,
-        filters.bathrooms
-      );
+      const bathroomsMatch = matchesCountFilter(project.bathrooms, filters.bathrooms);
 
       const price = toNumber(project.price);
       const area = toNumber(project.carpet_area || project.size_sqft);
@@ -229,10 +111,13 @@ export default function DeveloperProjectsPage({ developerSlug }) {
       const areaMatch =
         area >= filters.areaRange[0] && area <= filters.areaRange[1];
 
-      const amenities = Array.isArray(project.amenities) ? project.amenities : [];
+      const projectAmenities = Array.isArray(project.amenities)
+        ? project.amenities
+        : [];
+
       const amenitiesMatch =
         filters.amenities.length === 0 ||
-        filters.amenities.every((item) => amenities.includes(item));
+        filters.amenities.every((item) => projectAmenities.includes(item));
 
       return (
         keywordMatch &&
@@ -298,8 +183,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
         <div style={{ marginBottom: 24 }}>
           <h2 className="title">Projects by {developerName}</h2>
           <p className="text-1">
-            Showing all projects by {developerName} across all cities and
-            locations
+            Showing all projects by {developerName} across all cities and locations
           </p>
         </div>
 
@@ -368,7 +252,10 @@ export default function DeveloperProjectsPage({ developerSlug }) {
                     </li>
                   </ul>
 
-                  <div className="bot flex justify-between items-center" style={{ marginTop: 14 }}>
+                  <div
+                    className="bot flex justify-between items-center"
+                    style={{ marginTop: 14 }}
+                  >
                     <Link
                       href={`/property-detail-v1/${project.id}`}
                       className="tf-btn style-border pd-4"
@@ -383,7 +270,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
 
           {filteredProjects.length === 0 && (
             <div className="col-12">
-              <p>No projects found for the selected filters.</p>
+              <p>No properties found for the selected filters.</p>
             </div>
           )}
         </div>
