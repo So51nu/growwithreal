@@ -13,7 +13,7 @@ export default function Cta() {
                   alt=""
                   width={272}
                   height={85}
-                  src="/images/logo/logo-2@2x.png"
+                  src="/images/logo/growl_logo2.png"
                 />
               </div>
               <div className="image-wrap">
@@ -32,7 +32,7 @@ export default function Cta() {
                     Need help? Talk to our expert.
                   </h2>
                   <p className="text-1 text_white">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    GROWL REAL ESTATE
                   </p>
                 </div>
                 <div className="wrap-btn">
@@ -58,7 +58,7 @@ export default function Cta() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    (603) 555-0123
+                    +91 9326183013
                   </a>
                 </div>
               </div>

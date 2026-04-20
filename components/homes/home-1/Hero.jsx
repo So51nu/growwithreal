@@ -1,24 +1,52 @@
 "use client";
 import SearchForm from "@/components/common/SearchForm";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
-  // State to track the active item
+  const router = useRouter();
   const [activeItem, setActiveItem] = useState("For sale");
+  const [searchText, setSearchText] = useState("");
 
-  // Array of items to render
   const items = ["For sale", "For rent"];
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const query = new URLSearchParams();
+
+    if (searchText.trim()) {
+      query.set("search", searchText.trim());
+    }
+
+    if (activeItem === "For sale") {
+      query.set("property_status", "for-sale");
+    } else {
+      query.set("property_status", "for-rent");
+    }
+
+    router.push(`/my-property?${query.toString()}`);
+  };
+
   return (
-    <div className="page-title home01">
+    <div
+  className="page-title home01"
+  style={{
+    backgroundImage: "url('https://images.unsplash.com/photo-1689574666903-ec23039b3558?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
       <div className="tf-container ">
         <div className="row justify-center relative">
           <div className="col-lg-8 ">
             <div className="content-inner">
               <div className="heading-title">
-                <h1 className="title">GROWL REAL ESTATE</h1>
+                <h1 className="title">GROWL REAL ESTATE </h1>
                 <p className="h6 fw-4">
-                  Discover exclusive luxury projects, trusted by thousands of homebuyers every month.
+                  Discover exclusive luxury projects, trusted by thousands of
+                  homebuyers every month.
                 </p>
               </div>
               <div className="wg-filter">
@@ -35,21 +63,25 @@ export default function Hero() {
                           className={`select-item ${
                             activeItem === item ? "active" : ""
                           }`}
-                          onClick={() => setActiveItem(item)} // Set the active item on click
+                          onClick={() => setActiveItem(item)}
                         >
                           <span className="text-value-item">{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
-                  <form onSubmit={(e) => e.preventDefault()}>
+
+                  <form onSubmit={handleSearch}>
                     <fieldset>
                       <input
                         type="text"
                         placeholder="Place, neighborhood, school or agent..."
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
                       />
                     </fieldset>
                   </form>
+
                   <div className="box-item wrap-btn">
                     <div className="btn-filter show-form searchFormToggler">
                       <div className="icons">
@@ -126,9 +158,14 @@ export default function Hero() {
                         </svg>
                       </div>
                     </div>
-                    <a href="#" className="tf-btn bg-color-primary pd-3">
+
+                    <button
+                      type="button"
+                      onClick={handleSearch}
+                      className="tf-btn bg-color-primary pd-3"
+                    >
                       Search <i className="icon-MagnifyingGlass fw-6" />
-                    </a>
+                    </button>
                   </div>
                 </div>
                 <SearchForm />

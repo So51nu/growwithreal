@@ -1,91 +1,73 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-const optionsDefault = ["Newest", "Oldest", "3 days"];
+
 export default function DropdownSelect({
-  onChange = (elm) => {},
-  options = optionsDefault,
-  defaultOption,
-  selectedValue,
+  onChange = () => {},
+  options = [],
+  defaultOption = "",
+  selectedValue = "",
+  placeholder = "Select",
   addtionalParentClass = "",
 }) {
-  const selectRef = useRef();
-  const optionsRef = useRef();
-  const [selected, setSelected] = useState(options[0]);
-  const toggleDropdown = () => {
-    selectRef.current.classList.toggle("open");
+  const selectRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(selectedValue || defaultOption || "");
+
+  useEffect(() => {
+    setSelected(selectedValue || defaultOption || "");
+  }, [selectedValue, defaultOption]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSelect = (value) => {
+    setSelected(value);
+    onChange(value);
+    setOpen(false);
   };
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!selectRef.current.contains(event.target)) {
-        selectRef.current.classList.remove("open");
-      }
-    };
 
-    // Add event listeners to each dropdown element
-
-    // Add a global click event listener to detect outside clicks
-    document.addEventListener("click", handleClickOutside);
-
-    // Cleanup event listeners on component unmount
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Function to handle clicks outside the select or options
-    const handleClickOutside = (event) => {
-      if (
-        selectRef.current &&
-        selectRef.current.contains(event.target) &&
-        optionsRef.current &&
-        !optionsRef.current.contains(event.target)
-      ) {
-        // Close the options if clicked outside
-        toggleDropdown();
-      }
-    };
-
-    // Add event listener on mount
-    document.addEventListener("click", handleClickOutside);
-
-    // Cleanup event listener on unmount
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  const currentValue = selected || placeholder;
 
   return (
-    <>
-      <div className={`nice-select ${addtionalParentClass}`} ref={selectRef}>
-        <span className="current">
-          {selectedValue || selected || defaultOption || options[0]}
-        </span>
-        <ul className="list" ref={optionsRef}>
-          {options.map((elm, i) => (
-            <li
-              key={i}
-              onClick={() => {
-                setSelected(elm);
-                onChange(elm);
-                toggleDropdown();
-              }}
-              className={`option ${
-                !selectedValue
-                  ? selected == elm
-                    ? "selected"
-                    : ""
-                  : selectedValue == elm
-                  ? "selected"
-                  : ""
-              }  text text-1`}
-            >
-              {elm}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div
+      className={`nice-select ${open ? "open" : ""} ${addtionalParentClass}`}
+      ref={selectRef}
+    >
+      <span
+        className="current"
+        onClick={() => setOpen((prev) => !prev)}
+        style={{ cursor: "pointer" }}
+      >
+        {currentValue}
+      </span>
+
+      <ul className="list">
+        {options.map((option, index) => (
+          <li
+            key={index}
+            className={`option ${
+              currentValue === option ? "selected" : ""
+            } text text-1`}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleSelect(option);
+            }}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -27,7 +27,7 @@ export default function DashboardNav({ color = "" }) {
         </svg>
       </div>
       <div className={`name ${color} `}>
-        Themesflat
+        Growl Dashboard
         <i className="icon-CaretDown" />
       </div>
       <div className=" menu-user">

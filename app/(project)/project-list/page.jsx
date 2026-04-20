@@ -2,8 +2,7 @@ import Cta from "@/components/common/Cta";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import PageTitle from "@/components/projects/PageTitle";
-import Project1 from "@/components/projects/Project1";
-
+import DeveloperDirectory from "@/components/projects/DeveloperDirectory";
 import React from "react";
 
 export default function page() {
@@ -13,7 +12,7 @@ export default function page() {
         <Header1 />
         <PageTitle />
         <div className="main-content">
-          <Project1 />
+          <DeveloperDirectory />
           <Cta />
         </div>
         <Footer1 />

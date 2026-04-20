@@ -69,7 +69,7 @@ export default function Reviews() {
                   </div>
                   <div className="content">
                     <h6 className="name">Cody Fisher</h6>
-                    <p className="text-2 lh-16">CEO Themesflat</p>
+                    <p className="text-2 lh-16">CEO Growl Real Estate</p>
                   </div>
                 </div>
                 <div
@@ -113,7 +113,7 @@ export default function Reviews() {
                       <h6 className="name">
                         <a href="#">Cody Fisher</a>
                       </h6>
-                      <p className="text-2">CEO Themesflat</p>
+                      <p className="text-2">CEO Growl Real Estate</p>
                     </div>
                   </div>
                 </div>

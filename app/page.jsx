@@ -12,7 +12,7 @@ import Properties2 from "@/components/homes/home-1/Properties2";
 import Testimonials from "@/components/homes/home-1/Testimonials";
 
 export const metadata = {
-  title: "Home 01 || Proty - Real Estate React Nextjs Template",
+  title: " GROWL REAL ESTATE PRIVATE LIMITED ",
   description: "Proty - Real Estate React Nextjs Template",
 };
 export default function Home() {

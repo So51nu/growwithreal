@@ -332,7 +332,7 @@ export default function Sidebar() {
         <div className="logo relative z-5">
           <Image
             alt=""
-            src="/images/logo/logo-2@2x.png"
+            src="/images/logo/growl_logo2.png"
             width={272}
             height={85}
           />

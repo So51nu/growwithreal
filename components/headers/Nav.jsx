@@ -137,6 +137,59 @@
 // }
 
 
+
+// "use client";
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+// import React from "react";
+
+// export default function Nav() {
+//   const pathname = usePathname();
+
+//   return (
+//     <>
+//       {/* Home */}
+//       <li className={pathname === "/" ? "current-menu" : ""}>
+//         <Link href="/">Home</Link>
+//       </li>
+
+//       {/* Listing */}
+//       <li
+//         className={
+//           pathname === "/property-gird-top-search" ? "current-menu" : ""
+//         }
+//       >
+//         <Link href="/property-gird-top-search">Listing</Link>
+//       </li>
+
+//       {/* FAQ */}
+//       <li className={pathname === "/faq" ? "current-menu" : ""}>
+//         <Link href="/faq">FAQ</Link>
+//       </li>
+
+//       {/* Blog */}
+//       <li
+//         className={
+//           pathname === "/blog-list" || pathname.startsWith("/blog-details")
+//             ? "current-menu"
+//             : ""
+//         }
+//       >
+//         <Link href="/blog-list">Blog</Link>
+//       </li>
+
+//       {/* Contact */}
+//       <li className={pathname === "/contact" ? "current-menu" : ""}>
+//         <Link href="/contact">Contact</Link>
+//       </li>
+//        <li className={pathname === "/about" ? "current-menu" : ""}>
+//         <Link href="/about">About Us </Link>
+//       </li>
+//     </>
+//   );
+// }
+
+
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -147,12 +200,10 @@ export default function Nav() {
 
   return (
     <>
-      {/* Home */}
       <li className={pathname === "/" ? "current-menu" : ""}>
         <Link href="/">Home</Link>
       </li>
 
-      {/* Listing */}
       <li
         className={
           pathname === "/property-gird-top-search" ? "current-menu" : ""
@@ -161,12 +212,30 @@ export default function Nav() {
         <Link href="/property-gird-top-search">Listing</Link>
       </li>
 
-      {/* FAQ */}
+      <li
+        className={
+          pathname === "/cities" || pathname.startsWith("/cities/")
+            ? "current-menu"
+            : ""
+        }
+      >
+        <Link href="/cities">Cities</Link>
+      </li>
+
+      <li
+        className={
+          pathname === "/developers" || pathname.startsWith("/developers/")
+            ? "current-menu"
+            : ""
+        }
+      >
+        <Link href="/developers">Developers</Link>
+      </li>
+
       <li className={pathname === "/faq" ? "current-menu" : ""}>
         <Link href="/faq">FAQ</Link>
       </li>
 
-      {/* Blog */}
       <li
         className={
           pathname === "/blog-list" || pathname.startsWith("/blog-details")
@@ -177,12 +246,12 @@ export default function Nav() {
         <Link href="/blog-list">Blog</Link>
       </li>
 
-      {/* Contact */}
       <li className={pathname === "/contact" ? "current-menu" : ""}>
         <Link href="/contact">Contact</Link>
       </li>
-       <li className={pathname === "/about" ? "current-menu" : ""}>
-        <Link href="/about">About Us </Link>
+
+      <li className={pathname === "/about" ? "current-menu" : ""}>
+        <Link href="/about">About Us</Link>
       </li>
     </>
   );

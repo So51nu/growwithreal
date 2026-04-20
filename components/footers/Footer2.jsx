@@ -294,9 +294,9 @@ export default function Footer2({ parentClass = "" }) {
           <div className="footer-bottom">
             <p>
               Copyright © {new Date().getFullYear()}{" "}
-              <span className="fw-7">PROTY - REAL ESTATE</span> . Designed &amp;
+              <span className="fw-7"> GROWL REAL ESTATE</span> . Designed &amp;
               Developed by
-              <a href="#">Themesflat</a>
+              <a href="#">Click Connect Media Pvt Ltd.</a> 
             </p>
             <div className="wrap-social">
               <div className="text-3 fw-6 text_white">Follow us</div>

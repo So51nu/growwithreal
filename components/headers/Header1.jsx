@@ -12,19 +12,19 @@ export default function Header1({ parentClass = "header" }) {
             <div className="col-12">
               <div className="header-inner-wrap">
                 <div className="header-logo" style={{ overflow: "visible" }}>
-  <Link href={`/`} className="site-logo">
-    <img
-      src="/images/logo/growl_logo2.png"
-      alt="logo"
-      style={{
-        height: "80px",         // header ke andar fit
-        transform: "scale(1.95)", // 👈 ye actual size bada karega
-        transformOrigin: "left center",
-        display: "block",
-      }}
-    />
-  </Link>
-</div>
+                  <Link href={`/`} className="site-logo">
+                    <img
+                      src="/images/logo/growl_logo2.png"
+                      alt="logo"
+                      style={{
+                        height: "80px",         // header ke andar fit
+                        transform: "scale(1.95)", // 👈 ye actual size bada karega
+                        transformOrigin: "left center",
+                        display: "block",
+                      }}
+                    />
+                  </Link>
+                </div>
                 <nav className="main-menu">
                   <ul className="navigation ">
                     <Nav />
@@ -49,7 +49,7 @@ export default function Header1({ parentClass = "header" }) {
                         />
                       </svg>
                     </div>
-                    <p>(603) 555-0123</p>
+                    <p>+91 9326183013</p>
                   </div>
                   <DashboardNav />
                   <div className="btn-add">

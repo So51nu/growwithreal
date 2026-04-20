@@ -1,546 +1,305 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
 export default function Faqs() {
+  const [pageData, setPageData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [openItems, setOpenItems] = useState({});
+  const [formData, setFormData] = useState({
+    full_name: "",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+
+  useEffect(() => {
+    fetchFaqData();
+  }, []);
+
+  const fetchFaqData = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/faq/page-data/`, {
+        cache: "no-store",
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setPageData(data);
+
+        const initialOpenState = {};
+        data.categories.forEach((category, categoryIndex) => {
+          if (category.faqs?.length > 0) {
+            initialOpenState[category.id] =
+              categoryIndex === 0 ? category.faqs[0].id : null;
+          }
+        });
+        setOpenItems(initialOpenState);
+      }
+    } catch (error) {
+      console.error("Error fetching FAQ data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const toggleFaq = (categoryId, faqId) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [categoryId]: prev[categoryId] === faqId ? null : faqId,
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setResponseMessage("");
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/faq/inquiries/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setResponseMessage(data.message || "Message sent successfully.");
+        setFormData({
+          full_name: "",
+          message: "",
+        });
+      } else {
+        setResponseMessage("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+      setResponseMessage("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <section className="section-faq">
+        <div className="tf-container">
+          <p>Loading FAQs...</p>
+        </div>
+      </section>
+    );
+  }
+
+  const pageSetting = pageData?.page_setting;
+  const categories = pageData?.categories || [];
+
   return (
     <section className="section-faq">
       <div className="tf-container">
         <div className="row">
           <div className="col-xl-8 col-lg-7">
             <div className="heading-section mb-48">
-              <h2 className="title">Frequently Asked Questions</h2>
+              <h2 className="title">
+                {pageSetting?.section_title || "Frequently Asked Questions"}
+              </h2>
             </div>
-            <div className="tf-faq mb-49">
-              <h3 className="fw-8 title mb-24">Overview</h3>
-              <ul className="box-faq" id="wrapper-faq">
-                <li className="faq-item">
-                  <a
-                    href="#accordion-faq-one"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion-faq-one"
-                  >
-                    Why Should I Use Your Services?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion-faq-one"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item active">
-                  <a
-                    href="#accordion-faq-two"
-                    className="faq-header h6"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion-faq-two"
-                  >
-                    Why Should I Use Your Services?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion-faq-two"
-                    className="collapse show"
-                    data-bs-parent="#wrapper-faq"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion-faq-three"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion-faq-three"
-                  >
-                    How Secure Are Your Services?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion-faq-three"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion-faq-four"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion-faq-four"
-                  >
-                    Is There Customer Support Available?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion-faq-four"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion-faq-five"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion-faq-five"
-                  >
-                    How Can I Update My Account Information?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion-faq-five"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="tf-faq mb-49">
-              <h3 className="fw-8 title mb-24">Costs and Payments</h3>
-              <ul className="box-faq" id="wrapper-faq-2">
-                <li className="faq-item">
-                  <a
-                    href="#accordion2-faq-one"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion2-faq-one"
-                  >
-                    How Do You Calculate Fees?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion2-faq-one"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-2"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item active">
-                  <a
-                    href="#accordion2-faq-two"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion2-faq-two"
-                  >
-                    How Do I Pay My Invoices?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion2-faq-two"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-2"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion2-faq-three"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion2-faq-three"
-                  >
-                    Are There Opportunities For Discounts Or Promotions?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion2-faq-three"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-2"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion2-faq-four"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion2-faq-four"
-                  >
-                    Are There Any Hidden Fees Not Displayed In The Pricing
-                    Table?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion2-faq-four"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-2"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion2-faq-five"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion2-faq-five"
-                  >
-                    What Is The Refund Procedure?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion2-faq-five"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-2"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion2-faq-six"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion2-faq-six"
-                  >
-                    Is There Financial Or Accounting Support?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion2-faq-six"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-2"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="tf-faq">
-              <h3 className="fw-8 title mb-24">Safety and Security</h3>
-              <ul className="box-faq" id="wrapper-faq-3">
-                <li className="faq-item">
-                  <a
-                    href="#accordion3-faq-one"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion3-faq-one"
-                  >
-                    What Languages Does Your Service Support?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion3-faq-one"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-3"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item active">
-                  <a
-                    href="#accordion3-faq-two"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion3-faq-two"
-                  >
-                    How Do I Integrate Your Service Into My System?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion3-faq-two"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-3"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion3-faq-three"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion3-faq-three"
-                  >
-                    What Are The Safety Features Of Your System?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion3-faq-three"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-3"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion3-faq-four"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion3-faq-four"
-                  >
-                    How Can I Request New Features?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion3-faq-four"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-3"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion3-faq-five"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion3-faq-five"
-                  >
-                    Is My Data Protected?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion3-faq-five"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-3"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-                <li className="faq-item">
-                  <a
-                    href="#accordion3-faq-six"
-                    className="faq-header h6 collapsed"
-                    data-bs-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="accordion3-faq-six"
-                  >
-                    How Do I Report A Technical Issue?
-                    <i className="icon-CaretDown" />
-                  </a>
-                  <div
-                    id="accordion3-faq-six"
-                    className="collapse"
-                    data-bs-parent="#wrapper-faq-3"
-                  >
-                    <p className="faq-body">
-                      Once your account is set up and you've familiarized
-                      yourself with the platform, you are ready to start using
-                      our services. Whether it's accessing specific features,
-                      making transactions, or utilizing our tools, you'll find
-                      everything you need at your fingertips.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+
+            {categories.map((category) => (
+              <div className="tf-faq mb-49" key={category.id}>
+                <h3 className="fw-8 title mb-24">{category.title}</h3>
+
+                <ul className="box-faq">
+                  {category.faqs?.length > 0 ? (
+                    category.faqs.map((faq) => {
+                      const isOpen = openItems[category.id] === faq.id;
+
+                      return (
+                        <li
+                          className={`faq-item ${isOpen ? "active" : ""}`}
+                          key={faq.id}
+                        >
+                          <button
+                            type="button"
+                            className={`faq-header h6 ${isOpen ? "" : "collapsed"}`}
+                            onClick={() => toggleFaq(category.id, faq.id)}
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              background: "transparent",
+                              border: "none",
+                              padding: 0,
+                            }}
+                          >
+                            {faq.question}
+                            <i className="icon-CaretDown" />
+                          </button>
+
+                          {isOpen && (
+                            <div className="faq-content-show">
+                              <p className="faq-body">{faq.answer}</p>
+                            </div>
+                          )}
+                        </li>
+                      );
+                    })
+                  ) : (
+                    <li className="faq-item">
+                      <p className="faq-body">No FAQs available in this category.</p>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            ))}
           </div>
+
           <div className="col-xl-4 col-lg-5">
             <div className="tf-sidebar sticky-sidebar">
-              <form className="form-contact-seller mb-30">
-                <h4 className="heading-title mb-30">Contact Sellers</h4>
+              <form className="form-contact-seller mb-30" onSubmit={handleSubmit}>
+                <h4 className="heading-title mb-30">
+                  {pageSetting?.seller_form_title || "Contact Sellers"}
+                </h4>
+
                 <div className="seller-info">
                   <div className="avartar">
                     <Image
-                      alt=""
+                      alt={pageSetting?.seller_name || "Seller"}
                       width={200}
                       height={200}
-                      src="/images/avatar/seller.jpg"
+                      src={
+                        pageSetting?.seller_image
+                          ? pageSetting.seller_image
+                          : "/images/avatar/seller.jpg"
+                      }
                     />
                   </div>
+
                   <div className="content">
-                    <h6 className="name">Shara Conner</h6>
+                    <h6 className="name">
+                      {pageSetting?.seller_name || "Growl Real Estate Seller"}
+                    </h6>
+
                     <ul className="contact">
-                      <li>
-                        <i className="icon-phone-1" />
-                        <span>1-333-345-6868</span>
-                      </li>
-                      <li>
-                        <i className="icon-mail" />
-                        <a href="#">themesflat@gmail.com</a>
-                      </li>
+                      {pageSetting?.seller_phone && (
+                        <li>
+                          <i className="icon-phone-1" />
+                          <span>{pageSetting.seller_phone}</span>
+                        </li>
+                      )}
+
+                      {pageSetting?.seller_email && (
+                        <li>
+                          <i className="icon-mail" />
+                          <a href={`mailto:${pageSetting.seller_email}`}>
+                            {pageSetting.seller_email}
+                          </a>
+                        </li>
+                      )}
                     </ul>
                   </div>
                 </div>
+
                 <fieldset className="mb-12">
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Full Name"
-                    name="name"
-                    id="name"
-                    required=""
+                    name="full_name"
+                    value={formData.full_name}
+                    onChange={handleChange}
+                    required
                   />
                 </fieldset>
+
                 <fieldset className="mb-30">
                   <textarea
                     name="message"
                     cols={30}
                     rows={10}
                     placeholder="How can an agent help"
-                    id="message"
-                    required=""
-                    defaultValue={""}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                   />
                 </fieldset>
-                <a href="#" className="tf-btn bg-color-primary w-full">
-                  Send message
-                </a>
+
+                <button
+                  type="submit"
+                  className="tf-btn bg-color-primary w-full"
+                  disabled={submitting}
+                >
+                  {submitting ? "Sending..." : "Send message"}
+                </button>
+
+                {responseMessage && (
+                  <p style={{ marginTop: "12px" }}>{responseMessage}</p>
+                )}
               </form>
+
               <div className="sidebar-ads">
                 <div className="image-wrap">
                   <Image
                     className="lazyload"
-                    data-src="/images/blog/ads.jpg"
-                    alt=""
+                    alt={pageSetting?.ad_title || "Ad image"}
                     width={400}
                     height={470}
-                    src="/images/blog/ads.jpg"
+                    src={
+                      pageSetting?.ad_image
+                        ? pageSetting.ad_image
+                        : "/images/blog/ads.jpg"
+                    }
                   />
                 </div>
-                <div className="logo relative z-5">
-                  <Image
-                    alt=""
-                    width={272}
-                    height={85}
-                    src="/images/logo/logo-2@2x.png"
-                  />
-                </div>
+
+                {pageSetting?.ad_logo && (
+                  <div className="logo relative z-5">
+                    <Image
+                      alt="Ad Logo"
+                      width={272}
+                      height={85}
+                      src={pageSetting.ad_logo}
+                    />
+                  </div>
+                )}
+
                 <div className="box-ads relative z-5">
                   <div className="content">
                     <h4 className="title">
-                      <Link href={`/property-detail-v1`}>
-                        We can help you find a local real estate agent
+                      <Link href={pageSetting?.ad_button_link || "#"}>
+                        {pageSetting?.ad_title ||
+                          "We can help you find a local real estate agent"}
                       </Link>
                     </h4>
+
                     <div className="text-addres">
                       <p>
-                        Connect with a trusted agent who knows the market inside
-                        out - whether you’re buying or selling.
+                        {pageSetting?.ad_description ||
+                          "Connect with a trusted agent who knows the market inside out - whether you’re buying or selling."}
                       </p>
                     </div>
                   </div>
-                  <a href="#" className="tf-btn fw-6 bg-color-primary w-full">
-                    Connect with an agent
-                  </a>
+
+                  <Link
+                    href={pageSetting?.ad_button_link || "#"}
+                    className="tf-btn fw-6 bg-color-primary w-full"
+                  >
+                    {pageSetting?.ad_button_text || "Connect with an agent"}
+                  </Link>
                 </div>
               </div>
             </div>

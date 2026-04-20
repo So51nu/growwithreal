@@ -1,38 +1,124 @@
 "use client";
-import React from "react";
-import Image from "next/image";
 
-export default function Sidebar() {
+import React, { useMemo, useState } from "react";
+import Image from "next/image";
+import { apiPost } from "../lib/api";
+
+export default function Sidebar({ property }) {
+  const [sellerForm, setSellerForm] = useState({
+    name: "",
+    message: "",
+  });
+
+  const [infoForm, setInfoForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const [loadingSeller, setLoadingSeller] = useState(false);
+  const [loadingInfo, setLoadingInfo] = useState(false);
+const seller = useMemo(() => {
+  if (property?.contact_seller) return property.contact_seller;
+
+  if (Array.isArray(property?.fallback_sellers) && property.fallback_sellers.length) {
+    const index = property.id % property.fallback_sellers.length;
+    return property.fallback_sellers[index];
+  }
+
+  return {
+    full_name: property?.agent_name || "Seller",
+    phone: property?.agent_phone || "N/A",
+    email: property?.agent_email || "",
+    avatar_url: property?.agent_avatar_url || "/images/avatar/seller.jpg",
+  };
+}, [property]);
+
+  const agentName = seller?.full_name || "Seller";
+  const agentPhone = seller?.phone || seller?.office_number || "N/A";
+  const agentEmail = seller?.email || "";
+  const agentAvatar = seller?.avatar_url || "/images/avatar/seller.jpg";
+
+  const submitSellerForm = async (e) => {
+    e.preventDefault();
+    try {
+      setLoadingSeller(true);
+
+      await apiPost(`/admindashboard/properties/${property.id}/contact-seller/`, {
+        inquiry_type: "contact_seller",
+        name: sellerForm.name,
+        email: "",
+        phone: "",
+        message: sellerForm.message,
+      });
+
+      alert("Message sent successfully");
+      setSellerForm({ name: "", message: "" });
+    } catch (error) {
+      alert(error.message || "Failed to send message");
+    } finally {
+      setLoadingSeller(false);
+    }
+  };
+
+  const submitInfoForm = async (e) => {
+    e.preventDefault();
+    try {
+      setLoadingInfo(true);
+
+      await apiPost(`/admindashboard/properties/${property.id}/contact-seller/`, {
+        inquiry_type: "more_about_property",
+        name: infoForm.name,
+        email: infoForm.email,
+        phone: infoForm.phone,
+        message: infoForm.message,
+      });
+
+      alert("Inquiry sent successfully");
+      setInfoForm({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (error) {
+      alert(error.message || "Failed to send inquiry");
+    } finally {
+      setLoadingInfo(false);
+    }
+  };
+
   return (
     <div className="tf-sidebar sticky-sidebar">
-      <form
-        className="form-contact-seller mb-30"
-        onSubmit={(e) => e.preventDefault()}
-      >
+      <form className="form-contact-seller mb-30" onSubmit={submitSellerForm}>
         <h4 className="heading-title mb-30">Contact Sellers</h4>
+
         <div className="seller-info">
           <div className="avartar">
             <Image
-              alt=""
-              src="/images/avatar/seller.jpg"
+              alt={agentName}
+              src={agentAvatar}
               width={200}
               height={200}
             />
           </div>
+
           <div className="content">
-            <h6 className="name">Shara Conner</h6>
+            <h6 className="name">{agentName}</h6>
             <ul className="contact">
               <li>
                 <i className="icon-phone-1" />
-                <span>1-333-345-6868</span>
+                <span>{agentPhone}</span>
               </li>
               <li>
                 <i className="icon-mail" />
-                <a href="#">themesflat@gmail.com</a>
+                {agentEmail ? <a href={`mailto:${agentEmail}`}>{agentEmail}</a> : <span>N/A</span>}
               </li>
             </ul>
           </div>
         </div>
+
         <fieldset className="mb-12">
           <input
             type="text"
@@ -41,8 +127,13 @@ export default function Sidebar() {
             name="name"
             id="name1"
             required
+            value={sellerForm.name}
+            onChange={(e) =>
+              setSellerForm((prev) => ({ ...prev, name: e.target.value }))
+            }
           />
         </fieldset>
+
         <fieldset className="mb-30">
           <textarea
             name="message"
@@ -51,32 +142,38 @@ export default function Sidebar() {
             placeholder="How can an agent help"
             id="message1"
             required
-            defaultValue={""}
+            value={sellerForm.message}
+            onChange={(e) =>
+              setSellerForm((prev) => ({ ...prev, message: e.target.value }))
+            }
           />
         </fieldset>
-        <a href="#" className="tf-btn bg-color-primary w-full">
-          Send message
-        </a>
+
+        <button type="submit" className="tf-btn bg-color-primary w-full" disabled={loadingSeller}>
+          {loadingSeller ? "Sending..." : "Send message"}
+        </button>
       </form>
+
       <div className="sidebar-ads mb-30">
         <div className="image-wrap">
           <Image
             className="lazyload"
-            data-src="/images/blog/ads.jpg"
             alt=""
             src="/images/blog/ads.jpg"
             width={400}
             height={470}
           />
         </div>
+
         <div className="logo relative z-5">
           <Image
             alt=""
-            src="/images/logo/logo-2@2x.png"
+            src="/images/logo/growl_logo2.png"
             width={272}
             height={85}
           />
         </div>
+
         <div className="box-ads relative z-5">
           <div className="content">
             <h4 className="title">
@@ -94,8 +191,10 @@ export default function Sidebar() {
           </a>
         </div>
       </div>
-      <form className="form-contact-agent" onSubmit={(e) => e.preventDefault()}>
+
+      <form className="form-contact-agent" onSubmit={submitInfoForm}>
         <h4 className="heading-title mb-30">More About This Property</h4>
+
         <fieldset>
           <input
             type="text"
@@ -104,18 +203,28 @@ export default function Sidebar() {
             name="name"
             id="name2"
             required
+            value={infoForm.name}
+            onChange={(e) =>
+              setInfoForm((prev) => ({ ...prev, name: e.target.value }))
+            }
           />
         </fieldset>
+
         <fieldset>
           <input
-            type="text"
+            type="email"
             className="form-control"
             placeholder="Email"
             name="email"
             id="email2"
             required
+            value={infoForm.email}
+            onChange={(e) =>
+              setInfoForm((prev) => ({ ...prev, email: e.target.value }))
+            }
           />
         </fieldset>
+
         <fieldset className="phone">
           <input
             type="text"
@@ -124,8 +233,13 @@ export default function Sidebar() {
             name="phone"
             id="phone"
             required
+            value={infoForm.phone}
+            onChange={(e) =>
+              setInfoForm((prev) => ({ ...prev, phone: e.target.value }))
+            }
           />
         </fieldset>
+
         <fieldset>
           <textarea
             name="message"
@@ -134,11 +248,15 @@ export default function Sidebar() {
             placeholder="Message"
             id="message3"
             required
-            defaultValue={""}
+            value={infoForm.message}
+            onChange={(e) =>
+              setInfoForm((prev) => ({ ...prev, message: e.target.value }))
+            }
           />
         </fieldset>
+
         <div className="wrap-btn">
-          <a href="#" className="tf-btn bg-color-primary fw-6 w-full">
+          <button type="submit" className="tf-btn bg-color-primary fw-6 w-full" disabled={loadingInfo}>
             <svg
               width={20}
               height={20}
@@ -154,8 +272,8 @@ export default function Sidebar() {
                 strokeLinejoin="round"
               />
             </svg>
-            Email agent
-          </a>
+            {loadingInfo ? "Sending..." : "Email agent"}
+          </button>
         </div>
       </form>
     </div>

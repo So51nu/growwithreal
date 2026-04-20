@@ -406,10 +406,10 @@ export default function MobileMenu() {
             </a>
             <ul className="mb-info">
               <li>
-                Call Us Now: <span className="number">1-555-678-8888</span>
+                Call Us Now: <span className="number">+91 9326183013</span>
               </li>
               <li>
-                Support 24/7: <a href="#">themesflat@gmail.com</a>
+                Support 24/7: <a href="#">growlrealestate@gmail.com</a>
               </li>
               <li>
                 <div className="wrap-social">

@@ -54,7 +54,7 @@ export default function AgentDetails({ agent }) {
                   <p className="font-poppins">
                     Company Agent at{" "}
                     <a href="#" className="fw-7">
-                      Themesflat
+                      Growl Real Estate 
                     </a>
                   </p>
                 </div>
@@ -91,7 +91,7 @@ export default function AgentDetails({ agent }) {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <a href="#">themesflat@gmail.com</a>
+                    <a href="#">growlrealestate@gmail.com</a>
                   </li>
                   <li>
                     <svg
@@ -337,7 +337,7 @@ export default function AgentDetails({ agent }) {
                     alt=""
                     width={272}
                     height={85}
-                    src="/images/logo/logo-2@2x.png"
+                    src="/images/logo/growl_logo2.png"
                   />
                 </div>
                 <div className="box-ads relative z-5">

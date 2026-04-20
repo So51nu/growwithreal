@@ -237,7 +237,7 @@ export default function AgencyDetails({ agency }) {
                     alt=""
                     width={272}
                     height={85}
-                    src="/images/logo/logo-2@2x.png"
+                    src="/images/logo/growl_logo2.png"
                   />
                 </div>
                 <div className="box-ads relative z-5">
