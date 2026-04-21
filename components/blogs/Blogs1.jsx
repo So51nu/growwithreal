@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { apiGet } from "../lib/api";
+import { useSearchParams } from "next/navigation";
 
 function formatDate(date) {
   if (!date) return "";
@@ -15,16 +16,26 @@ function formatDate(date) {
 }
 
 export default function Blogs1() {
+  const searchParams = useSearchParams();
+
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [featuredBlogs, setFeaturedBlogs] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+
+  const category = searchParams.get("category") || "";
+  const searchQuery = searchParams.get("search") || "";
 
   useEffect(() => {
     const loadData = async () => {
       try {
+        const query = new URLSearchParams();
+
+        if (searchQuery) query.append("search", searchQuery);
+        if (category) query.append("category", category);
+
         const [blogsRes, categoriesRes, featuredRes] = await Promise.all([
-          apiGet("/blog/"),
+          apiGet(`/blog/${query.toString() ? `?${query.toString()}` : ""}`),
           apiGet("/blog/categories/"),
           apiGet("/blog/?featured=1"),
         ]);
@@ -38,11 +49,7 @@ export default function Blogs1() {
     };
 
     loadData();
-  }, []);
-
-  const filteredBlogs = blogs.filter((post) =>
-    post.title?.toLowerCase().includes(search.toLowerCase())
-  );
+  }, [category, searchQuery]);
 
   return (
     <section className="section-blog-list">
@@ -51,47 +58,47 @@ export default function Blogs1() {
           <div className="col-lg-8">
             <div className="left">
               <div className="box-title">
-                <h2>Blog list</h2>
-                <div className="group-layout">
-                  <a href="#" className="btn-layout grid active">Grid</a>
-                  <a href="#" className="btn-layout list">List</a>
-                </div>
+                <h2>Blog List</h2>
               </div>
 
               <div className="wrap-blog-list">
-                {filteredBlogs.map((post) => (
-                  <div key={post.id} className="blog-article-item style-row hover-img">
-                    <div className="article-thumb image-wrap">
-                      <Image
-                        className="lazyload"
-                        alt={post.title}
-                        width={1260}
-                        height={710}
-                        src={post.image || "/images/blog/blog-1.jpg"}
-                      />
-                    </div>
-
-                    <div className="article-content">
-                      <div className="time">
-                        <div className="icons">
-                          <i className="icon-clock" />
-                        </div>
-                        <p className="fw-5">{formatDate(post.created_at)}</p>
+                {blogs.length > 0 ? (
+                  blogs.map((post) => (
+                    <div key={post.id} className="blog-article-item style-row hover-img">
+                      <div className="article-thumb image-wrap">
+                        <Image
+                          className="lazyload"
+                          alt={post.title}
+                          width={1260}
+                          height={710}
+                          src={post.image || "/images/blog/blog-1.jpg"}
+                        />
                       </div>
 
-                      <h4 className="title">
-                        <Link href={`/blog-details/${post.slug}`}>{post.title}</Link>
-                      </h4>
+                      <div className="article-content">
+                        <div className="time">
+                          <div className="icons">
+                            <i className="icon-clock" />
+                          </div>
+                          <p className="fw-5">{formatDate(post.published_at || post.created_at)}</p>
+                        </div>
 
-                      <p className="description text-1">{post.short_description}</p>
+                        <h4 className="title">
+                          <Link href={`/blog-details/${post.slug}`}>{post.title}</Link>
+                        </h4>
 
-                      <Link href={`/blog-details/${post.slug}`} className="tf-btn-link">
-                        <span>Read More</span>
-                        <i className="icon-circle-arrow" />
-                      </Link>
+                        <p className="description text-1">{post.short_description}</p>
+
+                        <Link href={`/blog-details/${post.slug}`} className="tf-btn-link">
+                          <span>Read More</span>
+                          <i className="icon-circle-arrow" />
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p>No blogs found.</p>
+                )}
               </div>
             </div>
           </div>
@@ -100,7 +107,16 @@ export default function Blogs1() {
             <div className="tf-sidebar">
               <div className="sidebar-search sidebar-item">
                 <h4 className="sidebar-title">Search Blog</h4>
-                <form onSubmit={(e) => e.preventDefault()} className="form-search">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const url = search.trim()
+                      ? `/blog-list?search=${encodeURIComponent(search.trim())}`
+                      : "/blog-list";
+                    window.location.href = url;
+                  }}
+                  className="form-search"
+                >
                   <fieldset>
                     <input
                       type="text"
@@ -132,7 +148,7 @@ export default function Blogs1() {
               </div>
 
               <div className="sidebar-item sidebar-featured pb-36">
-                <h4 className="sidebar-title">Featured Listings</h4>
+                <h4 className="sidebar-title">Featured Posts</h4>
                 <ul>
                   {featuredBlogs.map((item) => (
                     <li key={item.id} className="box-listings hover-img">
@@ -149,7 +165,7 @@ export default function Blogs1() {
                         <div className="text-1 title fw-5">
                           <Link href={`/blog-details/${item.slug}`}>{item.title}</Link>
                         </div>
-                        <p>{formatDate(item.created_at)}</p>
+                        <p>{formatDate(item.published_at || item.created_at)}</p>
                       </div>
                     </li>
                   ))}
@@ -159,11 +175,11 @@ export default function Blogs1() {
               <div className="sidebar-item sidebar-tags">
                 <h4 className="sidebar-title mb-18">Popular Tags</h4>
                 <ul className="tags-list">
-                  <li><a href="#" className="tags-item">Property</a></li>
-                  <li><a href="#" className="tags-item">Office</a></li>
-                  <li><a href="#" className="tags-item">Finance</a></li>
-                  <li><a href="#" className="tags-item">Legal</a></li>
-                  <li><a href="#" className="tags-item">Market</a></li>
+                  <li><span className="tags-item">Property</span></li>
+                  <li><span className="tags-item">Office</span></li>
+                  <li><span className="tags-item">Finance</span></li>
+                  <li><span className="tags-item">Legal</span></li>
+                  <li><span className="tags-item">Market</span></li>
                 </ul>
               </div>
             </div>

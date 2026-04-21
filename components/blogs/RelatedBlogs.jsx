@@ -22,11 +22,12 @@ export default function RelatedBlogs({ blogSlug }) {
   useEffect(() => {
     const loadRelated = async () => {
       if (!blogSlug) return;
+
       try {
         const res = await apiGet(`/blog/related/${blogSlug}/`);
         setBlogs(Array.isArray(res) ? res : []);
       } catch (error) {
-        console.error(error);
+        console.error("Related blogs fetch error:", error);
       }
     };
 
@@ -40,16 +41,16 @@ export default function RelatedBlogs({ blogSlug }) {
       <div className="tf-container">
         <div className="row">
           <div className="col-12">
-            <h4 className="heading">Related posts</h4>
+            <h4 className="heading">Related Posts</h4>
 
             <Swiper
               dir="ltr"
               className="swiper style-pagination sw-layout"
               breakpoints={{
-                0: { slidesPerView: 1 },
-                575: { slidesPerView: 2 },
+                0: { slidesPerView: 1, spaceBetween: 16 },
+                575: { slidesPerView: 2, spaceBetween: 16 },
                 768: { slidesPerView: 2, spaceBetween: 20 },
-                992: { slidesPerView: 3, spaceBetween: 40 },
+                992: { slidesPerView: 3, spaceBetween: 24 },
               }}
               modules={[Pagination]}
               pagination={{ el: ".spd1" }}
@@ -60,11 +61,16 @@ export default function RelatedBlogs({ blogSlug }) {
                     <div className="image-wrap">
                       <Link href={`/blog-details/${article.slug}`}>
                         <Image
-                          className="lazyload"
                           alt={article.title}
                           width={600}
                           height={396}
                           src={article.image || "/images/blog/blog-1.jpg"}
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "14px",
+                            objectFit: "cover",
+                          }}
                         />
                       </Link>
 
@@ -80,7 +86,7 @@ export default function RelatedBlogs({ blogSlug }) {
                         <div className="icons">
                           <i className="icon-clock" />
                         </div>
-                        <p className="fw-5">{formatDate(article.created_at)}</p>
+                        <p className="fw-5">{formatDate(article.published_at || article.created_at)}</p>
                       </div>
 
                       <h4 className="title">

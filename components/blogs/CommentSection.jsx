@@ -32,6 +32,12 @@ export default function CommentSection({ blogSlug, initialComments = [] }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      alert("Please fill all fields");
+      return;
+    }
+
     try {
       setLoading(true);
       await apiPost(`/blog/${blogSlug}/comments/`, form);
