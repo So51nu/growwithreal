@@ -192,7 +192,7 @@ export default function Login() {
                 alt="banner"
                 width={380}
                 height={659}
-                src="/images/section/banner-login.jpg"
+                src="/images/section/g5.jpg"
               />
             </div>
 

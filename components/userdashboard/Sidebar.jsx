@@ -105,7 +105,7 @@ export default function Sidebar() {
               </Link>
             </li>
 
-            <li className={`nav-menu-item ${isActive("/user-dashboard/my-package") ? "active" : ""}`}>
+            {/* <li className={`nav-menu-item ${isActive("/user-dashboard/my-package") ? "active" : ""}`}>
               <Link className="nav-menu-link" href="/user-dashboard/my-package">
                 <svg
                   width={20}
@@ -138,7 +138,7 @@ export default function Sidebar() {
                 </svg>
                 My package
               </Link>
-            </li>
+            </li> */}
 
             <li className={`nav-menu-item ${isActive("/user-dashboard/my-favorites") ? "active" : ""}`}>
               <Link className="nav-menu-link" href="/user-dashboard/my-favorites">
@@ -210,7 +210,7 @@ export default function Sidebar() {
               </Link>
             </li>
 
-            <li className={`nav-menu-item ${isActive("/user-dashboard/review") ? "active" : ""}`}>
+            {/* <li className={`nav-menu-item ${isActive("/user-dashboard/review") ? "active" : ""}`}>
               <Link className="nav-menu-link" href="/user-dashboard/review">
                 <svg
                   width={20}
@@ -243,7 +243,7 @@ export default function Sidebar() {
                 </svg>
                 Reviews
               </Link>
-            </li>
+            </li> */}
 
             <li className={`nav-menu-item ${isActive("/user-dashboard/my-property") ? "active" : ""}`}>
               <Link className="nav-menu-link" href="/user-dashboard/my-property">
@@ -336,7 +336,43 @@ export default function Sidebar() {
               </Link>
             </li>
 
-            <li className={`nav-menu-item ${isActive("/user-dashboard/add-property") ? "active" : ""}`}>
+            <li className={`nav-menu-item ${isActive("/user-dashboard/referrals") ? "active" : ""}`}>
+  <Link className="nav-menu-link" href="/user-dashboard/referrals">
+    <svg width={20} height={20} viewBox="0 0 24 24" fill="none">
+      <path
+        d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
+        stroke="#A8ABAE"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.5 11C10.433 11 12 9.433 12 7.5C12 5.567 10.433 4 8.5 4C6.567 4 5 5.567 5 7.5C5 9.433 6.567 11 8.5 11Z"
+        stroke="#A8ABAE"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M20 8V14"
+        stroke="#A8ABAE"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M23 11H17"
+        stroke="#A8ABAE"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+    Referrals
+  </Link>
+</li>
+
+            {/* <li className={`nav-menu-item ${isActive("/user-dashboard/add-property") ? "active" : ""}`}>
               <Link className="nav-menu-link" href="/user-dashboard/add-property">
                 <svg
                   width={20}
@@ -369,7 +405,7 @@ export default function Sidebar() {
                 </svg>
                 Add property
               </Link>
-            </li>
+            </li> */}
 
             <li className="nav-menu-item">
               <Link className="nav-menu-link" href="/">

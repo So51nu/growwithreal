@@ -1,301 +1,407 @@
 "use client";
-import React from "react";
-import Image from "next/image";
+
+import React, { useEffect, useState } from "react";
+import { apiGet, apiPut } from "../lib/api";
+
+function getStoredUser() {
+  if (typeof window === "undefined") return null;
+  try {
+    return JSON.parse(localStorage.getItem("userData") || "null");
+  } catch {
+    return null;
+  }
+}
+
 export default function Profile() {
+  const user = getStoredUser();
+
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const [formData, setFormData] = useState({
+    full_name: "",
+    full_address: "",
+    email: "",
+    phone: "",
+    pincode: "",
+    city: "",
+    state: "",
+    country: "",
+  });
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      if (!user?.id) return;
+
+      try {
+        setLoading(true);
+        setMessage("");
+
+        const res = await apiGet(`/users/profile/${user.id}/`);
+        const profile = res?.data || res || {};
+
+        setFormData({
+          full_name: profile.full_name || user?.full_name || user?.username || "",
+          full_address: profile.full_address || "",
+          email: profile.email || user?.email || "",
+          phone: profile.phone || user?.phone || "",
+          pincode: profile.pincode || "",
+          city: profile.city || "",
+          state: profile.state || "",
+          country: profile.country || "",
+        });
+      } catch (error) {
+        console.error("Profile fetch error:", error);
+
+        setFormData({
+          full_name: user?.full_name || user?.username || "",
+          full_address: user?.full_address || "",
+          email: user?.email || "",
+          phone: user?.phone || "",
+          pincode: user?.pincode || "",
+          city: user?.city || "",
+          state: user?.state || "",
+          country: user?.country || "",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, [user?.id]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setMessage("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user?.id) {
+      alert("Please login first.");
+      return;
+    }
+
+    try {
+      setSaving(true);
+      setMessage("");
+
+      const res = await apiPut(`/users/profile/${user.id}/update/`, {
+        full_name: formData.full_name,
+        full_address: formData.full_address,
+        email: formData.email,
+        phone: formData.phone,
+        pincode: formData.pincode,
+        city: formData.city,
+        state: formData.state,
+        country: formData.country,
+      });
+
+      const updatedProfile = res?.data || res || {};
+
+      const updatedUserData = {
+        ...user,
+        full_name: updatedProfile.full_name || formData.full_name,
+        email: updatedProfile.email || formData.email,
+        phone: updatedProfile.phone || formData.phone,
+        full_address: updatedProfile.full_address || formData.full_address,
+        pincode: updatedProfile.pincode || formData.pincode,
+        city: updatedProfile.city || formData.city,
+        state: updatedProfile.state || formData.state,
+        country: updatedProfile.country || formData.country,
+      };
+
+      localStorage.setItem("userData", JSON.stringify(updatedUserData));
+      setMessage("Profile updated successfully.");
+    } catch (error) {
+      console.error("Profile update error:", error);
+      setMessage(error.message || "Failed to update profile.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
-    <div className="main-content style-2">
-      <div className="main-content-inner wrap-dashboard-content-2">
+    <div className="main-content w-100">
+      <div className="main-content-inner style-3">
         <div className="button-show-hide show-mb">
           <span className="body-1">Show Dashboard</span>
         </div>
-        <div className="widget-box-2">
-          <div className="box">
-            <h3 className="title">Account Settings</h3>
-            <div className="box-agent-account">
-              <h6>Agent Account</h6>
-              <p className="note">
-                Your current account type is set to agent, if you want to remove
-                your agent account, and return to normal account, you must click
-                the button below
-              </p>
-              <a href="#" className="tf-btn bg-color-primary pd-10 fw-7">
-                Remove Agent Account
-              </a>
-            </div>
-          </div>
-          <div className="box">
-            <h5 className="title">Avatar</h5>
-            <div className="box-agent-avt">
-              <div className="avatar">
-                <Image
-                  alt="avatar"
-                  loading="lazy"
-                  width={128}
-                  height={128}
-                  src="/images/avatar/account.jpg"
+
+        <div
+          className="widget-box-2"
+          style={{
+            maxWidth: "1100px",
+            margin: "0 auto",
+            borderRadius: "20px",
+          }}
+        >
+          <h3
+            className="title"
+            style={{
+              marginBottom: "28px",
+            }}
+          >
+            Contact Details
+          </h3>
+
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col-md-6 mb-4">
+                <label
+                  htmlFor="full_name"
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#777",
+                  }}
+                >
+                  Full Name*
+                </label>
+                <input
+                  type="text"
+                  id="full_name"
+                  name="full_name"
+                  className="form-control"
+                  placeholder="Enter your full name"
+                  value={formData.full_name}
+                  onChange={handleChange}
+                  required
                 />
               </div>
-              <div className="content uploadfile">
-                <p>Upload a new avatar</p>
-                <div className="box-ip">
-                  <input type="file" className="ip-file" />
+
+              <div className="col-md-6 mb-4">
+                <label
+                  htmlFor="phone"
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#777",
+                  }}
+                >
+                  Mobile Number*
+                </label>
+                <div style={{ position: "relative" }}>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    className="form-control"
+                    placeholder="+91 9876543210"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                  />
+                  {formData.phone ? (
+                    <span
+                      style={{
+                        position: "absolute",
+                        right: "14px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        color: "#2ca56c",
+                        fontSize: "22px",
+                        fontWeight: "700",
+                      }}
+                    >
+                      ✓
+                    </span>
+                  ) : null}
                 </div>
-                <p>JPEG 100x100</p>
               </div>
             </div>
-          </div>
-          <div className="box">
-            <h5 className="title">Agent Poster</h5>
-            <div className="box-agent-avt">
-              <div className="img-poster">
-                <Image
-                  alt="avatar"
-                  loading="lazy"
-                  src="/images/avatar/account-2.jpg"
-                  width={875}
-                  height={500}
-                />
-              </div>
-              <div className="content uploadfile">
-                <p>Upload a new poster</p>
-                <div className="box-ip">
-                  <input type="file" className="ip-file" />
-                </div>
-                <span>JPEG 100x100</span>
-              </div>
-            </div>
-          </div>
-          <h5 className="title">Information</h5>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <fieldset className="box box-fieldset">
-              <label htmlFor="name">
-                Full name:<span>*</span>
+
+            <div className="mb-4">
+              <label
+                htmlFor="full_address"
+                style={{
+                  display: "block",
+                  marginBottom: "8px",
+                  fontSize: "14px",
+                  color: "#777",
+                }}
+              >
+                Full Address*
               </label>
               <input
                 type="text"
-                id="name"
-                defaultValue="Demo Agent"
+                id="full_address"
+                name="full_address"
                 className="form-control"
+                placeholder="Enter your address"
+                value={formData.full_address}
+                onChange={handleChange}
+                required
               />
-            </fieldset>
-            <fieldset className="box box-fieldset">
-              <label>
-                Description:<span>*</span>
-              </label>
-              <textarea
-                defaultValue={
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                }
-              />
-            </fieldset>
-            <fieldset className="box grid-layout-4 gap-30">
-              <div className="box-fieldset">
-                <label htmlFor="company">
-                  Your Company:<span>*</span>
+            </div>
+
+            <div className="row">
+              <div className="col-md-6 mb-4">
+                <label
+                  htmlFor="email"
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#777",
+                  }}
+                >
+                  Email Address*
                 </label>
                 <input
-                  type="text"
-                  id="company"
-                  defaultValue="Your Company"
-                  className="form-control"
-                />
-              </div>
-              <div className="box-fieldset">
-                <label htmlFor="position">
-                  Position:<span>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="position"
-                  defaultValue="Your Company"
-                  className="form-control"
-                />
-              </div>
-              <div className="box-fieldset">
-                <label htmlFor="num">
-                  Office Number:<span>*</span>
-                </label>
-                <input
-                  type="number"
-                  id="num"
-                  defaultValue={1332565894}
-                  className="form-control"
-                />
-              </div>
-              <div className="box-fieldset">
-                <label htmlFor="address">
-                  Office Address:<span>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  defaultValue="10 Bringhurst St, Houston, TX"
-                  className="form-control"
-                />
-              </div>
-            </fieldset>
-            <div className="box grid-layout-4 gap-30 box-info-2">
-              <div className="box-fieldset">
-                <label htmlFor="job">
-                  Job:<span>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="job"
-                  defaultValue="Realter"
-                  className="form-control"
-                />
-              </div>
-              <div className="box-fieldset">
-                <label htmlFor="email">
-                  Email address:<span>*</span>
-                </label>
-                <input
-                  type="text"
+                  type="email"
                   id="email"
-                  defaultValue="themeflat@gmail.com"
+                  name="email"
                   className="form-control"
+                  placeholder="Enter email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                 />
               </div>
-              <div className="box-fieldset">
-                <label htmlFor="phone">
-                  Your Phone:<span>*</span>
+
+              <div className="col-md-6 mb-4">
+                <label
+                  htmlFor="pincode"
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#777",
+                  }}
+                >
+                  Pincode*
                 </label>
                 <input
-                  type="number"
-                  id="phone"
-                  defaultValue={1332565894}
+                  type="text"
+                  id="pincode"
+                  name="pincode"
                   className="form-control"
+                  placeholder="Enter your pincode"
+                  value={formData.pincode}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="col-md-6 mb-4">
+                <label
+                  htmlFor="city"
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#777",
+                  }}
+                >
+                  City
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  className="form-control"
+                  placeholder="Select your city"
+                  value={formData.city}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="col-md-6 mb-4">
+                <label
+                  htmlFor="state"
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#777",
+                  }}
+                >
+                  State
+                </label>
+                <input
+                  type="text"
+                  id="state"
+                  name="state"
+                  className="form-control"
+                  placeholder="Select your state"
+                  value={formData.state}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="col-md-6 mb-4">
+                <label
+                  htmlFor="country"
+                  style={{
+                    display: "block",
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#777",
+                  }}
+                >
+                  Country
+                </label>
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  className="form-control"
+                  placeholder="Select your country"
+                  value={formData.country}
+                  onChange={handleChange}
                 />
               </div>
             </div>
-            <div className="box box-fieldset">
-              <label htmlFor="location">
-                Location:<span>*</span>
-              </label>
-              <input
-                type="text"
-                id="location"
-                defaultValue="634 E 236th St, Bronx, NY 10466"
-                className="form-control"
-              />
-            </div>
-            <div className="box box-fieldset">
-              <label htmlFor="fb">
-                Facebook:<span>*</span>
-              </label>
-              <input
-                type="text"
-                id="fb"
-                defaultValue="#"
-                className="form-control"
-              />
-            </div>
-            <div className="box box-fieldset">
-              <label htmlFor="tw">
-                Twitter:<span>*</span>
-              </label>
-              <input
-                type="text"
-                id="tw"
-                defaultValue="#"
-                className="form-control"
-              />
-            </div>
-            <div className="box box-fieldset">
-              <label htmlFor="linkedin">
-                Linkedin:<span>*</span>
-              </label>
-              <input
-                type="text"
-                id="linkedin"
-                defaultValue="#"
-                className="form-control"
-              />
-            </div>
-            <div className="box">
-              <a href="#" className="tf-btn bg-color-primary pd-10">
-                Save &amp; Update
-              </a>
-            </div>
-            <h5 className="title">Change password</h5>
-            <div className="box grid-layout-3 gap-30">
-              <div className="box-fieldset">
-                <label htmlFor="old-pass">
-                  Old Password:<span>*</span>
-                </label>
-                <div className="box-password">
-                  <input
-                    type="password"
-                    id="old-pass"
-                    className="form-contact password-field"
-                    placeholder="Password"
-                  />
-                  <span className="show-pass">
-                    <i className="icon-pass icon-hide" />
-                    <i className="icon-pass icon-view" />
-                  </span>
-                </div>
+
+            {message ? (
+              <div
+                style={{
+                  marginBottom: "18px",
+                  color: message.toLowerCase().includes("success")
+                    ? "#2ca56c"
+                    : "#ff6b35",
+                  fontSize: "14px",
+                }}
+              >
+                {message}
               </div>
-              <div className="box-fieldset">
-                <label htmlFor="new-pass">
-                  New Password:<span>*</span>
-                </label>
-                <div className="box-password">
-                  <input
-                    type="password"
-                    id="new-pass"
-                    className="form-contact password-field2"
-                    placeholder="Password"
-                  />
-                  <span className="show-pass2">
-                    <i className="icon-pass icon-hide" />
-                    <i className="icon-pass icon-view" />
-                  </span>
-                </div>
-              </div>
-              <div className="box-fieldset mb-30">
-                <label htmlFor="confirm-pass">
-                  Confirm Password:<span>*</span>
-                </label>
-                <div className="box-password">
-                  <input
-                    type="password"
-                    id="confirm-pass"
-                    className="form-contact password-field3"
-                    placeholder="Password"
-                  />
-                  <span className="show-pass3">
-                    <i className="icon-pass icon-hide" />
-                    <i className="icon-pass icon-view" />
-                  </span>
-                </div>
-              </div>
+            ) : null}
+
+            <div style={{ marginTop: "14px" }}>
+              <button
+                type="submit"
+                className="tf-btn pd-4"
+                disabled={saving || loading}
+                style={{
+                  minWidth: "160px",
+                  background: "#2f241f",
+                  color: "#fff",
+                  border: "1px solid #2f241f",
+                }}
+              >
+                {saving ? "Saving..." : loading ? "Loading..." : "Save Details"}
+              </button>
             </div>
           </form>
-          <div className="box">
-            <a href="#" className="tf-btn bg-color-primary pd-20">
-              Update Password
-            </a>
-          </div>
         </div>
-        {/* .footer-dashboard */}
+
         <div className="footer-dashboard">
           <p>Copyright © {new Date().getFullYear()} Popty</p>
-          <ul className="list">
-            <li>
-              <a href="#">Privacy</a>
-            </li>
-            <li>
-              <a href="#">Terms</a>
-            </li>
-            <li>
-              <a href="#">Support</a>
-            </li>
-          </ul>
         </div>
-        {/* .footer-dashboard */}
       </div>
+
       <div className="overlay-dashboard" />
     </div>
   );

@@ -52,14 +52,14 @@ export default function Header1({ parentClass = "header" }) {
                     <p>+91 9326183013</p>
                   </div>
                   <DashboardNav />
-                  <div className="btn-add">
+                  {/* <div className="btn-add">
                     <Link
                       className="tf-btn style-border pd-23"
                       href={`/add-property`}
                     >
                       Add property
                     </Link>
-                  </div>
+                  </div> */}
                   <div
                     className="mobile-button"
                     data-bs-toggle="offcanvas"
