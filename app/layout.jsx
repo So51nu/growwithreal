@@ -97,6 +97,7 @@ import { usePathname } from "next/navigation";
 import BackToTop from "@/components/common/BackToTop";
 import MobileMenu from "@/components/headers/MobileMenu";
 import SettingsHandler from "@/components/common/SettingsHandler";
+import AIChatbot from "@/components/common/AIChatbot";
 import Login from "@/components/modals/Login";
 import Register from "@/components/modals/Register";
 
@@ -176,6 +177,7 @@ export default function RootLayout({ children }) {
         <SettingsHandler />
         <Login />
         <Register />
+        {/* <AIChatbot /> */}
       </body>
     </html>
   );
