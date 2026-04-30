@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
 
 const WIDGET_KEY = process.env.NEXT_PUBLIC_CHATBOT_WIDGET_KEY || "growl-main";
 

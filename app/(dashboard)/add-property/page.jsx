@@ -1,14 +1,15 @@
 import AddProperty from "@/components/dashboard/AddProperty";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata = {
-  title: "Add Property || Proty - Real Estate React Nextjs Template",
-  description: "Proty - Real Estate React Nextjs Template",
+  title: "Add Property || Growl Real Estate React",
+  description: "Growl - Real Estate",
 };
-export default function page() {
+
+export default function Page() {
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <AddProperty />
-    </>
+    </Suspense>
   );
 }

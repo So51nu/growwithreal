@@ -3,7 +3,7 @@ import Breadcumb from "@/components/common/Breadcumb";
 import Cta from "@/components/common/Cta";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata = {
   title: "Blog List || Proty",
@@ -16,7 +16,11 @@ export default function Page() {
       <Header1 />
       <div className="main-content">
         <Breadcumb pageName="Blog List" />
-        <Blogs1 />
+
+        <Suspense fallback={<div>Loading blogs...</div>}>
+          <Blogs1 />
+        </Suspense>
+
         <Cta />
       </div>
       <Footer1 />
