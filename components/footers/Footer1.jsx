@@ -1,16 +1,129 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import { footerData } from "@/data/footerLinks";
+
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
+
+function slugify(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
+function getResultsArray(response) {
+  if (Array.isArray(response)) return response;
+  if (Array.isArray(response?.results)) return response.results;
+  if (Array.isArray(response?.data)) return response.data;
+  return [];
+}
+
+function uniqueCitiesFromProperties(properties = []) {
+  const cityMap = new Map();
+
+  properties.forEach((property) => {
+    const city = property?.city || "";
+    const citySlug = property?.city_slug || slugify(city);
+
+    if (city && citySlug) {
+      const key = citySlug.toLowerCase();
+
+      if (!cityMap.has(key)) {
+        cityMap.set(key, {
+          text: city,
+          href: `/cities/${citySlug}`,
+        });
+      }
+    }
+  });
+
+  return Array.from(cityMap.values()).slice(0, 10);
+}
+
 export default function Footer1({ logo = "/images/logo/growl.png" }) {
+  const [success, setSuccess] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
+  const [cityLinks, setCityLinks] = useState([]);
+
+  useEffect(() => {
+    const fetchCitiesFromProperties = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admindashboard/properties/`);
+        const data = await res.json();
+
+        const properties = getResultsArray(data);
+
+        const publishedProperties = properties.filter((property) => {
+          const postStatus = String(property?.post_status || "").toLowerCase();
+          const isApproved = property?.is_approved === true;
+
+          return postStatus === "publish" && isApproved;
+        });
+
+        const dynamicCities = uniqueCitiesFromProperties(publishedProperties);
+
+        setCityLinks(dynamicCities);
+      } catch (error) {
+        console.error("Footer cities fetch error:", error);
+        setCityLinks([]);
+      }
+    };
+
+    fetchCitiesFromProperties();
+  }, []);
+
+  const footerColumns = useMemo(
+    () => [
+      {
+        title: "Overview",
+        className: "style-2",
+        links: [
+          { text: "Home", href: "/" },
+          { text: "Listing", href: "/property-gird-top-search" },
+          { text: "Cities", href: "/cities" },
+          { text: "Developers", href: "/developers" },
+          { text: "FAQ", href: "/faq" },
+          { text: "Contact", href: "/contact" },
+          { text: "About Us", href: "/about" },
+        ],
+      },
+      {
+  title: "Explore",
+  links: [
+    { text: "Developers", href: "/developers" },
+    { text: "Blog", href: "/blog-list" },
+    
+    { text: "Login", href: "#modalLogin", isLoginModal: true },
+    { text: "Referral", href: "#modalLogin", isLoginModal: true },
+  ],
+},
+      {
+        title: "Cities",
+        className: "style-2",
+        links:
+          cityLinks.length > 0
+            ? cityLinks
+            : [{ text: "Cities loading...", href: "/cities" }],
+      },
+    ],
+    [cityLinks]
+  );
+
   useEffect(() => {
     const headings = document.querySelectorAll(".title-mobile");
 
     const toggleOpen = (event) => {
       const parent = event.target.closest(".footer-col-block");
-      const content = parent.querySelector(".tf-collapse-content");
+      const content = parent?.querySelector(".tf-collapse-content");
+
+      if (!parent || !content) return;
 
       if (parent.classList.contains("open")) {
         parent.classList.remove("open");
@@ -25,25 +138,24 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
       heading.addEventListener("click", toggleOpen);
     });
 
-    // Clean up event listeners when the component unmounts
     return () => {
       headings.forEach((heading) => {
         heading.removeEventListener("click", toggleOpen);
       });
     };
-  }, []); // Empty dependency array means this will run only once on mount
-  const [success, setSuccess] = useState(true);
-  const [showMessage, setShowMessage] = useState(false);
+  }, [footerColumns]);
 
   const handleShowMessage = () => {
     setShowMessage(true);
+
     setTimeout(() => {
       setShowMessage(false);
     }, 2000);
   };
 
   const sendEmail = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
+
     const email = e.target.email.value;
 
     try {
@@ -55,18 +167,18 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
       );
 
       if ([200, 201].includes(response.status)) {
-        e.target.reset(); // Reset the form
-        setSuccess(true); // Set success state
+        e.target.reset();
+        setSuccess(true);
         handleShowMessage();
       } else {
-        setSuccess(false); // Handle unexpected responses
+        setSuccess(false);
         handleShowMessage();
       }
     } catch (error) {
       console.error("Error:", error.response?.data || "An error occurred");
-      setSuccess(false); // Set error state
+      setSuccess(false);
       handleShowMessage();
-      e.target.reset(); // Reset the form
+      e.target.reset();
     }
   };
 
@@ -87,35 +199,42 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                   />
                 </Link>
               </div>
+
               <div className="wrap-contact-item">
                 <div className="contact-item">
                   <div className="icons">
                     <i className="icon-phone-2" />
                   </div>
+
                   <div className="content">
                     <div className="title text-1">Call us</div>
                     <h6>
-                      <a href="#"> +91 9326183013</a>
+                      <a href="tel:+919326183013">+91 9326183013</a>
                     </h6>
                   </div>
                 </div>
+
                 <div className="contact-item">
                   <div className="icons">
                     <i className="icon-letter-2" />
                   </div>
+
                   <div className="content">
-                    <div className="title text-1">Nee live help</div>
+                    <div className="title text-1">Need live help</div>
                     <h6 className="fw-4">
-                      <a href="#">support@growlrealestate.gmail.com</a>
+                      <a href="mailto:support@growlrealestate.gmail.com">
+                        support@growlrealestate.gmail.com
+                      </a>
                     </h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div className="footer-main">
             <div className="row">
-              {footerData.map((column, index) => (
+              {footerColumns.map((column, index) => (
                 <div className="col-lg-3 col-md-6" key={index}>
                   <div
                     className={`footer-menu-list footer-col-block ${
@@ -125,24 +244,38 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                     <h5 className="title lh-30 title-desktop">
                       {column.title}
                     </h5>
-                    <h5 className="title lh-30 title-mobile">{column.title}</h5>
+
+                    <h5 className="title lh-30 title-mobile">
+                      {column.title}
+                    </h5>
+
                     <ul className="tf-collapse-content">
                       {column.links.map((link, linkIndex) => (
-                        <li key={linkIndex}>
-                          {link.href.startsWith("/") ? (
-                            <Link href={link.href}>{link.text}</Link>
-                          ) : (
-                            <a href={link.href}>{link.text}</a>
-                          )}
-                        </li>
-                      ))}
+  <li key={linkIndex}>
+    {link.isLoginModal ? (
+      <a
+        href="#modalLogin"
+        data-bs-toggle="modal"
+        data-bs-target="#modalLogin"
+      >
+        {link.text}
+      </a>
+    ) : link.href.startsWith("/") ? (
+      <Link href={link.href}>{link.text}</Link>
+    ) : (
+      <a href={link.href}>{link.text}</a>
+    )}
+  </li>
+))}
                     </ul>
                   </div>
                 </div>
               ))}
+
               <div className="col-lg-3 col-md-6">
-                <div className="footer-menu-list newsletter ">
+                <div className="footer-menu-list newsletter">
                   <h5 className="title lh-30 mb-19">Newsletter</h5>
+
                   <div className="sib-form">
                     <div id="sib-form-container" className="sib-form-container">
                       <div
@@ -156,12 +289,14 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                           >
                             <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
                           </svg>
+
                           <span className="sib-form-message-panel__inner-text">
                             Your subscription could not be saved. Please try
                             again.
                           </span>
                         </div>
                       </div>
+
                       <div
                         id="success-message"
                         className="sib-form-message-panel"
@@ -173,17 +308,19 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                           >
                             <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
                           </svg>
+
                           <span className="sib-form-message-panel__inner-text">
                             Your subscription has been successful.
                           </span>
                         </div>
                       </div>
+
                       <div
                         id="sib-container"
                         className="sib-container--large sib-container--vertical"
                       >
                         <div
-                          className={`tfSubscribeMsg  footer-sub-element ${
+                          className={`tfSubscribeMsg footer-sub-element ${
                             showMessage ? "active" : ""
                           }`}
                         >
@@ -195,20 +332,22 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                             <p style={{ color: "red" }}>Something went wrong</p>
                           )}
                         </div>
+
                         <form onSubmit={sendEmail} id="sib-form">
-                          <div className="sib-form-block ">
+                          <div className="sib-form-block">
                             <div className="sib-text-form-block">
                               <p className="text-1">
                                 Sign up to receive the latest articles
                               </p>
                             </div>
                           </div>
+
                           <div className="sib-input sib-form-block mb-11">
                             <div className="form__entry entry_block">
                               <div className="form__label-row mb-10">
                                 <fieldset className="entry__field">
                                   <input
-                                    className="input input-nl "
+                                    className="input input-nl"
                                     type="text"
                                     id="EMAIL"
                                     name="email"
@@ -219,12 +358,14 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                                   />
                                 </fieldset>
                               </div>
-                              <label className="  entry__error entry__error--primary"></label>
+
+                              <label className="entry__error entry__error--primary"></label>
                             </div>
                           </div>
+
                           <div className="sib-form-block">
                             <button
-                              className="sib-form-block__button sib-form-block__button-with-loader tf-btn bg-color-primary  w-full"
+                              className="sib-form-block__button sib-form-block__button-with-loader tf-btn bg-color-primary w-full"
                               form="sib-form"
                               type="submit"
                             >
@@ -237,15 +378,17 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                               Subscribe
                             </button>
                           </div>
+
                           <div className="sib-optin sib-form-block">
                             <div className="form__entry entry_mcq">
-                              <div className="form__label-row ">
-                                <div className="checkbox-item ">
+                              <div className="form__label-row">
+                                <div className="checkbox-item">
                                   <label className="mb-0">
                                     <span className="text-2 text-color-default">
                                       I have read and agree to the terms &amp;
                                       conditions
                                     </span>
+
                                     <input
                                       type="checkbox"
                                       className="input_replaced"
@@ -253,16 +396,19 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                                       id="OPT_IN"
                                       name="OPT_IN"
                                     />
+
                                     <span className="btn-checkbox" />
                                   </label>
                                 </div>
                               </div>
+
                               <label className="entry__error entry__error--primary"></label>
                             </div>
                           </div>
                         </form>
                       </div>
                     </div>
+
                     <form onSubmit={(e) => e.preventDefault()}>
                       <input
                         type="text"
@@ -277,43 +423,58 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-12">
-          <div className="footer-bottom">
-            <p>
-              Copyright © {new Date().getFullYear()}{" "}
-              <span className="fw-7">GROWL REAL ESTATE</span> . Designed &amp;
-              Developed by Click Connect Media
-              <a href="#"></a>
-            </p>
-            <div className="wrap-social">
-              <div className="text-3  fw-6 text_white">Follow us</div>
-              <ul className="tf-social ">
-                <li>
-                  <a href="#">
-                    <i className="icon-fb" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="icon-X" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="icon-linked" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="icon-ins" />
-                  </a>
-                </li>
-              </ul>
+
+          <div className="col-12">
+            <div className="footer-bottom">
+              <p>
+                Copyright © {new Date().getFullYear()}{" "}
+                <span className="fw-7">GROWL REAL ESTATE</span>. Designed &amp;
+                Developed by Click Connect Media
+              </p>
+
+              <div className="wrap-social">
+                <div className="text-3 fw-6 text_white">Follow us</div>
+
+                <ul className="tf-social">
+                  <li>
+                    <a href="#">
+                      <i className="icon-fb" />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#">
+                      <i className="icon-X" />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#">
+                      <i className="icon-linked" />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#">
+                      <i className="icon-ins" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .footer-menu-list ul li a {
+          text-transform: capitalize;
+        }
+
+        .footer-menu-list ul li a:hover {
+          color: #ff7a1a;
+        }
+      `}</style>
     </footer>
   );
 }

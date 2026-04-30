@@ -8,7 +8,7 @@ import Hero from "@/components/homes/home-1/Hero";
 import LoanCalculator from "@/components/homes/home-1/LoanCalculator";
 import Partners from "@/components/homes/home-1/Partners";
 import Properties from "@/components/homes/home-1/Properties";
-import Properties2 from "@/components/homes/home-1/Properties2";
+//import Properties2 from "@/components/homes/home-1/Properties2";
 import Testimonials from "@/components/homes/home-1/Testimonials";
 
 export const metadata = {
@@ -26,7 +26,7 @@ export default function Home() {
         <HelpCenter />
         <LoanCalculator />
         <Cities />
-        <Properties2 />
+        {/* <Properties2 /> */}
         <Partners />
         <Blogs />
         <Testimonials />
