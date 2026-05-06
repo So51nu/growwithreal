@@ -209,7 +209,7 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                   <div className="content">
                     <div className="title text-1">Call us</div>
                     <h6>
-                      <a href="tel:+919326183013">+91 9326183013</a>
+                      <a href="tel:+919326183013">+91 9326183013 / +91 91525 01725</a>
                     </h6>
                   </div>
                 </div>
@@ -222,8 +222,8 @@ export default function Footer1({ logo = "/images/logo/growl.png" }) {
                   <div className="content">
                     <div className="title text-1">Need live help</div>
                     <h6 className="fw-4">
-                      <a href="mailto:support@growlrealestate.gmail.com">
-                        support@growlrealestate.gmail.com
+                      <a href="mailto:info@growlrealestate.com">
+                        info@growlrealestate.com
                       </a>
                     </h6>
                   </div>

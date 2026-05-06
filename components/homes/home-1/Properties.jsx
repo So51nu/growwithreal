@@ -920,6 +920,7 @@
 
 
 
+
 "use client";
 
 import Link from "next/link";
@@ -1151,6 +1152,10 @@ const actionBtnStyle = {
   boxShadow: "0 6px 20px rgba(0,0,0,0.18)",
 };
 
+
+const cardTextColor = "#111827";
+const cardMutedColor = "#6b7280";
+const cardOrange = "#f28c52";
 export default function Properties({ filters = {} }) {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1631,14 +1636,15 @@ export default function Properties({ filters = {} }) {
 
     return (
       <div
-        className="box-house hover-img"
-        style={{
-          borderRadius: "22px",
-          overflow: "hidden",
-          background: "#fff",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-        }}
-      >
+          className="box-house hover-img"
+          style={{
+            borderRadius: "22px",
+            overflow: "hidden",
+            background: "#ffffff",
+            color: "#111827",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+          }}
+        >
         <div className="image-wrap" style={{ position: "relative" }}>
           <Link
             href={`/property-detail-v1/${property.id}`}
@@ -1732,89 +1738,169 @@ export default function Properties({ filters = {} }) {
           </div>
         </div>
 
-        <div className="content">
-          <h5 className="title">
-            <Link
-              href={`/property-detail-v1/${property.id}`}
-              onClick={() => addView(property.id)}
-            >
-              {property.title}
-            </Link>
-          </h5>
+        <div
+  className="content"
+  style={{
+    background: "#ffffff",
+    color: cardTextColor,
+    padding: "28px 28px 26px",
+  }}
+>
+  <h5
+    className="title"
+    style={{
+      marginBottom: "12px",
+      color: cardTextColor,
+      fontWeight: 700,
+    }}
+  >
+    <Link
+      href={`/property-detail-v1/${property.id}`}
+      onClick={() => addView(property.id)}
+      style={{
+        color: cardTextColor,
+        textDecoration: "none",
+      }}
+    >
+      {property.title || "Untitled Property"}
+    </Link>
+  </h5>
 
-          <p className="location text-1 line-clamp-1">
-            <i className="icon-location" />{" "}
-            {property.short_location ||
-              property.location ||
-              property.neighborhood ||
-              property.full_address}
-          </p>
+  <p
+    className="location text-1 line-clamp-1"
+    style={{
+      color: cardMutedColor,
+      marginBottom: "18px",
+      display: "flex",
+      alignItems: "center",
+      gap: "7px",
+    }}
+  >
+    <i
+      className="icon-location"
+      style={{
+        color: cardMutedColor,
+      }}
+    />{" "}
+    {property.short_location ||
+      property.location ||
+      property.neighborhood ||
+      property.full_address ||
+      "Location on request"}
+  </p>
 
-          <div
-            style={{
-              background: "#f4efec",
-              borderRadius: "12px",
-              padding: "10px 14px",
-              marginBottom: "12px",
-              fontSize: "14px",
-            }}
-          >
-            <strong>Configuration:</strong> {property.configuration_text}
-          </div>
+  <div
+    style={{
+      background: "#f4efec",
+      borderRadius: "12px",
+      padding: "10px 14px",
+      marginBottom: "12px",
+      fontSize: "14px",
+      color: cardTextColor,
+    }}
+  >
+    <strong style={{ color: "#4b5563" }}>Configuration:</strong>{" "}
+    <span style={{ color: cardTextColor }}>
+      {property.configuration_text || "Configuration on request"}
+    </span>
+  </div>
 
-          <ul className="meta-list flex">
-            <li className="text-1 flex">
-              <span>{property.bedrooms || 0}</span>Beds
-            </li>
+  <ul
+    className="meta-list flex"
+    style={{
+      color: cardMutedColor,
+      marginBottom: "18px",
+    }}
+  >
+    <li
+      className="text-1 flex"
+      style={{
+        color: cardMutedColor,
+      }}
+    >
+      <span style={{ color: cardTextColor, marginRight: "4px" }}>
+        {property.bedrooms || 0}
+      </span>
+      Beds
+    </li>
 
-            <li className="text-1 flex">
-              <span>{property.bathrooms || 0}</span>Baths
-            </li>
+    <li
+      className="text-1 flex"
+      style={{
+        color: cardMutedColor,
+      }}
+    >
+      <span style={{ color: cardTextColor, marginRight: "4px" }}>
+        {property.bathrooms || 0}
+      </span>
+      Baths
+    </li>
 
-            <li className="text-1 flex">
-              <span>{property.carpet_area || property.size_sqft || 0}</span>Sqft
-            </li>
-          </ul>
+    <li
+      className="text-1 flex"
+      style={{
+        color: cardMutedColor,
+      }}
+    >
+      <span style={{ color: cardTextColor, marginRight: "4px" }}>
+        {property.carpet_area || property.size_sqft || 0}
+      </span>
+      Sqft
+    </li>
+  </ul>
 
-          <div
-            className="bot"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 14,
-              borderTop: "1px solid #eee",
-              paddingTop: 16,
-            }}
-          >
-            <h5 className="price" style={{ margin: 0 }}>
-              {formatPrice(property.price)}
-            </h5>
+  <div
+    className="bot"
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      gap: 14,
+      borderTop: "1px solid #eeeeee",
+      paddingTop: 16,
+    }}
+  >
+    <h5
+      className="price"
+      style={{
+        margin: 0,
+        color: cardOrange,
+        fontWeight: 700,
+      }}
+    >
+      {formatPrice(property.price)}
+    </h5>
 
-            <div className="wrap-btn flex gap-8">
-              <Link
-                href={`/property-detail-v1/${property.id}`}
-                className="tf-btn style-border pd-4"
-                onClick={() => addView(property.id)}
-              >
-                Details
-              </Link>
+    <div className="wrap-btn flex gap-8">
+      <Link
+        href={`/property-detail-v1/${property.id}`}
+        className="tf-btn style-border pd-4"
+        onClick={() => addView(property.id)}
+        style={{
+          color: "#ff6a00",
+          border: "1px solid #ff6a00",
+          background: "#ffffff",
+          textDecoration: "none",
+        }}
+      >
+        Details
+      </Link>
 
-              <button
-                type="button"
-                className="tf-btn pd-4"
-                onClick={() => openBookingModal(property)}
-                style={{
-                  background: "#f28c52",
-                  color: "#fff",
-                  border: "1px solid #f28c52",
-                }}
-              >
-                Book Visit
-              </button>
-            </div>
-          </div>
-        </div>
+      <button
+        type="button"
+        className="tf-btn pd-4"
+        onClick={() => openBookingModal(property)}
+        style={{
+          background: cardOrange,
+          color: "#ffffff",
+          border: `1px solid ${cardOrange}`,
+        }}
+      >
+        Book Visit
+      </button>
+    </div>
+  </div>
+</div>
       </div>
     );
   };

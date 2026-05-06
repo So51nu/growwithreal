@@ -56,7 +56,7 @@ export default function Categories({
                   </div>
                   <div className="content text-center">
                     <h5>{category.name}</h5>
-                    <p className="mt-4 text-1">234 Property</p>
+                   
                   </div>
                 </a>
               </SwiperSlide>

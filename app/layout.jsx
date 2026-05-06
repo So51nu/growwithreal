@@ -177,7 +177,7 @@ export default function RootLayout({ children }) {
         <SettingsHandler />
         <Login />
         <Register />
-        {/* <AIChatbot /> */}
+        <AIChatbot />
       </body>
     </html>
   );

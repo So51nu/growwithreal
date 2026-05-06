@@ -13,7 +13,7 @@ export default function AIChatbot() {
   const [config, setConfig] = useState({
     bot_name: "Property AI Assistant",
     welcome_message:
-      "Hi! Main aapki property search me help kar sakta hoon. Aap city, budget, BHK ya project name puch sakte ho.",
+      "Hi! I can help you with your property search. You can ask me about city, budget, BHK, or project name to find the best properties for you.",
     primary_color: "#FF7A1A",
     secondary_color: "#0B1320",
   });
@@ -22,7 +22,7 @@ export default function AIChatbot() {
     {
       role: "bot",
       text:
-        "Hi! Main aapki property search me help kar sakta hoon. Aap city, budget, BHK ya project name puch sakte ho.",
+        "Hi! I can help you with your property search. You can ask me about city, budget, BHK, or project name to find the best properties for you.",
     },
   ]);
 
@@ -105,7 +105,7 @@ export default function AIChatbot() {
     try {
       data = await response.json();
     } catch (jsonError) {
-      throw new Error("Backend JSON response nahi de raha. Django API URL check karo.");
+      throw new Error(" Please Check  API URL .");
     }
 
     if (!response.ok || !data.success) {
@@ -144,7 +144,7 @@ export default function AIChatbot() {
         ...prev,
         {
           role: "bot",
-          text: "Please name aur phone number fill karo.",
+          text: "Please Enter Name and MObile no.",
         },
       ]);
       return;
@@ -193,7 +193,7 @@ export default function AIChatbot() {
         ...prev,
         {
           role: "bot",
-          text: "Lead submit nahi hua. Please thodi der baad try karo.",
+          text: "Lead submit Failed. Please  try again .",
         },
       ]);
     }
@@ -432,14 +432,14 @@ export default function AIChatbot() {
             <button
               type="button"
               style={styles.quickBtn}
-              onClick={() => setInput("Latest projects batao")}
+              onClick={() => setInput("Latest projects ")}
             >
               Latest Projects
             </button>
             <button
               type="button"
               style={styles.quickBtn}
-              onClick={() => setInput("Site visit book karna hai")}
+              onClick={() => setInput("Site visit book ")}
             >
               Site Visit
             </button>
@@ -457,7 +457,7 @@ export default function AIChatbot() {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Example: Mumbai me 2 BHK under 1 Cr batao..."
+              placeholder="Example: Mumbai me 2 BHK under 1 Cr ..."
               style={styles.input}
               rows={1}
             />
