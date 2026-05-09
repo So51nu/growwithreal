@@ -8,7 +8,7 @@
 // import React from "react";
 
 // function normalizeBaseUrl(url) {
-//   const fallback = "https://growlbackend.clickconnectmedia.cloud";
+//   const fallback = "http://127.0.0.1:8000";
 //   const raw = (url || fallback).trim().replace(/\/+$/, "");
 //   return raw.endsWith("/api") ? raw : `${raw}/api`;
 // }
@@ -67,6 +67,7 @@
 //   );
 // }
 
+
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import Breadcumb from "@/components/common/Breadcumb";
@@ -77,7 +78,7 @@ import Slider1 from "@/components/propertyDetails/sliders/Slider1";
 import React from "react";
 
 function normalizeBaseUrl(url) {
-  const fallback = "https://growlbackend.clickconnectmedia.cloud";
+  const fallback = "http://127.0.0.1:8000";
   const raw = (url || fallback).trim().replace(/\/+$/, "");
   return raw.endsWith("/api") ? raw : `${raw}/api`;
 }

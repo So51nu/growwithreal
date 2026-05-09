@@ -3,7 +3,7 @@
 // import React, { useEffect, useState } from "react";
 
 // const API_BASE_URL =
-//   process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+//   process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
 // const emptyNearbyPlace = { place_name: "", distance: "" };
 
@@ -632,7 +632,7 @@ import Header1 from "@/components/headers/Header1";
 import Footer1 from "@/components/footers/Footer1";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
 const emptyNearbyPlace = { place_name: "", distance: "" };
 

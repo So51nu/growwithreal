@@ -5,7 +5,7 @@
 // import SplitTextAnimation from "@/components/common/SplitTextAnimation";
 
 // const API_BASE =
-//   process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+//   process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
 // export default function Testimonials() {
 //   const [showMore, setShowMore] = useState(false);
@@ -182,7 +182,7 @@ import Image from "next/image";
 import SplitTextAnimation from "@/components/common/SplitTextAnimation";
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
 function normalizeAvatarUrl(avatar) {
   if (!avatar) return "";

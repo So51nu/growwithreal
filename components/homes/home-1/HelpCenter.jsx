@@ -2,7 +2,7 @@
 import SplitTextAnimation from "@/components/common/SplitTextAnimation";
 import { useState } from "react";
 
-const items = ["Buy Property", "Rent Property", "Sell Property"];
+const items = ["Buy Property", "Sell Property"];
 export default function HelpCenter() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
@@ -151,7 +151,7 @@ export default function HelpCenter() {
                     </div>
                   </div>
                 )}
-                {activeIndex == 1 && (
+                {/* {activeIndex == 1 && (
                   <div className="widget-content-inner active fadeInTab">
                     <div className=" tf-grid-layout md-col-3 ">
                       <div className="icons-box default effec-icon ">
@@ -266,8 +266,8 @@ export default function HelpCenter() {
                       </div>
                     </div>
                   </div>
-                )}
-                {activeIndex == 2 && (
+                )} */}
+                {activeIndex == 1 && (
                   <div className="widget-content-inner active fadeInTab">
                     <div className=" tf-grid-layout md-col-3 ">
                       <div className="icons-box default effec-icon ">
