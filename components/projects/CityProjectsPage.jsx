@@ -1148,7 +1148,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SearchForm from "../common/SearchForm";
 import { apiGet, apiPost } from "../lib/api";
-
+import { getPropertyDetailHref } from "../../utlis/propertyUrl";
 function toNumber(value) {
   const num = Number(value);
   return Number.isFinite(num) ? num : 0;
@@ -1979,7 +1979,7 @@ export default function CityProjectsPage({ citySlug }) {
                 >
                   <div className="image-wrap" style={{ position: "relative" }}>
                     <Link
-                      href={`/property-detail-v1/${project.id}`}
+                      href={getPropertyDetailHref(project)}
                       onClick={() => handleViewed(project.id)}
                     >
                       <Image
@@ -2062,7 +2062,7 @@ export default function CityProjectsPage({ citySlug }) {
                   >
                     <h5 className="title city-project-title" style={{ marginBottom: 8 }}>
                       <Link
-                        href={`/property-detail-v1/${project.id}`}
+                        href={getPropertyDetailHref(project)}
                         onClick={() => handleViewed(project.id)}
                         className="city-project-title-link"
                         style={{ color: "#1f1f1f", opacity: 1 }}
@@ -2143,7 +2143,7 @@ export default function CityProjectsPage({ citySlug }) {
                       }}
                     >
                       <Link
-                        href={`/property-detail-v1/${project.id}`}
+                        href={getPropertyDetailHref(project)}
                         className="tf-btn style-border pd-4 city-project-details-btn"
                         onClick={() => handleViewed(project.id)}
                       >

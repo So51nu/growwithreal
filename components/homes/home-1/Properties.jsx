@@ -928,7 +928,7 @@ import Image from "next/image";
 import SplitTextAnimation from "@/components/common/SplitTextAnimation";
 import React, { useEffect, useMemo, useState } from "react";
 import { apiGet, apiPost } from "../../lib/api";
-
+import { getPropertyDetailHref } from "../../../utlis/propertyUrl";
 function formatPrice(price) {
   const num = Number(price || 0);
   if (!num) return "Price on request";
@@ -1647,7 +1647,7 @@ export default function Properties({ filters = {} }) {
         >
         <div className="image-wrap" style={{ position: "relative" }}>
           <Link
-            href={`/property-detail-v1/${property.id}`}
+            href={getPropertyDetailHref(property)}
             onClick={() => addView(property.id)}
           >
             <Image
@@ -1755,7 +1755,7 @@ export default function Properties({ filters = {} }) {
     }}
   >
     <Link
-      href={`/property-detail-v1/${property.id}`}
+      href={getPropertyDetailHref(property)}
       onClick={() => addView(property.id)}
       style={{
         color: cardTextColor,
@@ -1873,7 +1873,7 @@ export default function Properties({ filters = {} }) {
 
     <div className="wrap-btn flex gap-8">
       <Link
-        href={`/property-detail-v1/${property.id}`}
+        href={getPropertyDetailHref(property)}
         className="tf-btn style-border pd-4"
         onClick={() => addView(property.id)}
         style={{

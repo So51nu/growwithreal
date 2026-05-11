@@ -2005,7 +2005,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SearchForm from "../common/SearchForm";
 import { apiGet, apiPost } from "../lib/api";
-
+import { getPropertyDetailHref } from "../../utlis/propertyUrl";
 function toNumber(value) {
   const num = Number(value);
   return Number.isFinite(num) ? num : 0;
@@ -2790,7 +2790,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
                 >
                   <div className="image-wrap" style={{ position: "relative" }}>
                     <Link
-                      href={`/property-detail-v1/${project.id}`}
+                      href={getPropertyDetailHref(project)}
                       onClick={() => handleViewed(project.id)}
                     >
                       <Image
@@ -2873,7 +2873,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
                   >
                     <h5 className="title developer-project-title" style={{ marginBottom: 8 }}>
                       <Link
-                        href={`/property-detail-v1/${project.id}`}
+                       href={getPropertyDetailHref(project)}
                         onClick={() => handleViewed(project.id)}
                         className="developer-project-title-link"
                         style={{ color: "#1f1f1f", opacity: 1 }}
@@ -2954,7 +2954,7 @@ export default function DeveloperProjectsPage({ developerSlug }) {
                       }}
                     >
                       <Link
-                        href={`/property-detail-v1/${project.id}`}
+                        href={getPropertyDetailHref(project)}
                         className="tf-btn style-border pd-4 developer-project-details-btn"
                         onClick={() => handleViewed(project.id)}
                       >

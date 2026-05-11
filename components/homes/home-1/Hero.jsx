@@ -1564,7 +1564,7 @@ export default function Hero({ onSearch = () => {}, projects = [] }) {
   const [developers, setDevelopers] = useState([]);
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
 
-  const items = useMemo(() => ["For sale", "For rent"], []);
+  // const items = useMemo(() => ["For sale", "For rent"], []);
 
   useEffect(() => {
     setMounted(true);
@@ -1968,7 +1968,7 @@ export default function Hero({ onSearch = () => {}, projects = [] }) {
     return (
       <div className={`wg-filter ${fixed ? "wg-filter-fixed" : ""}`}>
         <div className="form-title">
-          <div className="tf-dropdown-sort" data-bs-toggle="dropdown">
+          {/* <div className="tf-dropdown-sort" data-bs-toggle="dropdown">
             <div className="btn-select">
               <span className="text-sort-value">{activeItem}</span>
               <i className="icon-CaretDown" />
@@ -1987,7 +1987,7 @@ export default function Hero({ onSearch = () => {}, projects = [] }) {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <form
             onSubmit={handleSearch}

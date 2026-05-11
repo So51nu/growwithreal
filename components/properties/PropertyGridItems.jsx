@@ -635,7 +635,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { apiPost } from "../lib/api";
-
+import { getPropertyDetailHref } from "../../utlis/propertyUrl";
 function getArray(value) {
   if (Array.isArray(value)) return value;
   if (Array.isArray(value?.results)) return value.results;
@@ -1242,7 +1242,7 @@ export default function PropertyGridItems({ properties = [], onFavoriteUpdated =
             <span><b>Carpet Area</b><br/>${escapeHtml(getArea(property))} sq.ft.</span>
           </div>
           <div class="property-map-popup-actions">
-            <a href="/property-detail-v1/${property.id}" class="property-map-popup-btn">View Details</a>
+            <a href="${getPropertyDetailHref(property)}" class="property-map-popup-btn">View Details</a>
             <a href="${escapeHtml(mapsUrl)}" target="_blank" rel="noopener noreferrer" class="property-map-popup-link">Open in Google Maps</a>
           </div>
         </div>
@@ -1254,7 +1254,7 @@ export default function PropertyGridItems({ properties = [], onFavoriteUpdated =
 
     const mapsUrl = getGoogleMapsUrl(group.properties[0], group.lat, group.lng);
     const cards = group.properties.slice(0, 12).map((property) => `
-      <a href="/property-detail-v1/${property.id}" class="property-map-group-item">
+      <a href="${getPropertyDetailHref(property)}" class="property-map-group-item">
         <img src="${escapeHtml(getImage(property))}" alt="${escapeHtml(getTitle(property))}" />
         <div>
           <h5>${escapeHtml(getTitle(property))}</h5>
@@ -1669,11 +1669,13 @@ export default function PropertyGridItems({ properties = [], onFavoriteUpdated =
 
             <div className="property-map-list-grid">
               {items.map((property) => {
-                const sellerPhone = getPhone(property);
-                return (
+                  const sellerPhone = getPhone(property);
+                  const detailHref = getPropertyDetailHref(property);
+
+                  return (
                   <div className="box-house hover-img property-grid-card-custom" key={property.id}>
                     <div className="image-wrap" style={{ position: "relative" }}>
-                      <Link href={`/property-detail-v1/${property.id}`} onClick={() => handleViewed(property.id)}>
+                     <Link href={detailHref} onClick={() => handleViewed(property.id)}>
                         <Image
                           className="lazyload"
                           alt={getTitle(property)}
@@ -1706,7 +1708,7 @@ export default function PropertyGridItems({ properties = [], onFavoriteUpdated =
 
                     <div className="content property-grid-card-content">
                       <h5 className="title property-grid-card-title">
-                        <Link href={`/property-detail-v1/${property.id}`} onClick={() => handleViewed(property.id)} className="property-grid-card-title-link">
+                        <Link href={detailHref} onClick={() => handleViewed(property.id)} className="property-grid-card-title-link">
                           {getTitle(property)}
                         </Link>
                       </h5>
@@ -1728,7 +1730,7 @@ export default function PropertyGridItems({ properties = [], onFavoriteUpdated =
                       <div className="bot property-grid-card-bottom">
                         <h5 className="price property-grid-card-price">{formatPrice(property.price)}</h5>
                         <div className="wrap-btn flex gap-8">
-                          <Link href={`/property-detail-v1/${property.id}`} className="tf-btn style-border pd-4 property-grid-details-btn" onClick={() => handleViewed(property.id)}>
+                          <Link href={detailHref} className="tf-btn style-border pd-4 property-grid-details-btn" onClick={() => handleViewed(property.id)}>
                             Details
                           </Link>
                           <button type="button" className="tf-btn pd-4 property-grid-book-btn" onClick={() => openBookingModal(property)}>

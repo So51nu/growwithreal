@@ -3,7 +3,7 @@ import Header1 from "@/components/headers/Header1";
 import Blogs from "@/components/homes/home-1/Blogs";
 import Categories from "@/components/common/Categories";
 import Cities from "@/components/homes/home-1/Cities";
-import HelpCenter from "@/components/homes/home-1/HelpCenter";
+//import HelpCenter from "@/components/homes/home-1/HelpCenter";
 import Hero from "@/components/homes/home-1/Hero";
 import LoanCalculator from "@/components/homes/home-1/LoanCalculator";
 import Partners from "@/components/homes/home-1/Partners";
@@ -23,7 +23,7 @@ export default function Home() {
       <div className="main-content ">
         <Categories />
         <Properties />
-        <HelpCenter />
+        {/* <HelpCenter /> */}
         <LoanCalculator />
         <Cities />
         {/* <Properties2 /> */}
