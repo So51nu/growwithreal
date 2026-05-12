@@ -235,24 +235,88 @@ function openLoginModal() {
   }
 }
 
+function SaveIcon({ active = false }) {
+  return (
+    <svg
+      width="21"
+      height="21"
+      viewBox="0 0 24 24"
+      fill={active ? "#ff8c5a" : "none"}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M7 4.75C7 3.784 7.784 3 8.75 3H15.25C16.216 3 17 3.784 17 4.75V20.25L12 17.25L7 20.25V4.75Z"
+        stroke={active ? "#ff8c5a" : "#ffffff"}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function HeartIcon({ active = false }) {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill={active ? "#ff8c5a" : "none"}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M20.84 4.61C20.3292 4.099 19.7228 3.69365 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69365 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.1283 5.6417 1.54871 7.04097 1.54871 8.5C1.54871 9.95904 2.1283 11.3583 3.16 12.39L12 21.23L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6054C22.3095 9.9379 22.4518 9.22249 22.4518 8.5C22.4518 7.77752 22.3095 7.06211 22.0329 6.39464C21.7563 5.72718 21.351 5.12076 20.84 4.61Z"
+        stroke={active ? "#ff8c5a" : "#ffffff"}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg
+      width="21"
+      height="21"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1469 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.19 12.85C3.49998 10.2412 2.44824 7.271 2.12 4.18C2.09501 3.90347 2.12788 3.62476 2.2165 3.36162C2.30512 3.09849 2.44756 2.85669 2.63477 2.65162C2.82198 2.44655 3.04986 2.28271 3.30379 2.17052C3.55772 2.05833 3.83215 2.00026 4.11 2H7.11C7.59531 1.99522 8.06579 2.16708 8.43376 2.48353C8.80173 2.79999 9.04208 3.23945 9.11 3.72C9.23662 4.68007 9.47145 5.62273 9.81 6.53C9.94454 6.88792 9.97366 7.27691 9.89391 7.65088C9.81415 8.02485 9.62886 8.36812 9.36 8.64L8.09 9.91C9.51355 12.4135 11.5865 14.4865 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9752 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z"
+        stroke="#ffffff"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const actionBtnStyle = {
   width: "50px",
   height: "50px",
   borderRadius: "50%",
-  border: "none",
-  background: "rgba(35,35,35,0.55)",
-  backdropFilter: "blur(4px)",
+  border: "1px solid rgba(255,255,255,0.16)",
+  background: "rgba(31,41,55,0.72)",
+  backdropFilter: "blur(8px)",
+  WebkitBackdropFilter: "blur(8px)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   color: "#fff",
   cursor: "pointer",
-  boxShadow: "0 6px 20px rgba(0,0,0,0.18)",
+  boxShadow: "0 8px 24px rgba(0,0,0,0.22)",
+  padding: 0,
 };
 
 const cardTextColor = "#111827";
 const cardMutedColor = "#6b7280";
-const cardOrange = "#f28c52";
 
 export default function Properties({ filters = {} }) {
   const [properties, setProperties] = useState([]);
@@ -806,14 +870,10 @@ export default function Properties({ filters = {} }) {
               onClick={() => toggleFavorite(property.id)}
               style={actionBtnStyle}
               title="Favorite"
+              aria-label="Favorite property"
+              className="growl-action-btn"
             >
-              <i
-                className="icon-save"
-                style={{
-                  fontSize: "20px",
-                  color: property.is_favorite ? "#ff8c5a" : "#ffffff",
-                }}
-              />
+              <SaveIcon active={property.is_favorite} />
             </button>
 
             <button
@@ -821,25 +881,21 @@ export default function Properties({ filters = {} }) {
               onClick={() => toggleLiked(property.id)}
               style={actionBtnStyle}
               title="Like"
+              aria-label="Like property"
+              className="growl-action-btn"
             >
-              <i
-                className="icon-heart"
-                style={{
-                  fontSize: "20px",
-                  color: property.is_liked ? "#ff8c5a" : "#ffffff",
-                }}
-              />
+              <HeartIcon active={property.is_liked} />
             </button>
 
             {sellerPhone ? (
-              <a href={`tel:${sellerPhone}`} style={actionBtnStyle} title="Call">
-                <i
-                  className="icon-phone"
-                  style={{
-                    fontSize: "20px",
-                    color: "#fff",
-                  }}
-                />
+              <a
+                href={`tel:${sellerPhone}`}
+                style={actionBtnStyle}
+                title="Call"
+                aria-label="Call seller"
+                className="growl-action-btn"
+              >
+                <PhoneIcon />
               </a>
             ) : null}
           </div>
@@ -974,6 +1030,7 @@ export default function Properties({ filters = {} }) {
 
         .growl-property-image-wrap {
           position: relative;
+          overflow: hidden;
         }
 
         .growl-property-image {
@@ -988,6 +1045,14 @@ export default function Properties({ filters = {} }) {
           top: 14px;
           left: 14px;
           z-index: 2;
+          max-width: calc(100% - 170px);
+          flex-wrap: wrap;
+        }
+
+        .growl-property-tags .flat-tag {
+          border-radius: 20px;
+          padding: 7px 14px;
+          line-height: 1;
         }
 
         .growl-property-actions {
@@ -996,7 +1061,22 @@ export default function Properties({ filters = {} }) {
           top: 16px;
           display: flex;
           gap: 12px;
-          z-index: 3;
+          z-index: 5;
+        }
+
+        .growl-action-btn {
+          flex: 0 0 auto;
+          transition: all 0.25s ease;
+        }
+
+        .growl-action-btn:hover {
+          transform: translateY(-2px);
+          background: rgba(17, 24, 39, 0.86) !important;
+        }
+
+        .growl-action-btn svg {
+          display: block;
+          flex-shrink: 0;
         }
 
         .growl-property-content {
@@ -1290,16 +1370,33 @@ export default function Properties({ filters = {} }) {
             height: 230px;
           }
 
+          .growl-property-tags {
+            top: 12px;
+            left: 12px;
+            max-width: calc(100% - 150px);
+            gap: 6px;
+          }
+
+          .growl-property-tags .flat-tag {
+            font-size: 11px !important;
+            padding: 6px 10px;
+          }
+
           .growl-property-actions {
             right: 10px;
             top: 12px;
-            gap: 8px;
+            gap: 7px;
           }
 
           .growl-property-actions button,
           .growl-property-actions a {
-            width: 42px !important;
-            height: 42px !important;
+            width: 40px !important;
+            height: 40px !important;
+          }
+
+          .growl-property-actions svg {
+            width: 18px;
+            height: 18px;
           }
 
           .growl-property-content {
@@ -1372,6 +1469,25 @@ export default function Properties({ filters = {} }) {
         @media (max-width: 380px) {
           .growl-property-content {
             padding: 20px 18px;
+          }
+
+          .growl-property-tags {
+            max-width: calc(100% - 136px);
+          }
+
+          .growl-property-actions {
+            gap: 6px;
+          }
+
+          .growl-property-actions button,
+          .growl-property-actions a {
+            width: 36px !important;
+            height: 36px !important;
+          }
+
+          .growl-property-actions svg {
+            width: 17px;
+            height: 17px;
           }
 
           .growl-property-buttons {
