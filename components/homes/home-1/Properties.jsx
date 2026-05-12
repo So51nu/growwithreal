@@ -495,14 +495,21 @@ export default function Properties({ filters = {} }) {
     const currentUser = getStoredUser();
 
     if (!currentUser?.id) {
-      localStorage.setItem("pendingPropertyRedirect", getPropertyDetailHref(property));
+      localStorage.setItem(
+        "pendingPropertyRedirect",
+        getPropertyDetailHref(property)
+      );
       openLoginModal();
       return;
     }
 
     setSelectedProperty(property);
     setBookingForm({
-      name: currentUser?.full_name || currentUser?.username || currentUser?.name || "",
+      name:
+        currentUser?.full_name ||
+        currentUser?.username ||
+        currentUser?.name ||
+        "",
       phone: currentUser?.phone || "",
       visit_date: "",
       visit_time: "",
@@ -571,7 +578,8 @@ export default function Properties({ filters = {} }) {
       const searchableText = getPropertySearchText(property);
 
       const keywordMatch =
-        !filters.keyword || searchableText.includes(normalizeText(filters.keyword));
+        !filters.keyword ||
+        searchableText.includes(normalizeText(filters.keyword));
 
       const cityMatch =
         !filters.city ||
@@ -749,7 +757,7 @@ export default function Properties({ filters = {} }) {
       return related.slice(0, 6);
     }
 
-    let fallback = [...properties].sort(
+    const fallback = [...properties].sort(
       (a, b) =>
         new Date(b.posting_date || 0).getTime() -
         new Date(a.posting_date || 0).getTime()
@@ -763,44 +771,22 @@ export default function Properties({ filters = {} }) {
     const detailHref = getPropertyDetailHref(property);
 
     return (
-      <div
-        className="box-house hover-img"
-        style={{
-          borderRadius: "22px",
-          overflow: "hidden",
-          background: "#ffffff",
-          color: "#111827",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-        }}
-      >
-        <div className="image-wrap" style={{ position: "relative" }}>
+      <div className="box-house hover-img growl-property-card">
+        <div className="image-wrap growl-property-image-wrap">
           <Link
             href={detailHref}
             onClick={(event) => handleProtectedDetailClick(event, property)}
           >
             <Image
-              className="lazyload"
+              className="lazyload growl-property-image"
               alt={property.title || "property"}
               src={property.imageSrc || "/images/home/house-1.jpg"}
               width={600}
               height={401}
-              style={{
-                width: "100%",
-                height: "280px",
-                objectFit: "cover",
-              }}
             />
           </Link>
 
-          <ul
-            className="box-tag flex gap-8"
-            style={{
-              position: "absolute",
-              top: 14,
-              left: 14,
-              zIndex: 2,
-            }}
-          >
+          <ul className="box-tag flex gap-8 growl-property-tags">
             {property.property_label ? (
               <li className="flat-tag text-4 bg-main fw-6 text_white">
                 {property.property_label}
@@ -808,20 +794,13 @@ export default function Properties({ filters = {} }) {
             ) : null}
 
             <li className="flat-tag text-4 bg-3 fw-6 text_white">
-              {property.property_status === "for-rent" ? "For Rent" : "For Sale"}
+              {property.property_status === "for-rent"
+                ? "For Rent"
+                : "For Sale"}
             </li>
           </ul>
 
-          <div
-            style={{
-              position: "absolute",
-              right: 16,
-              top: 16,
-              display: "flex",
-              gap: 12,
-              zIndex: 3,
-            }}
-          >
+          <div className="growl-property-actions">
             <button
               type="button"
               onClick={() => toggleFavorite(property.id)}
@@ -866,22 +845,8 @@ export default function Properties({ filters = {} }) {
           </div>
         </div>
 
-        <div
-          className="content"
-          style={{
-            background: "#ffffff",
-            color: cardTextColor,
-            padding: "28px 28px 26px",
-          }}
-        >
-          <h5
-            className="title"
-            style={{
-              marginBottom: "12px",
-              color: cardTextColor,
-              fontWeight: 700,
-            }}
-          >
+        <div className="content growl-property-content">
+          <h5 className="title growl-property-title">
             <Link
               href={detailHref}
               onClick={(event) => handleProtectedDetailClick(event, property)}
@@ -894,22 +859,13 @@ export default function Properties({ filters = {} }) {
             </Link>
           </h5>
 
-          <p
-            className="location text-1 line-clamp-1"
-            style={{
-              color: cardMutedColor,
-              marginBottom: "18px",
-              display: "flex",
-              alignItems: "center",
-              gap: "7px",
-            }}
-          >
+          <p className="location text-1 line-clamp-1 growl-property-location">
             <i
               className="icon-location"
               style={{
                 color: cardMutedColor,
               }}
-            />{" "}
+            />
             {property.short_location ||
               property.location ||
               property.neighborhood ||
@@ -917,29 +873,14 @@ export default function Properties({ filters = {} }) {
               "Location on request"}
           </p>
 
-          <div
-            style={{
-              background: "#f4efec",
-              borderRadius: "12px",
-              padding: "10px 14px",
-              marginBottom: "12px",
-              fontSize: "14px",
-              color: cardTextColor,
-            }}
-          >
+          <div className="growl-property-config">
             <strong style={{ color: "#4b5563" }}>Configuration:</strong>{" "}
             <span style={{ color: cardTextColor }}>
               {property.configuration_text || "Configuration on request"}
             </span>
           </div>
 
-          <ul
-            className="meta-list flex"
-            style={{
-              color: cardMutedColor,
-              marginBottom: "18px",
-            }}
-          >
+          <ul className="meta-list flex growl-property-meta">
             <li className="text-1 flex" style={{ color: cardMutedColor }}>
               <span style={{ color: cardTextColor, marginRight: "4px" }}>
                 {property.bedrooms || 0}
@@ -962,52 +903,24 @@ export default function Properties({ filters = {} }) {
             </li>
           </ul>
 
-          <div
-            className="bot"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 14,
-              borderTop: "1px solid #eeeeee",
-              paddingTop: 16,
-            }}
-          >
-            <h5
-              className="price"
-              style={{
-                margin: 0,
-                color: cardOrange,
-                fontWeight: 700,
-              }}
-            >
+          <div className="bot growl-property-bottom">
+            <h5 className="price growl-property-price">
               {formatPrice(property.price)}
             </h5>
 
-            <div className="wrap-btn flex gap-8">
+            <div className="wrap-btn growl-property-buttons">
               <Link
                 href={detailHref}
-                className="tf-btn style-border pd-4"
+                className="tf-btn style-border pd-4 growl-property-details-btn"
                 onClick={(event) => handleProtectedDetailClick(event, property)}
-                style={{
-                  color: "#ff6a00",
-                  border: "1px solid #ff6a00",
-                  background: "#ffffff",
-                  textDecoration: "none",
-                }}
               >
                 Details
               </Link>
 
               <button
                 type="button"
-                className="tf-btn pd-4"
+                className="tf-btn pd-4 growl-property-book-btn"
                 onClick={() => openBookingModal(property)}
-                style={{
-                  background: cardOrange,
-                  color: "#ffffff",
-                  border: `1px solid ${cardOrange}`,
-                }}
               >
                 Book Visit
               </button>
@@ -1050,6 +963,440 @@ export default function Properties({ filters = {} }) {
 
   return (
     <>
+      <style jsx global>{`
+        .growl-property-card {
+          border-radius: 22px;
+          overflow: hidden;
+          background: #ffffff;
+          color: #111827;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .growl-property-image-wrap {
+          position: relative;
+        }
+
+        .growl-property-image {
+          width: 100%;
+          height: 280px;
+          object-fit: cover;
+          display: block;
+        }
+
+        .growl-property-tags {
+          position: absolute;
+          top: 14px;
+          left: 14px;
+          z-index: 2;
+        }
+
+        .growl-property-actions {
+          position: absolute;
+          right: 16px;
+          top: 16px;
+          display: flex;
+          gap: 12px;
+          z-index: 3;
+        }
+
+        .growl-property-content {
+          background: #ffffff;
+          color: #111827;
+          padding: 28px 28px 26px;
+        }
+
+        .growl-property-title {
+          margin-bottom: 12px;
+          color: #111827;
+          font-weight: 700;
+        }
+
+        .growl-property-location {
+          color: #6b7280;
+          margin-bottom: 18px;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+        }
+
+        .growl-property-config {
+          background: #f4efec;
+          border-radius: 12px;
+          padding: 10px 14px;
+          margin-bottom: 12px;
+          font-size: 14px;
+          color: #111827;
+        }
+
+        .growl-property-meta {
+          color: #6b7280;
+          margin-bottom: 18px;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .growl-property-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 14px;
+          border-top: 1px solid #eeeeee;
+          padding-top: 16px;
+        }
+
+        .growl-property-price {
+          margin: 0;
+          color: #f28c52;
+          font-weight: 700;
+          white-space: nowrap;
+        }
+
+        .growl-property-buttons {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-shrink: 0;
+        }
+
+        .growl-property-details-btn {
+          color: #ff6a00 !important;
+          border: 1px solid #ff6a00 !important;
+          background: #ffffff !important;
+          text-decoration: none !important;
+          min-height: 40px;
+          padding: 10px 14px !important;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          white-space: nowrap;
+        }
+
+        .growl-property-book-btn {
+          background: #f28c52 !important;
+          color: #ffffff !important;
+          border: 1px solid #f28c52 !important;
+          min-height: 40px;
+          padding: 10px 18px !important;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          white-space: nowrap;
+        }
+
+        #modalLogin {
+          z-index: 99999 !important;
+        }
+
+        #modalLogin .modal-dialog {
+          width: 100% !important;
+          max-width: 380px !important;
+          margin: 16px auto !important;
+          padding: 0 14px !important;
+        }
+
+        #modalLogin .modal-content {
+          width: 100% !important;
+          max-width: 100% !important;
+          border-radius: 24px !important;
+          overflow: hidden !important;
+          background: #ffffff !important;
+          box-sizing: border-box !important;
+        }
+
+        #modalLogin .flat-account {
+          width: 100% !important;
+          display: block !important;
+          min-height: auto !important;
+          overflow: hidden !important;
+          background: #ffffff !important;
+        }
+
+        #modalLogin .banner-account {
+          display: none !important;
+        }
+
+        #modalLogin .form-account {
+          width: 100% !important;
+          max-width: 100% !important;
+          padding: 30px 18px 28px !important;
+          background: #ffffff !important;
+          box-sizing: border-box !important;
+        }
+
+        #modalLogin .title-box {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          gap: 12px !important;
+          margin-bottom: 24px !important;
+        }
+
+        #modalLogin .title-box h4 {
+          font-size: 21px !important;
+          line-height: 1.25 !important;
+          margin: 0 !important;
+          color: #2f3137 !important;
+          font-weight: 800 !important;
+        }
+
+        #modalLogin .close-modal,
+        #modalLogin .icon-close,
+        #modalLogin .btn-close {
+          width: 36px !important;
+          height: 36px !important;
+          min-width: 36px !important;
+          border-radius: 50% !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          cursor: pointer !important;
+          color: #6b7280 !important;
+          background: transparent !important;
+          box-shadow: none !important;
+        }
+
+        #modalLogin .box,
+        #modalLogin .box-fieldset,
+        #modalLogin .ip-field {
+          width: 100% !important;
+          max-width: 100% !important;
+          box-sizing: border-box !important;
+        }
+
+        #modalLogin .box-fieldset {
+          margin-bottom: 16px !important;
+        }
+
+        #modalLogin label {
+          display: block !important;
+          margin-bottom: 8px !important;
+          font-size: 14px !important;
+          font-weight: 700 !important;
+          color: #374151 !important;
+        }
+
+        #modalLogin input,
+        #modalLogin select,
+        #modalLogin .form-control {
+          width: 100% !important;
+          max-width: 100% !important;
+          height: 46px !important;
+          min-height: 46px !important;
+          border: 1px solid #d1d5db !important;
+          border-radius: 10px !important;
+          background-color: #ffffff !important;
+          color: #111827 !important;
+          padding: 10px 12px !important;
+          font-size: 13px !important;
+          line-height: 1.2 !important;
+          box-sizing: border-box !important;
+          outline: none !important;
+          box-shadow: none !important;
+        }
+
+        #modalLogin select {
+          appearance: auto !important;
+          -webkit-appearance: auto !important;
+          cursor: pointer !important;
+        }
+
+        #modalLogin input:focus,
+        #modalLogin select:focus,
+        #modalLogin .form-control:focus {
+          border-color: #f28c52 !important;
+          box-shadow: 0 0 0 3px rgba(242, 140, 82, 0.16) !important;
+        }
+
+        #modalLogin .box-btn {
+          margin-top: 22px !important;
+        }
+
+        #modalLogin .tf-btn,
+        #modalLogin button[type="submit"] {
+          width: 100% !important;
+          max-width: 100% !important;
+          height: 46px !important;
+          min-height: 46px !important;
+          border-radius: 13px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: #2f3137 !important;
+          color: #ffffff !important;
+          font-size: 14px !important;
+          font-weight: 800 !important;
+          border: 0 !important;
+          padding: 0 16px !important;
+          box-sizing: border-box !important;
+        }
+
+        #modalLogin .tf-btn.style-border {
+          background: #ffffff !important;
+          color: #2f3137 !important;
+          border: 1px solid #d1d5db !important;
+        }
+
+        #modalLogin .caption-2 {
+          margin-top: 22px !important;
+          margin-bottom: 0 !important;
+          color: #6b7280 !important;
+          font-size: 13px !important;
+          text-align: center !important;
+          line-height: 1.5 !important;
+        }
+
+        #modalLogin .login-message {
+          margin-top: 10px !important;
+          color: #ff6b35 !important;
+          font-size: 14px !important;
+          line-height: 1.4 !important;
+        }
+
+        @media (min-width: 768px) {
+          #modalLogin .modal-dialog {
+            max-width: 760px !important;
+          }
+
+          #modalLogin .flat-account {
+            display: grid !important;
+            grid-template-columns: 1fr 1.05fr !important;
+            min-height: 500px !important;
+          }
+
+          #modalLogin .banner-account {
+            display: block !important;
+            min-height: 500px !important;
+            overflow: hidden !important;
+            background: #111827 !important;
+          }
+
+          #modalLogin .banner-account img {
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 500px !important;
+            object-fit: cover !important;
+            display: block !important;
+          }
+
+          #modalLogin .form-account {
+            padding: 34px 34px 30px !important;
+          }
+        }
+
+        @media (max-width: 575px) {
+          .growl-property-image {
+            height: 230px;
+          }
+
+          .growl-property-actions {
+            right: 10px;
+            top: 12px;
+            gap: 8px;
+          }
+
+          .growl-property-actions button,
+          .growl-property-actions a {
+            width: 42px !important;
+            height: 42px !important;
+          }
+
+          .growl-property-content {
+            padding: 22px 22px 22px;
+          }
+
+          .growl-property-title {
+            font-size: 18px;
+            line-height: 1.35;
+          }
+
+          .growl-property-config {
+            font-size: 13px;
+            padding: 9px 12px;
+          }
+
+          .growl-property-meta {
+            gap: 10px;
+            margin-bottom: 14px;
+          }
+
+          .growl-property-bottom {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+            padding-top: 14px;
+          }
+
+          .growl-property-price {
+            width: 100%;
+            font-size: 18px;
+            line-height: 1.2;
+          }
+
+          .growl-property-buttons {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 0.9fr 1.3fr;
+            gap: 8px;
+          }
+
+          .growl-property-details-btn,
+          .growl-property-book-btn {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 8px !important;
+            font-size: 13px !important;
+            border-radius: 12px;
+          }
+
+          #modalLogin .modal-dialog {
+            max-width: 380px !important;
+            margin: 14px auto !important;
+            padding: 0 14px !important;
+          }
+
+          #modalLogin .modal-content {
+            border-radius: 24px !important;
+          }
+
+          #modalLogin .form-account {
+            padding: 28px 18px 26px !important;
+          }
+
+          #modalLogin .title-box h4 {
+            font-size: 21px !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .growl-property-content {
+            padding: 20px 18px;
+          }
+
+          .growl-property-buttons {
+            grid-template-columns: 1fr 1.25fr;
+          }
+
+          .growl-property-details-btn,
+          .growl-property-book-btn {
+            font-size: 12px !important;
+          }
+
+          #modalLogin .modal-dialog {
+            padding: 0 10px !important;
+          }
+
+          #modalLogin .form-account {
+            padding: 26px 16px 24px !important;
+          }
+
+          #modalLogin .title-box h4 {
+            font-size: 20px !important;
+          }
+        }
+      `}</style>
+
       <section className="section-listing tf-spacing-1">
         <div className="tf-container">
           <div className="row">
