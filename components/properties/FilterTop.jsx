@@ -1,170 +1,7 @@
-// "use client";
-// import React from "react";
-// import DropdownSelect from "../common/DropdownSelect";
-// import Link from "next/link";
-// import SearchForm from "../common/SearchForm";
-
-// export default function FilterTop() {
-//   return (
-//     <section className="flat-title style-2">
-//       <div className="tf-container">
-//         <div className="row">
-//           <div className="col-lg-12">
-//             <div className="title-inner">
-//               <ul className="breadcrumb">
-//                 <li>
-//                   <Link className="home fw-6 text-color-3" href={`/`}>
-//                     Home
-//                   </Link>
-//                 </li>
-//                 <li>Property Listing</li>
-//               </ul>
-//             </div>
-//             <div className="wg-filter style-2 relative">
-//               <div className="form-title style-2">
-//                 <form>
-//                   <fieldset>
-//                     <input type="text" placeholder="Address, City, ZIP..." />
-//                   </fieldset>
-//                 </form>
-
-//                 <DropdownSelect
-//                   options={[
-//                     "Status",
-//                     "Bungalow",
-//                     "Apartment",
-//                     "House",
-//                     "Smart Home",
-//                     "Office",
-//                   ]}
-//                 />
-//                 <DropdownSelect
-//                   options={[
-//                     "Type",
-//                     "Bungalow",
-//                     "Apartment",
-//                     "House",
-//                     "Smart Home",
-//                     "Office",
-//                   ]}
-//                 />
-
-//                 <DropdownSelect
-//                   options={[
-//                     "Baths",
-//                     "Floating baths",
-//                     "Massage baths",
-//                     "Floor-standing bath",
-//                     "Built-in baths",
-//                   ]}
-//                 />
-
-//                 <DropdownSelect
-//                   options={[
-//                     "Beds",
-//                     "Twin beds",
-//                     "Bunk beds",
-//                     "Kids beds",
-//                     "Single bed",
-//                   ]}
-//                 />
-//                 <div className="wrap-btn searchFormToggler">
-//                   <div className="btn-filter show-form">
-//                     <div className="icons">
-//                       <svg
-//                         width={24}
-//                         height={24}
-//                         viewBox="0 0 24 24"
-//                         fill="none"
-//                         xmlns="http://www.w3.org/2000/svg"
-//                       >
-//                         <path
-//                           d="M21 4H14"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M10 4H3"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M21 12H12"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M8 12H3"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M21 20H16"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M12 20H3"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M14 2V6"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M8 10V14"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                         <path
-//                           d="M16 18V22"
-//                           stroke="#F1913D"
-//                           strokeWidth={2}
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                         />
-//                       </svg>
-//                     </div>
-//                   </div>
-//                   <a href="#" className="tf-btn bg-color-primary pd-3 fw-6">
-//                     Search <i className="icon-MagnifyingGlass fw-6" />
-//                   </a>
-//                 </div>
-//               </div>
-//               <SearchForm />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import DropdownSelect from "../common/DropdownSelect";
 import Link from "next/link";
-import SearchForm from "../common/SearchForm";
 import { useRouter } from "next/navigation";
 import { apiGet } from "../lib/api";
 
@@ -180,12 +17,6 @@ function slugify(value) {
     .replace(/[^\w\s-]/g, "")
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
-}
-
-function uniqueValues(values = []) {
-  return [...new Set(values.filter(Boolean).map((v) => String(v).trim()))].sort(
-    (a, b) => a.localeCompare(b)
-  );
 }
 
 function getProjectTitle(item) {
@@ -233,33 +64,9 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
   const [developers, setDevelopers] = useState([]);
   const [fetchedProjects, setFetchedProjects] = useState([]);
 
-  const [advancedFilters, setAdvancedFilters] = useState({
-    keyword: "",
-    city: "",
-    location: "",
-    propertyType: "",
-    propertyStatus: "",
-    bedrooms: "",
-    bathrooms: "",
-    amenities: [],
-    sortBy: "Newest",
-    priceRange: [0, 50000000],
-    areaRange: [0, 5000],
-  });
-
   const allProjects = useMemo(() => {
     return projects.length > 0 ? projects : fetchedProjects;
   }, [projects, fetchedProjects]);
-
-  const typeOptions = useMemo(
-    () => uniqueValues(allProjects.map((item) => item.property_type)),
-    [allProjects]
-  );
-
-  const statusOptions = useMemo(
-    () => uniqueValues(allProjects.map((item) => item.property_status)),
-    [allProjects]
-  );
 
   useEffect(() => {
     const loadSearchData = async () => {
@@ -397,7 +204,10 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
 
     const exactMatch = allProjects.find((item) => {
       const title = normalizeText(getProjectTitle(item));
-      const slug = normalizeText(item.slug || item.property_slug || item.project_slug);
+      const slug = normalizeText(
+        item.slug || item.property_slug || item.project_slug
+      );
+
       return title === normalized || slug === normalized;
     });
 
@@ -405,7 +215,10 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
 
     const partialMatch = allProjects.find((item) => {
       const title = normalizeText(getProjectTitle(item));
-      const slug = normalizeText(item.slug || item.property_slug || item.project_slug);
+      const slug = normalizeText(
+        item.slug || item.property_slug || item.project_slug
+      );
+
       return title.includes(normalized) || slug.includes(normalized);
     });
 
@@ -525,16 +338,19 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
     const projectTitle = getProjectTitle(projectItem) || fallbackValue;
 
     const selectedFilters = {
-      ...advancedFilters,
       keyword: projectTitle,
-      city: projectItem?.city || advancedFilters.city,
-      location: getLocationName(projectItem) || advancedFilters.location,
-      propertyType: projectItem?.property_type || advancedFilters.propertyType,
-      propertyStatus:
-        projectItem?.property_status || advancedFilters.propertyStatus,
+      city: projectItem?.city || "",
+      location: getLocationName(projectItem) || "",
+      propertyType: projectItem?.property_type || "",
+      propertyStatus: projectItem?.property_status || "",
+      bedrooms: "",
+      bathrooms: "",
+      amenities: [],
+      sortBy: "Newest",
+      priceRange: [0, 50000000],
+      areaRange: [0, 5000],
     };
 
-    setAdvancedFilters(selectedFilters);
     setSearchText(projectTitle);
     onSearch(selectedFilters);
     closeSuggestions();
@@ -563,36 +379,22 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
         applyProjectFilter(projectMatch, selectedValue);
         return;
       }
-
-      const selectedFilters = {
-        ...advancedFilters,
-        keyword: selectedValue,
-        city: suggestion.city || advancedFilters.city,
-        location: suggestion.location || advancedFilters.location,
-        propertyType: suggestion.propertyType || advancedFilters.propertyType,
-        propertyStatus:
-          suggestion.propertyStatus || advancedFilters.propertyStatus,
-      };
-
-      setAdvancedFilters(selectedFilters);
-      onSearch(selectedFilters);
-      closeSuggestions();
-      return;
     }
 
     const selectedFilters = {
-      ...advancedFilters,
       keyword: selectedValue,
-      city:
-        suggestion.type === "city"
-          ? selectedValue
-          : suggestion.city || advancedFilters.city,
-      location: suggestion.location || advancedFilters.location,
-      propertyType: suggestion.propertyType || advancedFilters.propertyType,
-      propertyStatus: suggestion.propertyStatus || advancedFilters.propertyStatus,
+      city: suggestion.city || "",
+      location: suggestion.location || "",
+      propertyType: suggestion.propertyType || "",
+      propertyStatus: suggestion.propertyStatus || "",
+      bedrooms: "",
+      bathrooms: "",
+      amenities: [],
+      sortBy: "Newest",
+      priceRange: [0, 50000000],
+      areaRange: [0, 5000],
     };
 
-    setAdvancedFilters(selectedFilters);
     onSearch(selectedFilters);
     closeSuggestions();
   };
@@ -602,43 +404,58 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
 
     const rawSearch = searchText.trim();
 
-    const mergedFilters = {
-      ...advancedFilters,
-      keyword: rawSearch || advancedFilters.keyword || "",
-    };
-
-    if (rawSearch) {
-      const cityMatch = findCityMatch(rawSearch);
-      if (cityMatch?.city_slug) {
-        closeSuggestions();
-        router.push(`/cities/${cityMatch.city_slug}`);
-        return;
-      }
-
-      const developerMatch = findDeveloperMatch(rawSearch);
-      if (developerMatch?.developer_slug) {
-        closeSuggestions();
-        router.push(`/developers/${developerMatch.developer_slug}`);
-        return;
-      }
-
-      const projectMatch = findProjectMatch(rawSearch);
-      if (projectMatch) {
-        applyProjectFilter(projectMatch, rawSearch);
-        return;
-      }
+    if (!rawSearch) {
+      onSearch({
+        keyword: "",
+        city: "",
+        location: "",
+        propertyType: "",
+        propertyStatus: "",
+        bedrooms: "",
+        bathrooms: "",
+        amenities: [],
+        sortBy: "Newest",
+        priceRange: [0, 50000000],
+        areaRange: [0, 5000],
+      });
+      closeSuggestions();
+      return;
     }
 
-    if (mergedFilters.city) {
-      const cityMatch = findCityMatch(mergedFilters.city);
-      if (cityMatch?.city_slug) {
-        closeSuggestions();
-        router.push(`/cities/${cityMatch.city_slug}`);
-        return;
-      }
+    const cityMatch = findCityMatch(rawSearch);
+    if (cityMatch?.city_slug) {
+      closeSuggestions();
+      router.push(`/cities/${cityMatch.city_slug}`);
+      return;
     }
 
-    onSearch(mergedFilters);
+    const developerMatch = findDeveloperMatch(rawSearch);
+    if (developerMatch?.developer_slug) {
+      closeSuggestions();
+      router.push(`/developers/${developerMatch.developer_slug}`);
+      return;
+    }
+
+    const projectMatch = findProjectMatch(rawSearch);
+    if (projectMatch) {
+      applyProjectFilter(projectMatch, rawSearch);
+      return;
+    }
+
+    onSearch({
+      keyword: rawSearch,
+      city: "",
+      location: "",
+      propertyType: "",
+      propertyStatus: "",
+      bedrooms: "",
+      bathrooms: "",
+      amenities: [],
+      sortBy: "Newest",
+      priceRange: [0, 50000000],
+      areaRange: [0, 5000],
+    });
+
     closeSuggestions();
   };
 
@@ -698,8 +515,8 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
               </ul>
             </div>
 
-            <div className="wg-filter style-2 relative">
-              <div className="form-title style-2">
+            <div className="wg-filter style-2 relative filtertop-simple-wrap">
+              <div className="form-title style-2 filtertop-simple-form-title">
                 <form onSubmit={handleSearch} ref={suggestionRef}>
                   <fieldset className="filtertop-search-fieldset">
                     <input
@@ -756,171 +573,27 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
                     )}
                   </fieldset>
                 </form>
-
-                <DropdownSelect
-                  options={
-                    statusOptions.length > 0
-                      ? ["Status", ...statusOptions]
-                      : [
-                          "Status",
-                          "For Sale",
-                          "For Rent",
-                          "Ready To Move",
-                          "Under Construction",
-                        ]
-                  }
-                  selectedValue={advancedFilters.propertyStatus}
-                  onChange={(value) =>
-                    setAdvancedFilters((prev) => ({
-                      ...prev,
-                      propertyStatus: value === "Status" ? "" : value,
-                    }))
-                  }
-                />
-
-                <DropdownSelect
-                  options={
-                    typeOptions.length > 0
-                      ? ["Type", ...typeOptions]
-                      : [
-                          "Type",
-                          "Bungalow",
-                          "Apartment",
-                          "House",
-                          "Smart Home",
-                          "Office",
-                        ]
-                  }
-                  selectedValue={advancedFilters.propertyType}
-                  onChange={(value) =>
-                    setAdvancedFilters((prev) => ({
-                      ...prev,
-                      propertyType: value === "Type" ? "" : value,
-                    }))
-                  }
-                />
-
-                <DropdownSelect
-                  options={["Baths", "1", "2", "3", "4+"]}
-                  selectedValue={advancedFilters.bathrooms}
-                  onChange={(value) =>
-                    setAdvancedFilters((prev) => ({
-                      ...prev,
-                      bathrooms: value === "Baths" ? "" : value,
-                    }))
-                  }
-                />
-
-                <DropdownSelect
-                  options={["Beds", "1", "2", "3", "4", "5+"]}
-                  selectedValue={advancedFilters.bedrooms}
-                  onChange={(value) =>
-                    setAdvancedFilters((prev) => ({
-                      ...prev,
-                      bedrooms: value === "Beds" ? "" : value,
-                    }))
-                  }
-                />
-
-                <div className="wrap-btn searchFormToggler">
-                  <div className="btn-filter show-form">
-                    <div className="icons">
-                      <svg
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M21 4H14"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M10 4H3"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M21 12H12"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M8 12H3"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M21 20H16"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 20H3"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M14 2V6"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M8 10V14"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16 18V22"
-                          stroke="#F1913D"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={handleSearch}
-                    className="tf-btn bg-color-primary pd-3 fw-6"
-                  >
-                    Search <i className="icon-MagnifyingGlass fw-6" />
-                  </button>
-                </div>
               </div>
-
-              <SearchForm
-                projects={allProjects}
-                onFilterChange={setAdvancedFilters}
-              />
             </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .form-title form {
+        .filtertop-simple-wrap {
+          width: 100%;
+        }
+
+        .filtertop-simple-form-title {
+          display: block !important;
+          width: 100%;
+        }
+
+        .filtertop-simple-form-title form {
           position: relative;
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
         }
 
         .filtertop-search-fieldset {
@@ -928,10 +601,32 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
           margin: 0;
           padding: 0;
           border: 0;
+          width: 100%;
+          min-width: 0;
         }
 
         .filtertop-search-fieldset input {
           width: 100%;
+          min-width: 0;
+          height: 72px;
+          border-radius: 18px;
+          border: 1px solid #e5e7eb;
+          background: #ffffff;
+          color: #111827;
+          font-size: 17px;
+          font-weight: 500;
+          padding: 0 24px;
+          outline: none;
+          box-sizing: border-box;
+        }
+
+        .filtertop-search-fieldset input:focus {
+          border-color: #f1913d;
+          box-shadow: 0 0 0 4px rgba(241, 145, 61, 0.12);
+        }
+
+        .filtertop-search-fieldset input::placeholder {
+          color: #6b7280;
         }
 
         .filtertop-search-suggestions {
@@ -993,8 +688,21 @@ export default function FilterTop({ projects = [], onSearch = () => {} }) {
           background: #ffffff;
         }
 
-        .wrap-btn button {
-          border: 0;
+        @media (max-width: 767px) {
+          .filtertop-search-fieldset input {
+            height: 50px;
+            font-size: 13px;
+            border-radius: 12px;
+            padding: 0 14px;
+          }
+
+          .filtertop-suggestion-label {
+            font-size: 14px;
+          }
+
+          .filtertop-suggestion-sub {
+            font-size: 12px;
+          }
         }
       `}</style>
     </section>

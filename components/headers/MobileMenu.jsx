@@ -569,6 +569,37 @@ export default function MobileMenu() {
               </Link>
             </li>
 
+
+
+              <li
+              className={`menu-item ${
+                pathname === "/cities" ? "current-item" : ""
+              }`}
+            >
+              <Link href="/cities" className="item-menu-mobile">
+                Cities
+              </Link>
+            </li>
+
+
+
+
+             <li
+              className={`menu-item ${
+                pathname === "/developers" ? "current-item" : ""
+              }`}
+            >
+              <Link href="/developers" className="item-menu-mobile">
+                Developers
+              </Link>
+            </li>
+
+
+
+
+
+
+
             <li className={`menu-item ${pathname === "/faq" ? "current-item" : ""}`}>
               <Link href="/faq" className="item-menu-mobile">
                 FAQ
