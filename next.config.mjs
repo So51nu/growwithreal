@@ -28,7 +28,7 @@ const nextConfig = {
       // ✅ ADD THIS
       {
         protocol: "https",
-        hostname: "growlbackend.clickconnectmedia.cloud",
+        hostname: "backendgrowl.growlcityrealty.in",
         pathname: "/media/**",
       },
     ],
