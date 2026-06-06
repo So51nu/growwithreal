@@ -8,7 +8,7 @@ import SplitTextAnimation from "@/components/common/SplitTextAnimation";
 import { Pagination } from "swiper/modules";
 
 function normalizeBaseUrl(url) {
-  const fallback = "https://growlbackend.clickconnectmedia.cloud";
+  const fallback = "https://backendgrowl.growlcityrealty.in";
   const raw = (url || fallback).trim().replace(/\/+$/, "");
   return raw.endsWith("/api") ? raw : `${raw}/api`;
 }

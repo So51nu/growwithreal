@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
 export default function Faqs() {
   const [pageData, setPageData] = useState(null);

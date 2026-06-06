@@ -13,7 +13,7 @@ import { apiGet, apiPost } from "@/components/lib/api";
 const NotificationContext = createContext(null);
 
 function getApiRoot() {
-  const fallback = "https://growlbackend.clickconnectmedia.cloud";
+  const fallback = "https://backendgrowl.growlcityrealty.in";
   const raw = (process.env.NEXT_PUBLIC_API_BASE_URL || fallback)
     .trim()
     .replace(/\/+$/, "");

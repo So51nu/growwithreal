@@ -4,7 +4,7 @@
 // // // // import Image from "next/image";
 
 // // // // const API_BASE_URL =
-// // // //   process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+// // // //   process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
 // // // // export default function Login() {
 // // // //   const [step, setStep] = useState("login");
@@ -371,7 +371,7 @@
 
 // // // const API_BASE_URL =
 // // //   process.env.NEXT_PUBLIC_API_BASE_URL ||
-// // //   "https://growlbackend.clickconnectmedia.cloud";
+// // //   "https://backendgrowl.growlcityrealty.in";
 
 // // // export default function Login() {
 // // //   const [step, setStep] = useState("login");
@@ -764,7 +764,7 @@
 
 // // const API_BASE_URL =
 // //   process.env.NEXT_PUBLIC_API_BASE_URL ||
-// //   "https://growlbackend.clickconnectmedia.cloud";
+// //   "https://backendgrowl.growlcityrealty.in";
 
 // // const roleOptions = [
 // //   { value: "customer", label: "Customer" },
@@ -1505,7 +1505,7 @@
 
 // const API_BASE_URL =
 //   process.env.NEXT_PUBLIC_API_BASE_URL ||
-//   "https://growlbackend.clickconnectmedia.cloud";
+//   "https://backendgrowl.growlcityrealty.in";
 
 // const roleOptions = [
 //   { value: "customer", label: "Customer" },
@@ -2275,7 +2275,7 @@ import Image from "next/image";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ||
-  "https://growlbackend.clickconnectmedia.cloud";
+  "https://backendgrowl.growlcityrealty.in";
 
 const roleOptions = [
   { value: "customer", label: "Customer" },

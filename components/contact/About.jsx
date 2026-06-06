@@ -4,7 +4,7 @@
 // import Image from "next/image";
 
 // const API_BASE_URL =
-//   process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+//   process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
 // function GalleryRow({ images, reverse = false, speed = "40s" }) {
 //   const validImages = Array.isArray(images) ? images.filter(Boolean) : [];
@@ -516,7 +516,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
 function GalleryRow({ images, reverse = false, speed = "40s" }) {
   const validImages = Array.isArray(images) ? images.filter(Boolean) : [];

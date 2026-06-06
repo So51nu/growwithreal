@@ -553,7 +553,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ||
-  "https://growlbackend.clickconnectmedia.cloud";
+  "https://backendgrowl.growlcityrealty.in";
 
 function BellSvg() {
   return (

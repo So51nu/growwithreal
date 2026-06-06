@@ -158,7 +158,7 @@
 // // //     setLoading(true);
 
 // // //     try {
-// // //       const response = await fetch("https://growlbackend.clickconnectmedia.cloud/api/contact/submit/", {
+// // //       const response = await fetch("https://backendgrowl.growlcityrealty.in/api/contact/submit/", {
 // // //         method: "POST",
 // // //         headers: {
 // // //           "Content-Type": "application/json",
@@ -474,7 +474,7 @@
 
 // // //     try {
 // // //       const response = await fetch(
-// // //         "https://growlbackend.clickconnectmedia.cloud/api/contact/submit/",
+// // //         "https://backendgrowl.growlcityrealty.in/api/contact/submit/",
 // // //         {
 // // //           method: "POST",
 // // //           headers: {
@@ -903,7 +903,7 @@
 
 // //     try {
 // //       const response = await fetch(
-// //         "https://growlbackend.clickconnectmedia.cloud/api/contact/submit/",
+// //         "https://backendgrowl.growlcityrealty.in/api/contact/submit/",
 // //         {
 // //           method: "POST",
 // //           headers: {
@@ -1622,7 +1622,7 @@
 
 //     try {
 //       const response = await fetch(
-//         "https://growlbackend.clickconnectmedia.cloud/api/contact/submit/",
+//         "https://backendgrowl.growlcityrealty.in/api/contact/submit/",
 //         {
 //           method: "POST",
 //           headers: {
@@ -2321,7 +2321,7 @@ export default function Contact() {
 
     try {
       const response = await fetch(
-        "https://growlbackend.clickconnectmedia.cloud/api/contact/submit/",
+        "https://backendgrowl.growlcityrealty.in/api/contact/submit/",
         {
           method: "POST",
           headers: {

@@ -4,7 +4,7 @@
 // import Link from "next/link";
 
 // const API_BASE_URL =
-//   process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+//   process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
 // export default function SourceManagerMyPropertiesPage() {
 //   const [properties, setProperties] = useState([]);
@@ -367,7 +367,7 @@ import Header1 from "@/components/headers/Header1";
 import Footer1 from "@/components/footers/Footer1";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
 // ─── Extracted from screenshot ───────────────────────────────────────────────
 // Primary orange  : #E8843A  (Book Visit btn bg, banner bg, price text, icons)

@@ -6,7 +6,7 @@
 // // import axios from "axios";
 
 // // const API_BASE_URL =
-// //   process.env.NEXT_PUBLIC_API_BASE_URL || "https://growlbackend.clickconnectmedia.cloud";
+// //   process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
 // // function slugify(value) {
 // //   return String(value || "")
@@ -484,7 +484,7 @@
 // import React, { useEffect, useMemo, useState } from "react";
 // import Link from "next/link";
 
-// const API_BASE_URL =  "https://growlbackend.clickconnectmedia.cloud";
+// const API_BASE_URL =  "https://backendgrowl.growlcityrealty.in";
 
 // const PROPERTY_API = `${API_BASE_URL}/api/admindashboard/properties/`;
 // const FOOTER_MENU_API = `${API_BASE_URL}/api/footermenu/`;
@@ -1449,7 +1449,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
-const API_BASE_URL = "https://growlbackend.clickconnectmedia.cloud";
+const API_BASE_URL = "https://backendgrowl.growlcityrealty.in";
 
 const PROPERTY_API = `${API_BASE_URL}/api/admindashboard/properties/`;
 const FOOTER_MENU_API = `${API_BASE_URL}/api/footermenu/`;
