@@ -138,7 +138,7 @@
 // //               <div className="image-wrap growl-about-main-image">
 // //                 {hero?.main_image && (
 // //                   <Image
-// //                     alt={hero?.title || "About Growl Real Estate"}
+// //                     alt={hero?.title || "About Growl City Realty"}
 // //                     width={650}
 // //                     height={620}
 // //                     src={hero.main_image}
@@ -187,7 +187,7 @@
 // //                 {resourceSection?.side_image && (
 // //                   <Image
 // //                     src={resourceSection.side_image}
-// //                     alt={resourceSection?.title || "Growl Real Estate Resources"}
+// //                     alt={resourceSection?.title || "Growl City Realty Resources"}
 // //                     width={650}
 // //                     height={520}
 // //                   />
@@ -255,7 +255,7 @@
 // //                 {teamIntroSection?.side_image && (
 // //                   <Image
 // //                     src={teamIntroSection.side_image}
-// //                     alt={teamIntroSection?.title || "Growl Real Estate Team"}
+// //                     alt={teamIntroSection?.title || "Growl City Realty Team"}
 // //                     width={650}
 // //                     height={560}
 // //                   />
@@ -650,7 +650,7 @@
 //               <div className="image-wrap growl-about-main-image">
 //                 {hero?.main_image && (
 //                   <Image
-//                     alt={hero?.title || "About Growl Real Estate"}
+//                     alt={hero?.title || "About Growl City Realty"}
 //                     width={650}
 //                     height={620}
 //                     src={hero.main_image}
@@ -699,7 +699,7 @@
 //                 {resourceSection?.side_image && (
 //                   <Image
 //                     src={resourceSection.side_image}
-//                     alt={resourceSection?.title || "Growl Real Estate Resources"}
+//                     alt={resourceSection?.title || "Growl City Realty Resources"}
 //                     width={650}
 //                     height={520}
 //                   />
@@ -767,7 +767,7 @@
 //                 {teamIntroSection?.side_image && (
 //                   <Image
 //                     src={teamIntroSection.side_image}
-//                     alt={teamIntroSection?.title || "Growl Real Estate Team"}
+//                     alt={teamIntroSection?.title || "Growl City Realty Team"}
 //                     width={650}
 //                     height={560}
 //                   />

@@ -35,7 +35,7 @@ export async function generateMetadata({ params }) {
   const blog = await getBlog(resolvedParams.id);
 
   return {
-    title: blog?.meta_title || blog?.title || "Blog Details || Proty",
+    title: blog?.meta_title || blog?.title || "Blog Details || Growl",
     description: blog?.meta_description || blog?.short_description || "Blog details page",
   };
 }

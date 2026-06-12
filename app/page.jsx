@@ -12,8 +12,8 @@
 // import Testimonials from "@/components/homes/home-1/Testimonials";
 
 // export const metadata = {
-//   title: " GROWL REAL ESTATE PRIVATE LIMITED ",
-//   description: "Proty - Real Estate React Nextjs Template",
+//   title: " Growl City Realty PRIVATE LIMITED ",
+//   description: "Growl City Realty React Nextjs Template",
 // };
 // export default function Home() {
 //   return (
@@ -52,8 +52,8 @@ import Properties from "@/components/homes/home-1/Properties";
 import Testimonials from "@/components/homes/home-1/Testimonials";
 import PlotGallerySection from "@/components/homes/home-1/PlotGallerySection";
 export const metadata = {
-  title: " GROWL REAL ESTATE PRIVATE LIMITED ",
-  description: "Proty - Real Estate React Nextjs Template",
+  title: " Growl City Realty PRIVATE LIMITED ",
+  description: "Growl City Realty React Nextjs Template",
 };
 export default function Home() {
   return (

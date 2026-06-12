@@ -42,12 +42,12 @@ export async function generateMetadata({ params }) {
 
   return {
     title: property?.title
-      ? `${property.title} | Growl Real Estate`
-      : "Property Details | Growl Real Estate",
+      ? `${property.title} | Growl City Realty`
+      : "Property Details | Growl City Realty",
     description:
       property?.description ||
       property?.short_location ||
-      "Explore property details with Growl Real Estate.",
+      "Explore property details with Growl City Realty.",
   };
 }
 

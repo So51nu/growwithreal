@@ -2,7 +2,7 @@ import AddProperty from "@/components/dashboard/AddProperty";
 import React, { Suspense } from "react";
 
 export const metadata = {
-  title: "Add Property || Growl Real Estate React",
+  title: "Add Property || Growl City Realty React",
   description: "Growl - Real Estate",
 };
 

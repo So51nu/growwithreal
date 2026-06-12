@@ -6,7 +6,7 @@ import Header1 from "@/components/headers/Header1";
 import React, { Suspense } from "react";
 
 export const metadata = {
-  title: "Blog List || Proty",
+  title: "Blog List || Growl",
   description: "Blog listing page",
 };
 

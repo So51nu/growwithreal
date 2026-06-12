@@ -2,8 +2,8 @@ import Dashboard from "@/components/userdashboard/Dashboard";
 import React from "react";
 
 export const metadata = {
-  title: "User Dashboard || Proty - Real Estate React Nextjs Template",
-  description: "Proty - Real Estate React Nextjs Template",
+  title: "User Dashboard || Growl City Realty React Nextjs Template",
+  description: "Growl City Realty React Nextjs Template",
 };
 
 export default function Page() {

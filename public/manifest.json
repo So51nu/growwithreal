@@ -1,6 +1,6 @@
 {
-  "name": "Proty Next App",
-  "short_name": "Proty",
+  "name": "Growl Next App",
+  "short_name": "Growl",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -32,7 +32,7 @@ export default function Cta() {
                     Need help? Talk to our expert.
                   </h2>
                   <p className="text-1 text_white">
-                    GROWL REAL ESTATE
+                    Growl City Realty
                   </p>
                 </div>
                 <div className="wrap-btn">

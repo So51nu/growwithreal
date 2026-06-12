@@ -13,13 +13,13 @@
 // // //             <div className="content">
 // // //               <div className="heading-section ">
 // // //                 <h2 className="title split-text effect-right">
-// // //                   <SplitTextAnimation text="Need a Home Loan with Growl Real Estate?" />
+// // //                   <SplitTextAnimation text="Need a Home Loan with Growl City Realty?" />
 // // //                   <br />
 // // //                   <SplitTextAnimation text="Get Pre-Approved Instantly" />
 // // //                 </h2>
 // // //                 <p className="text-1 split-text split-lines-transform">
 // // //                   Find the best home loan options with competitive interest rates.
-// // //                   Growl Real Estate helps you get quick approvals and expert financial guidance.
+// // //                   Growl City Realty helps you get quick approvals and expert financial guidance.
 // // //                 </p>
 // // //               </div>
 // // //               <form

@@ -191,7 +191,7 @@ export default function Faqs() {
 
                   <div className="content">
                     <h6 className="name">
-                      {pageSetting?.seller_name || "Growl Real Estate Seller"}
+                      {pageSetting?.seller_name || "Growl City Realty Seller"}
                     </h6>
 
                     <ul className="contact">

@@ -428,7 +428,7 @@
 // //             <div className="footer-bottom">
 // //               <p>
 // //                 Copyright © {new Date().getFullYear()}{" "}
-// //                 <span className="fw-7">GROWL REAL ESTATE</span>. Designed &amp;
+// //                 <span className="fw-7">Growl City Realty</span>. Designed &amp;
 // //                 Developed by Click Connect Media
 // //               </p>
 
@@ -944,7 +944,7 @@
 
 //               <p>
 //                 Copyright © {new Date().getFullYear()}{" "}
-//                 <strong>GROWL REAL ESTATE</strong>. Designed &amp; Developed by
+//                 <strong>Growl City Realty</strong>. Designed &amp; Developed by
 //                 Click Connect Media
 //               </p>
 
@@ -2164,7 +2164,7 @@ export default function Footer1() {
 
               <p>
                 Copyright © {new Date().getFullYear()}{" "}
-                <strong>GROWL REAL ESTATE</strong>. Designed &amp; Developed by
+                <strong>Growl City Realty</strong>. Designed &amp; Developed by
                 Click Connect Media
               </p>
 

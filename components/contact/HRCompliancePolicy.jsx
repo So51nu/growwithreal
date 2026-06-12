@@ -342,7 +342,7 @@ export default function HRCompliancePolicy() {
               <span className="legal-meta-value">
                 Growl City Realty
                 <br />
-                <small>Formally Known as Growl Real Estate</small>
+                <small>Formally Known as Growl City Realty</small>
               </span>
             </div>
           </div>

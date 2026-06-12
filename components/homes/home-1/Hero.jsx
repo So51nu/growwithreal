@@ -43,7 +43,7 @@
 // // // // // // // //           <div className="col-lg-8 ">
 // // // // // // // //             <div className="content-inner">
 // // // // // // // //               <div className="heading-title">
-// // // // // // // //                 <h1 className="title">GROWL REAL ESTATE </h1>
+// // // // // // // //                 <h1 className="title">Growl City Realty </h1>
 // // // // // // // //                 <p className="h6 fw-4">
 // // // // // // // //                   Discover exclusive luxury projects, trusted by thousands of
 // // // // // // // //                   homebuyers every month.
@@ -401,7 +401,7 @@
 // // // // // // //           <div className="col-lg-8">
 // // // // // // //             <div className="content-inner">
 // // // // // // //               <div className="heading-title">
-// // // // // // //                 <h1 className="title">GROWL REAL ESTATE</h1>
+// // // // // // //                 <h1 className="title">Growl City Realty</h1>
 // // // // // // //                 <p className="h6 fw-4">
 // // // // // // //                   Discover exclusive luxury projects, trusted by thousands of
 // // // // // // //                   homebuyers every month.
@@ -1103,7 +1103,7 @@
 // // // // // //           <div className="col-lg-8">
 // // // // // //             <div className="content-inner">
 // // // // // //               <div className="heading-title">
-// // // // // //                 <h1 className="title">GROWL REAL ESTATE</h1>
+// // // // // //                 <h1 className="title">Growl City Realty</h1>
 // // // // // //                 <p className="h6 fw-4">
 // // // // // //                   Discover exclusive luxury projects, trusted by thousands of
 // // // // // //                   homebuyers every month.
@@ -2162,7 +2162,7 @@
 // // // // //             <div className="col-lg-10 col-xl-10">
 // // // // //               <div className="content-inner">
 // // // // //                 <div className="heading-title">
-// // // // //                   <h1 className="title">GROWL REAL ESTATE</h1>
+// // // // //                   <h1 className="title">Growl City Realty</h1>
 // // // // //                   <p className="h6 fw-4">
 // // // // //                     Discover exclusive luxury projects, trusted by thousands of
 // // // // //                     homebuyers every month.
@@ -3382,7 +3382,7 @@
 // // // //             <div className="col-lg-10 col-xl-10">
 // // // //               <div className="content-inner">
 // // // //                 <div className="heading-title">
-// // // //                   <h1 className="title">GROWL REAL ESTATE</h1>
+// // // //                   <h1 className="title">Growl City Realty</h1>
 // // // //                   <p className="h6 fw-4">
 // // // //                     Discover exclusive luxury projects, trusted by thousands of
 // // // //                     homebuyers every month.
@@ -4578,7 +4578,7 @@
 // // //             <div className="col-lg-10 col-xl-10">
 // // //               <div className="content-inner">
 // // //                 <div className="heading-title">
-// // //                   <h1 className="title">GROWL REAL ESTATE</h1>
+// // //                   <h1 className="title">Growl City Realty</h1>
 // // //                   <p className="h6 fw-4">
 // // //                     Discover exclusive luxury projects, trusted by thousands of
 // // //                     homebuyers every month.
@@ -5682,7 +5682,7 @@
 // //             <div className="col-lg-10 col-xl-10">
 // //               <div className="content-inner">
 // //                 <div className="heading-title">
-// //                   <h1 className="title">GROWL REAL ESTATE</h1>
+// //                   <h1 className="title">Growl City Realty</h1>
 // //                   <p className="h6 fw-4">
 // //                     Discover exclusive luxury projects, trusted by thousands of
 // //                     homebuyers every month.
@@ -6720,7 +6720,7 @@
 //             <div className="col-lg-10 col-xl-10">
 //               <div className="content-inner">
 //                 <div className="heading-title">
-//                   <h1 className="title">GROWL REAL ESTATE</h1>
+//                   <h1 className="title">Growl City Realty</h1>
 //                   <p className="h6 fw-4">
 //                     Discover exclusive luxury projects, trusted by thousands of
 //                     homebuyers every month.

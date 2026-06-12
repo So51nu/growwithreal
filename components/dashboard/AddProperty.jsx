@@ -3293,7 +3293,7 @@ export default function AddProperty() {
         </div>
 
         <div className="footer-dashboard">
-          <p>Copyright © {new Date().getFullYear()} GROWL Real Estate</p>
+          <p>Copyright © {new Date().getFullYear()} Growl City Realty</p>
           <ul className="list">
             <li>
               <a href="#">Privacy</a>

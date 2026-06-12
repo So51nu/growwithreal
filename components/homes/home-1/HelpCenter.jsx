@@ -12,10 +12,10 @@ export default function HelpCenter() {
           <div className="col-12">
             <div className="heading-section text-center">
               <h2 className="title split-text effect-right">
-                <SplitTextAnimation text="Discover how Growl Real Estate helps you" />
+                <SplitTextAnimation text="Discover how Growl City Realty helps you" />
               </h2>
               <p className="text-1 split-text split-lines-transform">
-                Thousands of property seekers trust Growl Real Estate to find, buy, and sell homes with confidence.
+                Thousands of property seekers trust Growl City Realty to find, buy, and sell homes with confidence.
               </p>
             </div>
             <div className="widget-tabs style-2 style-border-primary">
@@ -299,7 +299,7 @@ export default function HelpCenter() {
                           </a>
                         </h4>
                         <p className="text-center text-1">
-                          Showcase your property to thousands of potential buyers with Growl Real Estate.
+                          Showcase your property to thousands of potential buyers with Growl City Realty.
                         </p>
                         <a
                           href="#"
@@ -386,7 +386,7 @@ export default function HelpCenter() {
               </div>
             </div>
             <p className="text text-center text-1 " data-wow-duration="2s">
-              Looking to spotlight a unique property with Growl Real Estate?
+              Looking to spotlight a unique property with Growl City Realty?
               <a href="#" className="fw-7">
                 Let’s connect
               </a>

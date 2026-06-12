@@ -14,7 +14,7 @@ export default function Reviews() {
                   data-wow-duration="1s"
                   data-wow-delay="0s"
                 >
-                  Reviews from employees working at Proty
+                  Reviews from employees working at Growl
                 </h2>
                 <div
                   className="description mb-32 wow animate__fadeInUp animate__animated"
@@ -69,7 +69,7 @@ export default function Reviews() {
                   </div>
                   <div className="content">
                     <h6 className="name">Cody Fisher</h6>
-                    <p className="text-2 lh-16">CEO Growl Real Estate</p>
+                    <p className="text-2 lh-16">CEO Growl City Realty</p>
                   </div>
                 </div>
                 <div
@@ -113,7 +113,7 @@ export default function Reviews() {
                       <h6 className="name">
                         <a href="#">Cody Fisher</a>
                       </h6>
-                      <p className="text-2">CEO Growl Real Estate</p>
+                      <p className="text-2">CEO Growl City Realty</p>
                     </div>
                   </div>
                 </div>

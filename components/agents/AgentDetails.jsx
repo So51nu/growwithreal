@@ -54,7 +54,7 @@ export default function AgentDetails({ agent }) {
                   <p className="font-poppins">
                     Company Agent at{" "}
                     <a href="#" className="fw-7">
-                      Growl Real Estate 
+                      Growl City Realty 
                     </a>
                   </p>
                 </div>
