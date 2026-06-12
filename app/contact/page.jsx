@@ -34,8 +34,8 @@ import Header1 from "@/components/headers/Header1";
 import React from "react";
 
 export const metadata = {
-  title: "Contact Us || Vastu Realtors",
-  description: "Contact Vastu Realtors for property enquiry and office location.",
+  title: "Contact Us || Growl City Realty ",
+  description: "Contact Growl City Realty  for property enquiry and office location.",
 };
 
 export default function page() {

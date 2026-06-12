@@ -1478,9 +1478,9 @@ const CAREER_FALLBACK_COLUMN = {
   slug: "career",
   label: "Career",
   items: [
-    { text: "Careers", href: "/" },
+    { text: "Careers", href: "/hr-compliance-policy" },
     { text: "Join Our Team", href: "/" },
-    { text: "Sales Executive", href: "/" },
+    
   ],
 };
 
