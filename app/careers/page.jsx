@@ -1,11 +1,11 @@
-import HRCompliancePolicy from "@/components/contact/HRCompliancePolicy";
+import Careers from "@/components/contact/Careers";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import React from "react";
 
 export const metadata = {
-  title: "HR Compliance Policy || Growl City Realty",
-  description: "Growl City Realty HR Compliance Policy details.",
+  title: "Careers || Growl City Realty",
+  description: "Current openings at Growl City Realty with online application and resume upload.",
 };
 
 export default function page() {
@@ -15,7 +15,7 @@ export default function page() {
         <Header1 />
 
         <div className="main-content">
-          <HRCompliancePolicy />
+          <Careers />
         </div>
 
         <Footer1 />

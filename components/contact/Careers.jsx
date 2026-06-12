@@ -1,171 +1,516 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import React, { useEffect, useMemo, useState } from "react";
 
-const sections = [
-  {
-    title: "Equal Opportunity Employer",
-    body:
-      "Growl City Realty is proud to be an Equal Opportunity Organization. We are committed to:",
-    bullets: [
-      "Providing fair and unbiased recruitment, training, and promotion opportunities.",
-      "Ensuring that employment decisions are based on merit, qualifications, and business needs.",
-      "Prohibiting discrimination on the basis of race, religion, gender, age, disability, marital status, sexual orientation, or any other protected category under applicable law.",
-    ],
-  },
-  {
-    title: "Right to Conduct Background Checks",
-    body:
-      "To maintain integrity and compliance, Growl City Realty reserves the right to conduct background checks on employees, contractors, and consultants. These checks may include:",
-    bullets: [
-      "Verification of educational qualifications and professional credentials.",
-      "Employment history and reference checks.",
-      "Criminal record verification, where legally permissible.",
-      "Financial background checks for roles involving fiduciary responsibility.",
-    ],
-  },
-  {
-    title: "Impact on Privacy",
-    body:
-      "We respect the privacy of all individuals and ensure that background checks are conducted responsibly:",
-    bullets: [
-      "Information collected during background checks will be used solely for employment and compliance purposes.",
-      "Data will be stored securely and accessed only by authorized HR and compliance personnel.",
-      "Personal information will not be shared with third parties except as required by law or regulatory authorities.",
-      "Candidates and employees will be informed of the nature and scope of background checks prior to initiation.",
-    ],
-  },
-  {
-    title: "Employee Rights",
-    body: "Employees and candidates have the right to:",
-    bullets: [
-      "Be informed about the background check process.",
-      "Access and review information collected, subject to legal limitations.",
-      "Raise concerns or disputes regarding inaccurate information.",
-      "Request correction of verified inaccuracies.",
-    ],
-  },
-  {
-    title: "Compliance & Accountability",
-    body: "Growl City Realty ensures that HR practices comply with:",
-    bullets: [
-      "Indian Labour Laws.",
-      "RERA guidelines for real estate compliance.",
-      "Information Technology Act, 2000 for data privacy and protection.",
-    ],
-  },
-  {
-    title: "Contact for HR Compliance",
-    body:
-      "For questions or concerns regarding HR compliance, please contact realestate@growlcommunications.com or call +91-8108888402. Address: HR Compliance Department, Growl City Realty, Navi Mumbai, Thane, Maharashtra, India.",
-  },
-];
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://backendgrowl.growlcityrealty.in";
 
-export default function HRCompliancePolicy() {
+const emptyApplication = {
+  full_name: "",
+  email: "",
+  phone: "",
+  experience_years: "",
+  current_company: "",
+  current_ctc: "",
+  expected_ctc: "",
+  notice_period: "",
+  cover_letter: "",
+  resume: null,
+};
+
+function cleanPoint(point) {
+  return String(point || "")
+    .replace(/^[•\-–—*]+\s*/, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function textToPoints(value, mode = "points") {
+  const text = String(value || "").trim();
+
+  if (!text) return [];
+
+  const normalized = text
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .replace(/\u2022/g, "\n")
+    .replace(/\s+•\s+/g, "\n")
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+
+  const splitter =
+    mode === "keywords" ? /[,\n]+/ : /\n+|\s[•]\s|\s-\s|\s–\s|\s—\s/g;
+
+  const points = normalized
+    .split(splitter)
+    .map(cleanPoint)
+    .filter(Boolean);
+
+  if (points.length > 1) return points;
+
+  if (mode === "keywords") {
+    return normalized
+      .split(",")
+      .map(cleanPoint)
+      .filter(Boolean);
+  }
+
+  return points;
+}
+
+function getJobType(job) {
+  return job?.job_type_display || job?.job_type || "Full Time";
+}
+
+function getSalary(job) {
+  return job?.salary_range || "Salary as per experience";
+}
+
+function getLocation(job) {
+  return job?.location || "Navi Mumbai";
+}
+
+function getWorkMode(job) {
+  return job?.work_mode_display || job?.work_mode || "";
+}
+
+function JobDetailBlock({ title, text }) {
+  const points = textToPoints(text);
+
+  if (!points.length) return null;
+
+  return (
+    <div className="job-detail-block">
+      <h4>{title}</h4>
+      <ul>
+        {points.map((item, index) => (
+          <li key={`${title}-${index}`}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default function Careers() {
+  const [openings, setOpenings] = useState([]);
+  const [openingsLoading, setOpeningsLoading] = useState(true);
+  const [expandedJobId, setExpandedJobId] = useState(null);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [applicationForm, setApplicationForm] = useState(emptyApplication);
+  const [applicationLoading, setApplicationLoading] = useState(false);
+  const [applicationMessage, setApplicationMessage] = useState("");
+  const [applicationError, setApplicationError] = useState("");
+
+  useEffect(() => {
+    const loadOpenings = async () => {
+      try {
+        setOpeningsLoading(true);
+
+        const response = await fetch(`${API_BASE_URL}/api/careers/openings/`);
+        const data = await response.json();
+
+        if (response.ok && data?.success) {
+          setOpenings(Array.isArray(data.data) ? data.data : []);
+        } else {
+          setOpenings([]);
+        }
+      } catch (error) {
+        setOpenings([]);
+      } finally {
+        setOpeningsLoading(false);
+      }
+    };
+
+    loadOpenings();
+  }, []);
+
+  const selectedJobDetails = useMemo(() => {
+    if (!selectedJob) return null;
+    return openings.find((item) => item.id === selectedJob.id) || selectedJob;
+  }, [selectedJob, openings]);
+
+  const toggleDetails = (jobId) => {
+    setExpandedJobId((prev) => (prev === jobId ? null : jobId));
+  };
+
+  const openApplyModal = (job) => {
+    setSelectedJob(job);
+    setApplicationForm(emptyApplication);
+    setApplicationMessage("");
+    setApplicationError("");
+  };
+
+  const closeApplyModal = () => {
+    if (applicationLoading) return;
+    setSelectedJob(null);
+    setApplicationForm(emptyApplication);
+    setApplicationMessage("");
+    setApplicationError("");
+  };
+
+  const handleApplicationChange = (event) => {
+    const { name, value, files } = event.target;
+
+    if (name === "resume") {
+      setApplicationForm((prev) => ({
+        ...prev,
+        resume: files?.[0] || null,
+      }));
+      return;
+    }
+
+    if (name === "phone") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setApplicationForm((prev) => ({
+        ...prev,
+        phone: digitsOnly,
+      }));
+      return;
+    }
+
+    setApplicationForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const submitApplication = async (event) => {
+    event.preventDefault();
+
+    if (!selectedJobDetails?.id) return;
+
+    if (!/^[6-9]\d{9}$/.test(applicationForm.phone)) {
+      setApplicationError(
+        "Enter a valid 10 digit mobile number. It must start with 6, 7, 8 or 9."
+      );
+      return;
+    }
+
+    if (!applicationForm.resume) {
+      setApplicationError("Please upload your resume.");
+      return;
+    }
+
+    try {
+      setApplicationLoading(true);
+      setApplicationError("");
+      setApplicationMessage("");
+
+      const formData = new FormData();
+      formData.append("job", selectedJobDetails.id);
+      formData.append("full_name", applicationForm.full_name);
+      formData.append("email", applicationForm.email);
+      formData.append("phone", applicationForm.phone);
+      formData.append("experience_years", applicationForm.experience_years || "");
+      formData.append("current_company", applicationForm.current_company);
+      formData.append("current_ctc", applicationForm.current_ctc);
+      formData.append("expected_ctc", applicationForm.expected_ctc);
+      formData.append("notice_period", applicationForm.notice_period);
+      formData.append("cover_letter", applicationForm.cover_letter);
+      formData.append("resume", applicationForm.resume);
+
+      const response = await fetch(`${API_BASE_URL}/api/careers/apply/`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data?.success) {
+        let errorText = data?.message || "Application submit failed. Please try again.";
+
+        if (data?.errors) {
+          const firstKey = Object.keys(data.errors)[0];
+          if (firstKey && data.errors[firstKey]?.[0]) {
+            errorText = data.errors[firstKey][0];
+          }
+        }
+
+        throw new Error(errorText);
+      }
+
+      setApplicationMessage("Application submitted successfully.");
+      setApplicationForm(emptyApplication);
+
+      setTimeout(() => {
+        closeApplyModal();
+      }, 1200);
+    } catch (error) {
+      setApplicationError(error.message || "Application submit failed. Please try again.");
+    } finally {
+      setApplicationLoading(false);
+    }
+  };
+
   return (
     <main className="growl-page">
       <section className="growl-hero">
         <div className="growl-container">
-          <span className="growl-kicker">HR Compliance</span>
-          <h1>HR Compliance Policy</h1>
+          <span className="growl-kicker">Careers</span>
+          <h1>Current Open Positions</h1>
           <p>
-            Growl City Realty employment compliance policy covering equal
-            opportunity, background checks, privacy protection, employee rights,
-            and accountability.
+            Explore active openings at Growl City Realty and submit your
+            application with resume through the online application form.
           </p>
           <div className="growl-badge-row">
-            <span className="growl-badge">Equal Opportunity</span>
-            <span className="growl-badge">Privacy Protection</span>
-            <span className="growl-badge">Background Verification</span>
+            <span className="growl-badge">Open Roles</span>
+            <span className="growl-badge">Submit Application</span>
+            <span className="growl-badge">Resume Upload</span>
           </div>
         </div>
       </section>
 
       <section className="growl-main">
         <div className="growl-container">
-          <div className="meta-grid">
-            <div className="meta-card">
-              <span className="meta-label">Effective Date</span>
-              <span className="meta-value">June 12, 2026</span>
+          <section className="openings-section">
+            <div className="openings-head">
+              <span>Careers</span>
+              <h2>Current Open Positions</h2>
+              <p>
+                Use the arrow to view full job details, then submit your
+                application for the selected role.
+              </p>
             </div>
-            <div className="meta-card">
-              <span className="meta-label">Domain</span>
-              <span className="meta-value">growlcityrealty.in</span>
+
+            <div className="openings-list">
+              {openingsLoading ? (
+                <div className="opening-empty">Loading current openings...</div>
+              ) : openings.length ? (
+                openings.map((job) => {
+                  const isOpen = expandedJobId === job.id;
+                  const keywords = textToPoints(job.keywords, "keywords");
+
+                  return (
+                    <article className="opening-item" key={job.id}>
+                      <div className="opening-main-row">
+                        <div className="opening-info">
+                          <span className="opening-label">Open Roles</span>
+                          <h3>{job.title}</h3>
+
+                          <div className="opening-meta">
+                            <span>{getJobType(job)}</span>
+                            <span>{getSalary(job)}</span>
+                            <span>{getLocation(job)}</span>
+                            {getWorkMode(job) ? <span>{getWorkMode(job)}</span> : null}
+                          </div>
+                        </div>
+
+                        <div className="opening-actions">
+                          <button
+                            type="button"
+                            className={`details-circle ${isOpen ? "active" : ""}`}
+                            onClick={() => toggleDetails(job.id)}
+                            aria-label="See details"
+                            title="See Details"
+                          >
+                            <span>⌄</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            className="submit-application-btn"
+                            onClick={() => openApplyModal(job)}
+                          >
+                            Submit Application <span>↗</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {isOpen && (
+                        <div className="opening-details">
+                          <div className="opening-detail-intro">
+                            <h4>Job Details</h4>
+                            <p>{job.description}</p>
+                          </div>
+
+                          <JobDetailBlock title="Responsibilities" text={job.responsibilities} />
+                          <JobDetailBlock title="Requirements" text={job.requirements} />
+                          <JobDetailBlock title="Preferred Skills" text={job.preferred_skills} />
+                          <JobDetailBlock title="Benefits" text={job.benefits} />
+
+                          {keywords.length ? (
+                            <div className="job-detail-block">
+                              <h4>Keywords</h4>
+                              <div className="keyword-list">
+                                {keywords.map((item, index) => (
+                                  <span key={`keyword-${index}`}>{item}</span>
+                                ))}
+                              </div>
+                            </div>
+                          ) : null}
+
+                          {job.application_deadline ? (
+                            <div className="opening-deadline">
+                              Application Deadline: {job.application_deadline}
+                            </div>
+                          ) : null}
+                        </div>
+                      )}
+                    </article>
+                  );
+                })
+              ) : (
+                <div className="opening-empty">
+                  No active openings right now. Please check back later.
+                </div>
+              )}
             </div>
-            <div className="meta-card">
-              <span className="meta-label">Company</span>
-              <span className="meta-value">
-                Growl City Realty
-                <br />
-                <small>Formally Known as Growl Real Estate</small>
-              </span>
-            </div>
-          </div>
-
-          <div className="layout">
-            <article className="content-card">
-              <div className="content-inner">
-                {sections.map((section, index) => (
-                  <section className="policy-section" key={section.title}>
-                    <h2>
-                      <span className="policy-index">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span>{section.title}</span>
-                    </h2>
-                    {section.body ? <p>{section.body}</p> : null}
-                    {section.bullets?.length ? (
-                      <ul>
-                        {section.bullets.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </section>
-                ))}
-              </div>
-
-              <div className="bottom-nav">
-                <span>Want to explore current career opportunities?</span>
-                <Link href="/careers">View Careers</Link>
-              </div>
-            </article>
-
-            <aside className="side">
-              <div className="side-card side-note">
-                <h3>Fair & Compliant Workplace</h3>
-                <p>
-                  Growl City Realty supports merit-based opportunities,
-                  responsible background checks, privacy protection, and legally
-                  compliant HR practices.
-                </p>
-              </div>
-
-              <div className="side-card">
-                <h3>Contact Details</h3>
-                <ul className="contact-list">
-                  <li>
-                    <strong>Email</strong>
-                    <a href="mailto:realestate@growlcommunications.com">
-                      realestate@growlcommunications.com
-                    </a>
-                  </li>
-                  <li>
-                    <strong>Phone</strong>
-                    <a href="tel:+918108888402">+91-8108888402</a>
-                  </li>
-                  <li>
-                    <strong>Address</strong>
-                    HR Compliance Department, Growl City Realty, Navi Mumbai,
-                    Thane, Maharashtra, India
-                  </li>
-                </ul>
-              </div>
-            </aside>
-          </div>
+          </section>
         </div>
       </section>
+
+      {selectedJobDetails && (
+        <div className="career-modal-overlay">
+          <div className="career-modal">
+            <div className="career-modal-head">
+              <div>
+                <span>Submit Application</span>
+                <h3>{selectedJobDetails.title}</h3>
+              </div>
+
+              <button type="button" onClick={closeApplyModal}>
+                ×
+              </button>
+            </div>
+
+            <form onSubmit={submitApplication} className="career-form">
+              <div className="career-form-grid">
+                <fieldset>
+                  <label>Full Name *</label>
+                  <input
+                    type="text"
+                    name="full_name"
+                    value={applicationForm.full_name}
+                    onChange={handleApplicationChange}
+                    required
+                  />
+                </fieldset>
+
+                <fieldset>
+                  <label>Email *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={applicationForm.email}
+                    onChange={handleApplicationChange}
+                    required
+                  />
+                </fieldset>
+
+                <fieldset>
+                  <label>Phone Number *</label>
+                  <div className="career-phone-wrap">
+                    <span>+91</span>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={applicationForm.phone}
+                      onChange={handleApplicationChange}
+                      inputMode="numeric"
+                      minLength={10}
+                      maxLength={10}
+                      pattern="[6-9][0-9]{9}"
+                      required
+                    />
+                  </div>
+                  <small className="phone-help-text">
+                    Enter 10 digits only, number must start with 6, 7, 8 or 9.
+                  </small>
+                </fieldset>
+
+                <fieldset>
+                  <label>Experience Years</label>
+                  <input
+                    type="number"
+                    step="0.5"
+                    name="experience_years"
+                    value={applicationForm.experience_years}
+                    onChange={handleApplicationChange}
+                  />
+                </fieldset>
+
+                <fieldset>
+                  <label>Current Company</label>
+                  <input
+                    type="text"
+                    name="current_company"
+                    value={applicationForm.current_company}
+                    onChange={handleApplicationChange}
+                  />
+                </fieldset>
+
+                <fieldset>
+                  <label>Notice Period</label>
+                  <input
+                    type="text"
+                    name="notice_period"
+                    value={applicationForm.notice_period}
+                    onChange={handleApplicationChange}
+                  />
+                </fieldset>
+
+                <fieldset>
+                  <label>Current CTC</label>
+                  <input
+                    type="text"
+                    name="current_ctc"
+                    value={applicationForm.current_ctc}
+                    onChange={handleApplicationChange}
+                  />
+                </fieldset>
+
+                <fieldset>
+                  <label>Expected CTC</label>
+                  <input
+                    type="text"
+                    name="expected_ctc"
+                    value={applicationForm.expected_ctc}
+                    onChange={handleApplicationChange}
+                  />
+                </fieldset>
+              </div>
+
+              <fieldset>
+                <label>Cover Letter</label>
+                <textarea
+                  name="cover_letter"
+                  value={applicationForm.cover_letter}
+                  onChange={handleApplicationChange}
+                  placeholder="Write a short note..."
+                />
+              </fieldset>
+
+              <fieldset>
+                <label>Upload Resume * PDF / DOC / DOCX, max 5 MB</label>
+                <input
+                  type="file"
+                  name="resume"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleApplicationChange}
+                  required
+                />
+              </fieldset>
+
+              {applicationError ? (
+                <div className="career-alert error">{applicationError}</div>
+              ) : null}
+
+              {applicationMessage ? (
+                <div className="career-alert success">{applicationMessage}</div>
+              ) : null}
+
+              <button
+                type="submit"
+                className="career-submit"
+                disabled={applicationLoading}
+              >
+                {applicationLoading ? "Submitting..." : "Submit Application"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       
       <style jsx>{`
         :global(:root) {

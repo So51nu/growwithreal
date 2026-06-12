@@ -3,81 +3,22 @@
 import React from "react";
 import Link from "next/link";
 
-const sections = [
-  {
-    title: "Equal Opportunity Employer",
-    body:
-      "Growl City Realty is proud to be an Equal Opportunity Organization. We are committed to:",
-    bullets: [
-      "Providing fair and unbiased recruitment, training, and promotion opportunities.",
-      "Ensuring that employment decisions are based on merit, qualifications, and business needs.",
-      "Prohibiting discrimination on the basis of race, religion, gender, age, disability, marital status, sexual orientation, or any other protected category under applicable law.",
-    ],
-  },
-  {
-    title: "Right to Conduct Background Checks",
-    body:
-      "To maintain integrity and compliance, Growl City Realty reserves the right to conduct background checks on employees, contractors, and consultants. These checks may include:",
-    bullets: [
-      "Verification of educational qualifications and professional credentials.",
-      "Employment history and reference checks.",
-      "Criminal record verification, where legally permissible.",
-      "Financial background checks for roles involving fiduciary responsibility.",
-    ],
-  },
-  {
-    title: "Impact on Privacy",
-    body:
-      "We respect the privacy of all individuals and ensure that background checks are conducted responsibly:",
-    bullets: [
-      "Information collected during background checks will be used solely for employment and compliance purposes.",
-      "Data will be stored securely and accessed only by authorized HR and compliance personnel.",
-      "Personal information will not be shared with third parties except as required by law or regulatory authorities.",
-      "Candidates and employees will be informed of the nature and scope of background checks prior to initiation.",
-    ],
-  },
-  {
-    title: "Employee Rights",
-    body: "Employees and candidates have the right to:",
-    bullets: [
-      "Be informed about the background check process.",
-      "Access and review information collected, subject to legal limitations.",
-      "Raise concerns or disputes regarding inaccurate information.",
-      "Request correction of verified inaccuracies.",
-    ],
-  },
-  {
-    title: "Compliance & Accountability",
-    body: "Growl City Realty ensures that HR practices comply with:",
-    bullets: [
-      "Indian Labour Laws.",
-      "RERA guidelines for real estate compliance.",
-      "Information Technology Act, 2000 for data privacy and protection.",
-    ],
-  },
-  {
-    title: "Contact for HR Compliance",
-    body:
-      "For questions or concerns regarding HR compliance, please contact realestate@growlcommunications.com or call +91-8108888402. Address: HR Compliance Department, Growl City Realty, Navi Mumbai, Thane, Maharashtra, India.",
-  },
-];
-
-export default function HRCompliancePolicy() {
+export default function JoinOurTeam() {
   return (
     <main className="growl-page">
       <section className="growl-hero">
         <div className="growl-container">
-          <span className="growl-kicker">HR Compliance</span>
-          <h1>HR Compliance Policy</h1>
+          <span className="growl-kicker">Join Our Team</span>
+          <h1>Become Part of the Happy Growl Family</h1>
           <p>
-            Growl City Realty employment compliance policy covering equal
-            opportunity, background checks, privacy protection, employee rights,
-            and accountability.
+            Growl City Realty is building a people-first real estate team focused
+            on trust, transparency, verified properties, and customer-first
+            service across Navi Mumbai, Thane, Panvel, and nearby markets.
           </p>
           <div className="growl-badge-row">
-            <span className="growl-badge">Equal Opportunity</span>
-            <span className="growl-badge">Privacy Protection</span>
-            <span className="growl-badge">Background Verification</span>
+            <span className="growl-badge">Happy Growl Family</span>
+            <span className="growl-badge">Growth Culture</span>
+            <span className="growl-badge">Real Estate Careers</span>
           </div>
         </div>
       </section>
@@ -86,64 +27,104 @@ export default function HRCompliancePolicy() {
         <div className="growl-container">
           <div className="meta-grid">
             <div className="meta-card">
-              <span className="meta-label">Effective Date</span>
-              <span className="meta-value">June 12, 2026</span>
+              <span className="meta-label">Team Culture</span>
+              <span className="meta-value">Learning, Growth & Ownership</span>
             </div>
             <div className="meta-card">
-              <span className="meta-label">Domain</span>
-              <span className="meta-value">growlcityrealty.in</span>
+              <span className="meta-label">Work Focus</span>
+              <span className="meta-value">Verified Real Estate Services</span>
             </div>
             <div className="meta-card">
-              <span className="meta-label">Company</span>
-              <span className="meta-value">
-                Growl City Realty
-                <br />
-                <small>Formally Known as Growl Real Estate</small>
-              </span>
+              <span className="meta-label">Career Page</span>
+              <span className="meta-value">Apply through Current Openings</span>
+            </div>
+          </div>
+
+          <div className="feature-grid">
+            <div className="feature-card">
+              <h3>Grow With Us</h3>
+              <p>
+                Work with a fast-growing property advisory team where learning,
+                performance, and ownership are valued every day.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <h3>People-First Culture</h3>
+              <p>
+                We believe in a supportive team environment where every member
+                contributes to better customer experience.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <h3>Real Estate Impact</h3>
+              <p>
+                Help customers discover verified properties and make confident
+                property decisions with transparent guidance.
+              </p>
             </div>
           </div>
 
           <div className="layout">
             <article className="content-card">
               <div className="content-inner">
-                {sections.map((section, index) => (
-                  <section className="policy-section" key={section.title}>
-                    <h2>
-                      <span className="policy-index">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span>{section.title}</span>
-                    </h2>
-                    {section.body ? <p>{section.body}</p> : null}
-                    {section.bullets?.length ? (
-                      <ul>
-                        {section.bullets.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </section>
-                ))}
+                <section className="policy-section">
+                  <h2>
+                    <span className="policy-index">01</span>
+                    <span>Why Join Growl City Realty?</span>
+                  </h2>
+                  <p className="join-text">
+                    At Growl City Realty, every team member is part of the Happy
+                    Growl Family. We focus on professional growth, ethical real
+                    estate service, teamwork, customer trust, and transparent
+                    property advisory.
+                  </p>
+                </section>
+
+                <section className="policy-section">
+                  <h2>
+                    <span className="policy-index">02</span>
+                    <span>Who Can Apply?</span>
+                  </h2>
+                  <ul>
+                    <li>Sales professionals looking to grow in real estate.</li>
+                    <li>CRM, telecalling, sourcing, and field support teams.</li>
+                    <li>Marketing, operations, and customer support candidates.</li>
+                    <li>Freshers with strong communication and learning attitude.</li>
+                  </ul>
+                </section>
+
+                <section className="policy-section">
+                  <h2>
+                    <span className="policy-index">03</span>
+                    <span>How to Apply?</span>
+                  </h2>
+                  <p className="join-text">
+                    Visit the Careers page, check active openings, view job
+                    details, and submit your application with resume through the
+                    online application form.
+                  </p>
+                </section>
               </div>
 
               <div className="bottom-nav">
-                <span>Want to explore current career opportunities?</span>
-                <Link href="/careers">View Careers</Link>
+                <span>Ready to become part of the Happy Growl Family?</span>
+                <Link href="/careers">View Current Openings</Link>
               </div>
             </article>
 
             <aside className="side">
               <div className="side-card side-note">
-                <h3>Fair & Compliant Workplace</h3>
+                <h3>Happy Growl Family</h3>
                 <p>
-                  Growl City Realty supports merit-based opportunities,
-                  responsible background checks, privacy protection, and legally
-                  compliant HR practices.
+                  A normal team page for candidates to understand culture before
+                  applying for active openings.
                 </p>
               </div>
 
               <div className="side-card">
-                <h3>Contact Details</h3>
+                <h3>HR Contact</h3>
                 <ul className="contact-list">
                   <li>
                     <strong>Email</strong>
@@ -157,12 +138,23 @@ export default function HRCompliancePolicy() {
                   </li>
                   <li>
                     <strong>Address</strong>
-                    HR Compliance Department, Growl City Realty, Navi Mumbai,
-                    Thane, Maharashtra, India
+                    Growl City Realty, Navi Mumbai, Thane, Maharashtra, India
                   </li>
                 </ul>
               </div>
             </aside>
+          </div>
+
+          <div className="join-panel">
+            <h2>Join our Team</h2>
+            <p>
+              We welcome motivated people who want to learn, perform, and grow
+              with a trusted real estate brand. Check current openings and apply
+              for the role that matches your skills.
+            </p>
+            <Link className="primary-link" href="/careers">
+              Explore Careers
+            </Link>
           </div>
         </div>
       </section>
