@@ -77,7 +77,7 @@ export default function AccessibilityStatement() {
               <span className="legal-meta-value">
                 Growl City Realty
                 <br />
-                <small>Formally Known as Growl City Realty</small>
+                <small>Formally Known as Growl Real Estate</small>
               </span>
             </div>
           </div>

@@ -27,7 +27,7 @@ const sections = [
       "Respond to inquiries and customer support requests.",
       "Verify property authenticity and compliance with RERA.",
       "Improve website functionality and user experience.",
-      "Send updates, offers, and marketing communications with consent.",
+      "Send updates, offers, and marketing communications (with consent).",
     ],
   },
   {
@@ -35,10 +35,10 @@ const sections = [
     body:
       "We do not sell your personal information. However, we may share data with:",
     bullets: [
-      "Authorized Developers & Builders for property transactions.",
-      "Regulatory Authorities for compliance verification.",
-      "Service Providers such as IT, hosting, analytics, and marketing partners.",
-      "Legal Requirements if required by law or court order.",
+      "Authorized Developers & Builders (for property transactions).",
+      "Regulatory Authorities (for compliance verification).",
+      "Service Providers such as (IT, hosting, analytics, and marketing).",
+      "Legal Requirements (if required by law or court order).",
     ],
   },
   {
@@ -60,7 +60,7 @@ const sections = [
     body: "As a user, you have the right to:",
     bullets: [
       "Access, update, or correct your personal information.",
-      "Request deletion of your data, subject to legal obligations.",
+      "Request deletion of your data (subject to legal obligations).",
       "Opt out of marketing communications.",
     ],
   },
@@ -108,7 +108,7 @@ export default function PrivacyPolicy() {
               <span className="legal-meta-value">
                 Growl City Realty
                 <br />
-                <small>Formally Known as Growl City Realty</small>
+                <small>Formally Known as Growl Real Estate</small>
               </span>
             </div>
           </div>
