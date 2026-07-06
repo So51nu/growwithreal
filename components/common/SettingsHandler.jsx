@@ -677,7 +677,7 @@ export default function SettingsHandler() {
           </div>
 
           {/* Theme Mode */}
-          <div className="sh-row">
+          {/* <div className="sh-row">
             <span className="sh-label">Theme Mode:</span>
             <div className="toggle-switch">
               <label className="switch-label">
@@ -691,7 +691,7 @@ export default function SettingsHandler() {
                 <span className="slider" />
               </label>
             </div>
-          </div>
+          </div> */}
 
           {/* Quick Actions */}
           <div className="sh-quick-section">

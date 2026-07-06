@@ -552,8 +552,8 @@ export default function PlotGallerySection() {
           }
 
           .plot-large {
-            height: 210px;
-            grid-column: span 2;
+            height: 145px;
+            grid-column: auto;
           }
 
           .plot-gallery-card::before {

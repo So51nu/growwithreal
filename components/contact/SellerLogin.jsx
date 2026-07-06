@@ -8,9 +8,9 @@ const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ||
   "https://backendgrowl.growlcityrealty.in";
 
-const roleOptions = [
-  { value: "source_manager", label: "Source Manager" },
-];
+// const roleOptions = [
+//   { value: "source_manager", label: "Source Manager" },
+// ];
 
 const countryCodeOptions = [
   "+91",
@@ -48,7 +48,7 @@ export default function SellerLogin() {
   const [message, setMessage] = useState("");
 
   const isAdmin = formData.role === "admin";
-  const selectedRole = roleOptions.find((item) => item.value === formData.role);
+  //const selectedRole = roleOptions.find((item) => item.value === formData.role);
 
   const getFullPhoneNumber = () => {
     const cleanPhone = String(formData.phone || "").replace(/\D/g, "");
@@ -757,7 +757,7 @@ export default function SellerLogin() {
                 </div>
 
                 <div className="box">
-                  <fieldset className="box-fieldset">
+                  {/* <fieldset className="box-fieldset">
                     <label>Login As</label>
 
                     <div className="custom-role-select">
@@ -795,7 +795,7 @@ export default function SellerLogin() {
                         </div>
                       )}
                     </div>
-                  </fieldset>
+                  </fieldset> */}
 
                   {isAdmin ? (
                     <>
