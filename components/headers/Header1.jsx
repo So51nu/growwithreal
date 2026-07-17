@@ -4055,7 +4055,7 @@ export default function Header1({ parentClass = "header", projects = [] }) {
                   <div className="header-logo" style={{ overflow: "visible" }}>
                     <Link href="/" className="site-logo">
                       <img
-                        src="/images/logo/growl_logo_3.jpeg"
+                        src="/images/logo/growl_real_estate_4.png"
                         alt="logo"
                         style={{
                           height: "80px",

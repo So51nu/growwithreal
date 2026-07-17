@@ -2707,7 +2707,7 @@ export default function MobileMenu() {
           <Link href="/">
             <Image
               alt="logo"
-              src="/images/logo/growl_logo_3.jpeg"
+              src="/images/logo/growl_real_estate_4.png"
               width={272}
               height={84}
             />
